@@ -1,0 +1,44 @@
+import { client } from './client';
+
+export async function getUser(){
+  return await client.auth.session();
+}
+
+export async function signIn(email, password){
+  const { user } = await client.auth.signIn({ email, password });
+  return user;
+}
+
+export async function signUp(email, password){
+  const { user } = await client.auth.signUp({ email, password });
+  return user;
+}
+
+export async function logout(){
+  await client.auth.signOut();
+  return (window.location.href = '/signIn');
+}
+
+export async function getFavoriteHomes(){
+  const { body } = await client
+    .from('saved')
+    .select('*');
+
+  return body;
+}
+
+export async function getProfile(){
+  const { body } = await client
+    .from('profiles')
+    .select('*');
+
+  return body;
+}
+
+export async function getFilters() {
+  const { body } = await client
+    .from('filters')
+    .select('*');
+
+  return body;
+}
