@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { signUp } from '../services/supabase-utils';
 
-export default function SignUp({ setToken }) {
+export default function SignUp({ setUser }) {
 
   const [signUpData, setSignUpData] = useState({
     email: '',
@@ -11,13 +12,14 @@ export default function SignUp({ setToken }) {
   async function handleSignUp(e) {
     e.preventDefault();
 
-    const { access_token } = await signUp(signUpData.email, signUpData.password);
+    const user = await signUp(signUpData.email, signUpData.password);
 
-    setToken(access_token);
+    setUser(user);
   }
 
   return (
     <div>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSignUp}>
         <label>Email<input required type='email' onChange={ e => setSignUpData({
           email: e.target.value,
@@ -29,6 +31,7 @@ export default function SignUp({ setToken }) {
         })}/></label>
         <button>Sign Up</button>
       </form>
+      <Link to={'/signin'}>Sign In</Link>
     </div>
   );
 }

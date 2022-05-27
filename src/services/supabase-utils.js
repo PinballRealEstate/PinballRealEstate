@@ -1,7 +1,7 @@
 import { client } from './client';
 
 export async function getUser(){
-  return await client.auth.session();
+  return client.auth.session() && client.auth.session().user;
 }
 
 export async function signIn(email, password){
@@ -16,7 +16,7 @@ export async function signUp(email, password){
 
 export async function logout(){
   await client.auth.signOut();
-  return (window.location.href = '/signIn');
+  return (window.location.href = '../signin');
 }
 
 export async function getFavoriteHomes(){

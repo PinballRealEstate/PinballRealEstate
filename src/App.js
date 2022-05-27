@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
   Link
 } from 'react-router-dom';
 import SignUp from './components/SignUp';
@@ -15,13 +16,14 @@ import { getUser } from './services/supabase-utils';
 
 export default function App() {
   const [listings, setListings] = useState([]);
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
   async function getUserOnLoad(){
-    const { access_token } = await getUser();
+    const user = await getUser();
 
-    setToken(access_token);
-
+    if (user) {
+      setUser(user);
+    }
   }
 
   useEffect(() => {
@@ -46,20 +48,21 @@ export default function App() {
           {/* {listings.map((listing, i) => <p key={i}>{listing.location.address.line}</p>)} */}
         </div>
         <Switch>
-          <Route path="/signin">
-            <SignIn setToken={setToken}/>
+          <Route exact path="/signin">
+            <SignIn setUser={setUser}/>
           </Route>
-          <Route path="/signup">
-            <SignUp setToken={setToken}/>
+          <Route exact path="/signup">
+            <SignUp setUser={setUser}/>
           </Route>
-          <Route path="/">
-            <Search />
+          <Route exact path="/">
+            {console.log('path to search was hit', user)}
+            {user ? <Search /> : <Redirect to={'/signin'}/>}
           </Route>
-          <Route path="/detail:?id">
-            <Detail />
+          <Route exact path="/detail/:id">
+            {user ? <Detail /> : <Redirect to={'/signin'}/>}
           </Route>
-          <Route path="/profile">
-            <Profile />
+          <Route exact path="/profile">
+            {user ? <Profile /> : <Redirect to={'/signin'}/>}
           </Route>
         </Switch>
       </div>
