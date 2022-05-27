@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import Search from './components/Search';
 import Profile from './components/Profile';
 import Detail from './components/Detail';
-import { getAllHomes } from './services/fetch-utils';
+// import { getAllHomes } from './services/fetch-utils';
 import { getUser } from './services/supabase-utils';
 
 export default function App() {
-  const [listings, setListings] = useState([]);
+  // const [listings, setListings] = useState([]);
   const [user, setUser] = useState();
 
   async function getUserOnLoad(){
@@ -22,7 +21,6 @@ export default function App() {
     
     if (userOnLoad) {
       setUser(userOnLoad);
-      console.log(user);
     }
   }
 
