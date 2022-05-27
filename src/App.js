@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
   Link
 } from 'react-router-dom';
 import SignUp from './components/SignUp';
@@ -16,13 +15,14 @@ import { getUser } from './services/supabase-utils';
 
 export default function App() {
   const [listings, setListings] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
   async function getUserOnLoad(){
-    const user = await getUser();
-
-    if (user) {
-      setUser(user);
+    const userOnLoad = await getUser();
+    
+    if (userOnLoad) {
+      setUser(userOnLoad);
+      console.log(user);
     }
   }
 
@@ -55,14 +55,13 @@ export default function App() {
             <SignUp setUser={setUser}/>
           </Route>
           <Route exact path="/">
-            {console.log('path to search was hit', user)}
-            {user ? <Search /> : <Redirect to={'/signin'}/>}
+            {user ? <Search /> : <SignIn setUser={setUser}/>}
           </Route>
           <Route exact path="/detail/:id">
-            {user ? <Detail /> : <Redirect to={'/signin'}/>}
+            {user ? <Detail /> : <SignIn setUser={setUser}/>}
           </Route>
           <Route exact path="/profile">
-            {user ? <Profile /> : <Redirect to={'/signin'}/>}
+            {user ? <Profile /> : <SignIn setUser={setUser}/>}
           </Route>
         </Switch>
       </div>

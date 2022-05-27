@@ -1,7 +1,7 @@
 import { client } from './client';
 
 export async function getUser(){
-  return client.auth.session() && client.auth.session().user;
+  return await client.auth.session() && await client.auth.session().user;
 }
 
 export async function signIn(email, password){
@@ -27,10 +27,12 @@ export async function getFavoriteHomes(){
   return body;
 }
 
-export async function getProfile(){
+export async function getProfileByID(id){
   const { body } = await client
     .from('profiles')
-    .select('*');
+    .select('*')
+    .match({ user_id: id })
+    .single();
 
   return body;
 }
