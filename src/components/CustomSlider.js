@@ -2,14 +2,14 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
-function valuetext(value) {
+function ValueText(value) {
   return `${value}°C`;
 }
 
 const minDistance = 200000;
 
-export default function MinimumDistanceSlider() {
-
+export default function CustomSlider({ setSignUpData }) {
+    
   const [value2, setValue2] = React.useState([0, 400000]);
 
   const handleChange2 = (event, newValue, activeThumb) => {
@@ -28,6 +28,12 @@ export default function MinimumDistanceSlider() {
     } else {
       setValue2(newValue);
     }
+
+    setSignUpData({
+      low_price: value2[0],
+      high_price: value2[1]
+    });
+
   };
 
   return (
@@ -37,7 +43,7 @@ export default function MinimumDistanceSlider() {
         value={value2}
         onChange={handleChange2}
         valueLabelDisplay="auto"
-        getAriaValueText={valuetext}
+        getAriaValueText={ValueText}
         disableSwap
         min={0}
         max={3000000}

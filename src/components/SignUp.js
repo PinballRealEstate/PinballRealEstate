@@ -42,7 +42,7 @@ export default function SignUp({ setUser }) {
           password: e.target.value
         })}/></label>
         <label> Price Range: 
-          <CustomSlider />
+          <CustomSlider setSignUpData={setSignUpData} />
         </label>
         <label> Zip Code: 
           <input required type='number' onChange={(e) => setSignUpData({
