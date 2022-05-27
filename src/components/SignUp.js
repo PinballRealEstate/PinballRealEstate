@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { createProfile, signUp } from '../services/supabase-utils';
+import { createProfile, signUp, createFilter } from '../services/supabase-utils';
 import CustomSlider from './CustomSlider';
 
 export default function SignUp({ setUser }) {
@@ -20,6 +20,7 @@ export default function SignUp({ setUser }) {
 
     const user = await signUp(signUpData.email, signUpData.password);
     await createProfile(signUpData);
+    await createFilter(signUpData);
     setUser(user);
     push('/');
   }

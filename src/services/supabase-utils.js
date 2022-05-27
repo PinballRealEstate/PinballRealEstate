@@ -50,3 +50,11 @@ export async function createProfile({ username }) {
 
   return body;
 }
+
+export async function createFilter({ zip_code, low_price, high_price }){
+  const { body } = await client
+    .from('filters')
+    .insert({ zip_code, low_price, high_price });
+
+  return body;
+}
