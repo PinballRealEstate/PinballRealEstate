@@ -8,7 +8,7 @@ function ValueText(value) {
 
 const minDistance = 200000;
 
-export default function CustomSlider({ setSignUpData }) {
+export default function CustomSlider({ setSignUpData, signUpData }) {
     
   const [value2, setValue2] = React.useState([0, 400000]);
 
@@ -28,8 +28,9 @@ export default function CustomSlider({ setSignUpData }) {
     } else {
       setValue2(newValue);
     }
-
+    
     setSignUpData({
+      ...signUpData,
       low_price: value2[0],
       high_price: value2[1]
     });

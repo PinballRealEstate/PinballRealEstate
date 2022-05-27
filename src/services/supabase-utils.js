@@ -42,3 +42,11 @@ export async function getFilters() {
 
   return body;
 }
+
+export async function createProfile({ username }) {
+  const { body } = await client
+    .from('profiles')
+    .insert({ username });
+
+  return body;
+}

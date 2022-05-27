@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { signUp } from '../services/supabase-utils';
+import { createProfile, signUp } from '../services/supabase-utils';
 import CustomSlider from './CustomSlider';
 
 export default function SignUp({ setUser }) {
-
+  const { push } = useHistory();
   const [signUpData, setSignUpData] = useState({
     username: '',
     email: '',
@@ -18,8 +19,9 @@ export default function SignUp({ setUser }) {
     e.preventDefault();
 
     const user = await signUp(signUpData.email, signUpData.password);
-
+    await createProfile(signUpData);
     setUser(user);
+    push('/');
   }
 
   return (
@@ -28,27 +30,24 @@ export default function SignUp({ setUser }) {
       <form onSubmit={handleSignUp}>
         <label> Username:
           <input required type='username' onChange={(e) => setSignUpData({
-            username: e.target.value,
-            email: signUpData.email,
-            password: signUpData.password
+            ...signUpData, 
+            username: e.target.value,           
           })}/>
         </label>
         <label>Email<input required type='email' onChange={ e => setSignUpData({
+          ...signUpData,
           email: e.target.value,
-          password: signUpData.password
         })}/></label>
         <label>Password<input required type='password' onChange={ e => setSignUpData({
-          email: signUpData.email,
+          ...signUpData,
           password: e.target.value
         })}/></label>
         <label> Price Range: 
-          <CustomSlider setSignUpData={setSignUpData} />
+          <CustomSlider setSignUpData={setSignUpData} signUpData={signUpData} />
         </label>
         <label> Zip Code: 
           <input required type='number' onChange={(e) => setSignUpData({
-            username: e.target.value,
-            email: signUpData.email,
-            password: signUpData.password,
+            ...signUpData,
             zip_code: e.target.value
           })}/>
         </label>
