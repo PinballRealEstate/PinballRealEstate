@@ -18,9 +18,9 @@ export default function App() {
   const [token, setToken] = useState(null);
 
   async function getUserOnLoad(){
-    const user = await getUser();
+    const { access_token } = await getUser();
 
-    setToken(user.access_token);
+    setToken(access_token);
 
   }
 

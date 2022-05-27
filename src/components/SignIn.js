@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { signIn } from '../services/supabase-utils';
+import { useHistory } from 'react-router-dom';
 
 export default function SignIn({ setToken }) {
-
+  const { push } = useHistory();
   const [signInData, setSignInData] = useState({
     email: '',
     password: ''
-  })
+  });
 
   async function handleSignIn(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    const user = await signIn(signInData.email, signInData.password);
+    const { access_token } = await signIn(signInData.email, signInData.password);
 
-    setToken(user.access_token);
+    setToken(access_token);
+    push('/');
   }
 
   return (

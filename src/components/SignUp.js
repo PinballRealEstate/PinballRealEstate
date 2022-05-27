@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { signUp } from '../services/supabase-utils';
 
 export default function SignUp({ setToken }) {
 
   const [signUpData, setSignUpData] = useState({
     email: '',
     password: ''
-  })
+  });
 
   async function handleSignUp(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    const user = await signUp(signUpData.email, signUpData.password);
+    const { access_token } = await signUp(signUpData.email, signUpData.password);
 
-    setToken(user.access_token);
+    setToken(access_token);
   }
 
   return (
