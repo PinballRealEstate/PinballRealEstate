@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { logout, signIn } from '../services/supabase-utils';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import './SignIn.css';
 
 export default function SignIn({ setUser }) {
   const { push } = useHistory();
@@ -26,7 +27,8 @@ export default function SignIn({ setUser }) {
   }
 
   return (
-    <div>
+    <div className='signIn'>
+      <img src={'public/generic-home2.jpg'}/>
       <h1>Sign In</h1>
       <form onSubmit={handleSignIn}>
         <label>Email<input required type='email' onChange={ e => setSignInData({
