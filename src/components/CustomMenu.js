@@ -84,7 +84,7 @@ export default function CustomMenu() {
     <Box sx={{ display: 'flex' }} >
       <CssBaseline />
       <AppBar position="fixed" open={open} >
-        <Toolbar sx={{ background: '#70a9a1' }}>
+        <Toolbar sx={{ background: '#40798c' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -123,10 +123,10 @@ export default function CustomMenu() {
           {['Home', 'Saved Homes', 'Meet the Team'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ color: '#1f363d' }}>
               <ListItemButton>
-                <ListItemIcon sx={{ color: '#70a9a1' }}>
-                  {index === 0 && <HomeIcon /> 
-                  || index === 1 && <FavoriteBorderIcon /> 
-                  || index === 2 && <PeopleIcon />}
+                <ListItemIcon sx={{ color: '#284750' }} >
+                  {index === 0 && <HomeIcon fontSize='large'/> 
+                  || index === 1 && <FavoriteBorderIcon fontSize='large'/> 
+                  || index === 2 && <PeopleIcon fontSize='large'/>}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
