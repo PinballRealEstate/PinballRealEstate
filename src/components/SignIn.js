@@ -18,7 +18,6 @@ export default function SignIn({ setUser }) {
     setUser(user);
     push('/');
   }
-
   async function handleLogout() {
     await logout();
 

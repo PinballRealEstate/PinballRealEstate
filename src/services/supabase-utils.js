@@ -1,7 +1,7 @@
 import { client } from './client';
 
 export async function getUser(){
-  return client.auth.session() && client.auth.session().user;
+  return await client.auth.session() && await client.auth.session().user;
 }
 
 export async function signIn(email, password){
@@ -27,10 +27,12 @@ export async function getFavoriteHomes(){
   return body;
 }
 
-export async function getProfile(){
+export async function getProfileByID(id){
   const { body } = await client
     .from('profiles')
-    .select('*');
+    .select('*')
+    .match({ user_id: id })
+    .single();
 
   return body;
 }
@@ -39,6 +41,22 @@ export async function getFilters() {
   const { body } = await client
     .from('filters')
     .select('*');
+
+  return body;
+}
+
+export async function createProfile({ username }) {
+  const { body } = await client
+    .from('profiles')
+    .insert({ username });
+
+  return body;
+}
+
+export async function createFilter({ zip_code, low_price, high_price }){
+  const { body } = await client
+    .from('filters')
+    .insert({ zip_code, low_price, high_price });
 
   return body;
 }
