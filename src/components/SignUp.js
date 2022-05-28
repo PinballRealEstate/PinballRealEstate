@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { createProfile, signUp, createFilter } from '../services/supabase-utils';
 import CustomSlider from './CustomSlider';
+import CustomMenu from './CustomMenu';
 
 export default function SignUp({ setUser }) {
   const { push } = useHistory();
@@ -27,6 +28,7 @@ export default function SignUp({ setUser }) {
 
   return (
     <div>
+      <CustomMenu />
       <h1>Sign Up</h1>
       <form onSubmit={handleSignUp}>
         <label> Username:
