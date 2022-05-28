@@ -10,19 +10,19 @@ export default function Profile() {
     async function getProfileOnLoad(){
       const { id } = await getUser();
       const profileData = await getProfileByID(id);
-      const filterData = await getFilters();
+      const filterData = await getFilters(id);
       setProfile(profileData);
       setFilters(filterData);
       
     }
-    console.log('filters', filters);
     return getProfileOnLoad;
   }, []);
+  console.log('filters', filters);
   
   console.log('profile', profile);
   async function handleNameChange(e) {
     e.preventDefault();
-    // await editUserName(userNameData);
+    // await editUser(userNameData);
   }
 
   return (
