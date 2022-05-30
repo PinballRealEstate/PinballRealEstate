@@ -4,8 +4,12 @@ body{
     --color3: #70a9a1;
     --color4: #9ec1a3;
     --color5: #cfe0c3;
-    display: grid;
-    grid-template-columns: 50% 50%;
+   
+    background: linear-gradient(
+      to left,
+      rgba(0,0,0, 0),
+      var(--color3) 50%
+    ),url(../generic-home2.jpg) ;
   }
 
 .signIn{
