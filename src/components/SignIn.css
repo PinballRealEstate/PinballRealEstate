@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 body{
     --color1: #1f363d;
     --color2: #40798c;
@@ -6,12 +7,32 @@ body{
     --color5: #cfe0c3;
    
     background: linear-gradient(
-      to left,
+      to bottom,
       rgba(0,0,0, 0),
-      var(--color3) 50%
-    ),url(../generic-home2.jpg) ;
+      var(--color1) 70%
+    ),url(../generic-home2.jpg) 60% 100%;
+    background-size: 1700px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 .signIn{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: 'Poppins', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 1px 1px 17px -1px rgba(0,0,0,0.9);
+  border-radius: 10px;
+  padding: 100px;
+  background: rgba(255,255,255,0.57);
+}
 
+.signIn form{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
 }
