@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { results } from '../data';
 import CustomSlider from './CustomSlider';
 import Mapbox from './Mapbox';
 import PropertyCard from './PropertyCard.js';
 import './SignIn.css';
-import { getFilters, updateFilter } from '../services/supabase-utils';
+import { getFavoriteHomes, getFilters, updateFilter } from '../services/supabase-utils';
 
 export default function Search() {
   const [userPrefs, setUserPrefs] = useState({
@@ -15,8 +14,12 @@ export default function Search() {
     id: 0
   });
   const [homes, setHomes] = useState([]);
+  const [savedHomes, setSavedHomes] = useState([]);
 
-  const { push } = useHistory();
+  async function getSavedHomes() {
+    const savedHomeArray = await getFavoriteHomes();
+    setSavedHomes(savedHomeArray);
+  }
 
   async function handleSubmit(e){
     e.preventDefault();
@@ -39,7 +42,9 @@ export default function Search() {
       });
     }
     getUserPrefs();
+    getSavedHomes();
   }, []);
+
   return (
     <div className='searchPage'>
       <div className="search">
@@ -51,9 +56,9 @@ export default function Search() {
       </div>
       
       <div className='card-container'>
-        {homes.map((home, i) => <PropertyCard key={i} home={home}> </PropertyCard>)}
+        {homes.map((home, i) => <PropertyCard key={i} home={home} savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
       </div>
-      <Mapbox/>
+      {/* <Mapbox/> */}
       <div>
        
       </div>
