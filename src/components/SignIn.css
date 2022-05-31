@@ -1,3 +1,4 @@
+/* @import  background  from 'public/generic-home2.jpg'; */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 .signInPage{
     --color1: #1f363d;
@@ -10,7 +11,7 @@
       to bottom,
       rgba(0,0,0, 0),
       var(--color1) 70%
-    ),url(../generic-home2.jpg) 100%;
+    ),url(/src/generic-home2.jpg) 100%;
     background-size: 1700px;
     height: 100vh;
     display: flex;

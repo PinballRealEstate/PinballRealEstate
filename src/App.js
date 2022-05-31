@@ -9,9 +9,12 @@ import SignIn from './components/SignIn';
 import Search from './components/Search';
 import Profile from './components/Profile';
 import Detail from './components/Detail';
+import CustomMenu from './components/CustomMenu';
 // import { getAllHomes } from './services/fetch-utils';
 import { getUser } from './services/supabase-utils';
 import './components/Search.css';
+
+
 
 export default function App() {
   // const [listings, setListings] = useState([]);
@@ -39,13 +42,10 @@ export default function App() {
     <Router>
       <div>
         <header className='App-header'>
-          <h1>
-            Pinball Real Estate
-          </h1>
+          {
+            user && <CustomMenu setUser={setUser}/>
+          }
         </header>
-        <div>
-          {/* {listings.map((listing, i) => <p key={i}>{listing.location.address.line}</p>)} */}
-        </div>
         <Switch>
           <Route exact path="/signin">
             <SignIn setUser={setUser}/>
