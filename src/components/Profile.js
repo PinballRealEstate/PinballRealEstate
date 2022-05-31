@@ -33,12 +33,26 @@ export default function Profile() {
     await updateFilter(filters);
     setVisibleFilter(false);
   }
+  function handleFilterVisible(){
+    if (visibleFilter === false){
+      setVisibleFilter(true);
+    } else {
+      setVisibleFilter(false);
+    }
+  }
   async function handleNameChange(e) {
     e.preventDefault();
     await updateProfile(profile);
     setVisibleNameForm(false);
   }
-  
+  function handleEditNameVisible(){
+    if (visibleNameForm === false){
+      setVisibleNameForm(true);
+    } else {
+      setVisibleNameForm(false);
+    }
+  }
+
   return (
     <div>
       <header>
@@ -47,7 +61,7 @@ export default function Profile() {
       <div className='profile'>
         <img src='https://placedog.net/200'/>
         <h2>Username: {profile.username}</h2>
-        <button onClick={(() => setVisibleNameForm(true))}>Change User Name?</button>
+        <button onClick={handleEditNameVisible}>Change User Name?</button>
         <form className='' onSubmit={handleNameChange}>
           { visibleNameForm &&       
             <label>
@@ -61,7 +75,7 @@ export default function Profile() {
             <label>Zip Code: {filters.zip_code}</label>
             <label>Low Price: {filters.low_price}</label>
             <label>High Price: {filters.high_price}</label>
-            <button onClick={(() => setVisibleFilter(true))}>Update Filters</button><br/>
+            <button onClick={handleFilterVisible}>Update Filters</button><br/>
             <br/>
           </div>
           <br/>
