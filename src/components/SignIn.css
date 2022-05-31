@@ -1,13 +1,70 @@
-body{
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+.signInPage{
     --color1: #1f363d;
     --color2: #40798c;
     --color3: #70a9a1;
     --color4: #9ec1a3;
     --color5: #cfe0c3;
-    display: grid;
-    grid-template-columns: 50% 50%;
+   
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0, 0),
+      var(--color1) 70%
+    ),url(../generic-home2.jpg) 100%;
+    background-size: 1700px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 .signIn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  flex-direction: column;
+  height: 20%;
+  box-shadow: 1px 1px 17px -1px rgba(0,0,0,0.9);
+  border-radius: 10px;
+  padding: 100px;
+  background: rgba(255,255,255,0.57);
+}
 
+.signIn form{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 10px;
+}
+
+.signIn input{
+  background: rgba(255,255,255,0.57);
+  border-radius: 5px;
+  margin: 5px 0px 5px 10px;
+  height: 18px;
+}
+
+.signIn button{
+  background-color: #1f363d;
+  color: var(--color3);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100px;
+  font-weight: 700;
+}
+
+.signIn button:hover{
+  cursor: pointer;
+  transform: scale(1.04);
+  font-size: 1.2rem;
+}
+
+.signUpLink{
+  margin: 10px;
+  font-size: medium;
 }
