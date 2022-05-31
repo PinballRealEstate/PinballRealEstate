@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -21,7 +21,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import { Avatar } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Logout } from '@mui/icons-material';
-import { logout } from '../services/supabase-utils';
+import { getProfileByID, getUser, logout } from '../services/supabase-utils';
 import { useHistory } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -75,6 +75,10 @@ export default function CustomMenu({ setUser }) {
   const { push } = useHistory();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    username: '',
+    avatar: ''
+  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -104,6 +108,15 @@ export default function CustomMenu({ setUser }) {
     setOpen(false);
   }
 
+  useEffect(() => {
+    async function getCurrentUser(){
+      const userSession = await getUser();
+      const currentUser = await getProfileByID(userSession.id);
+      setCurrentUser(currentUser);
+    }
+    getCurrentUser();
+  }, []);
+
   return (
     <Box sx={{ display: 'flex' }} >
       <CssBaseline />
@@ -119,7 +132,7 @@ export default function CustomMenu({ setUser }) {
             <MenuIcon sx={{ color: '#1f363d', fontSize: '2rem' }}/>
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Welcome, Username
+            Welcome, {currentUser.username}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -137,7 +150,7 @@ export default function CustomMenu({ setUser }) {
         open={open}
       >
         <DrawerHeader sx={{ background: '#cfe0c3', display: 'flex', justifyContent: 'space-between' }}>
-          <Avatar /> Username
+          <Avatar alt={currentUser.username} src={currentUser.avatar}/> {`${currentUser.username}'s Profile`}
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
