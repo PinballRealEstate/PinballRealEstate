@@ -11,6 +11,7 @@ import Profile from './components/Profile';
 import Detail from './components/Detail';
 // import { getAllHomes } from './services/fetch-utils';
 import { getUser } from './services/supabase-utils';
+import './components/Search.css';
 
 export default function App() {
   // const [listings, setListings] = useState([]);
