@@ -6,45 +6,9 @@ body{
     --color5: #cfe0c3;
   }
 
-  .profile{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    color: var(--color1);
-    font-size: 1.2rem;
-    background: rgba(255,255,255, 0.57);
-    border-radius: 10px;
-    padding: 20px;
-    margin-right: 20px;
-  }
-  .profile input{
-    margin: 10px;
-    border-radius: 5px;
-    width: 200px;
-    height: 20px;
-  }
-  .profile button{
-    color: var(--color3);
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    width: 100px;
-    font-weight: 700;
-  }
-  .filters{
-    display: flex;
-    justify-content: center;
-  }
-  .filter_form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    margin-right: 25px;
-    font-size: medium;
-    font-weight: 400;
-    color: var(--color1);
-  }
-  
+.profile {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}

@@ -38,33 +38,39 @@ export default function Profile() {
         </header>
         <img src='https://placedog.net/200'/>
         <h2>{profile.username}</h2>
-        {/* <button onClick={(() => setVisible(true))}>Change User Name?</button>
-      <form>
-        { visible && <label>
+        <button onClick={(() => setVisible(true))}>Change User Name?</button>
+        <form>
+          <label>
           Edit User Name
-          <input onChange={e => setProfile.username(e.target.value)} />
-          <button onClick={handleNameChange}>Change Name</button>
-        </label>
-        }
-      </form> */}
+            <input onChange={e => setProfile.username(e.target.value)} />
+            {/* <button onClick={handleNameChange}>Change Name</button> */}
+          </label>
+          
+        </form>
         <div className='filters'>
-          Zip Code: {filters.zip_code}
-          Low Price: {filters.low_price}
-          High Price: {filters.high_price}
-          <button onClick={(() => setVisible(true))}>Update Filters</button>
-          <form className='filter_form' onSubmit={handleFilterChange}>
-            { visible && 
+          <div className='display_filters'>
+            <p>Zip Code: {filters.zip_code}</p>
+            <p>Low Price: {filters.low_price}</p>
+            <p>High Price: {filters.high_price}</p><br/>
+            <button onClick={(() => setVisible(true))}>Update Filters</button><br/>
+            <br/>
+          </div>
+          <br/>
+          <div className='filter_form'>
+            <form onSubmit={handleFilterChange}>       
+              { visible && 
             <label> 
               Zip Code 
-              <input value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input><br/>
+              <input value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
               Low Price
-              <input value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input><br/>
+              <input value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
               High Price
-              <input value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input><br/>
+              <input value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
               <button onClick={handleFilterChange}>Update</button>
             </label>            
-            }
-          </form>
+              }
+            </form>
+          </div>
         </div>
         
         <div className='cards'>Saved home cards here</div>
