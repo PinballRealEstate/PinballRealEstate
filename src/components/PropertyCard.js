@@ -6,14 +6,10 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { AttachMoney, Bathtub, Hotel, SquareFoot } from '@mui/icons-material';
 
 const ExpandMore = styled((props) => {
@@ -27,7 +23,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function RecipeReviewCard() {
+export default function PropertyCard({ home }) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -35,35 +31,35 @@ export default function RecipeReviewCard() {
   };
 
   return (
-    <Card sx={{ maxWidth: 345, borderRadius: '20px', backgroundColor: '#40798c' }}>
+    <Card sx={{ width: 300, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px' }}>
       <CardHeader sx={{ backgroundColor: '#40798c', color: 'white' }}
-        title="1605 SE 42nd Ave"
-        subheader="Portland, OR 97215"
+        title={`${home.location.address.line}`}
+        subheader={`${home.location.address.city}, ${home.location.address.state_code} ${home.location.address.postal_code}`}
       />
       <CardMedia
         component="img"
         height="194"
-        image="https://ap.rdcpix.com/fd2a7812c7dc773bf2aea4a3b02aba82l-m427674787s-w1024_h768.jpg"
+        image={home.primary_photo.href}
         alt="front photo"
       />
       <CardContent sx={{ backgroundColor: 'white' }} className='flex-row'>
         <div className='flex-column'>
           <IconButton aria-label="bedrooms">
             <Hotel/>
-            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>3 beds</Typography>
+            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.beds} beds`}</Typography>
           </IconButton>
           <IconButton aria-label="bathrooms">
             <Bathtub/>
-            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>2 baths</Typography>
+            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.baths} baths`}</Typography>
           </IconButton>
           <IconButton aria-label="square feet">
             <SquareFoot/>
-            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>2,341 sq ft</Typography>
+            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.sqft} sq ft`}</Typography>
           </IconButton>
         </div>
         <IconButton aria-label="list price">
           <AttachMoney />
-          <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>$750,000</Typography>
+          <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`$${home.list_price}`}</Typography>
         </IconButton>
       </CardContent>
       <CardActions disableSpacing>

@@ -5,3 +5,10 @@ body{
     --color4: #9ec1a3;
     --color5: #cfe0c3;
   }
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  flex-wrap: wrap;
+}

@@ -107,7 +107,7 @@ export const results = [
         'coordinate': null,
         'city': 'Portland',
         'state_code': 'OR',
-        'line': '16901 SE Division St Unit 109'
+        'line': '16901 SE Division St'
       },
       'street_view_url': 'https://maps.googleapis.com/maps/api/streetview?channel=rdc-streetview&client=gme-movesalesinc&location=16901%20SE%20Division%20St%20Unit%20109%2C%20Portland%2C%20OR%2097236&size=640x480&source=outdoor&signature=eglKfFuxpNpp5LmTnIw0AQvA36Y=',
       'county': {
@@ -1573,7 +1573,7 @@ export const results = [
         },
         'city': 'Portland',
         'state_code': 'OR',
-        'line': '2245 SW Park Pl Unit 7D'
+        'line': '2245 SW Park Pl'
       },
       'street_view_url': 'https://maps.googleapis.com/maps/api/streetview?channel=rdc-streetview&client=gme-movesalesinc&location=2245%20SW%20Park%20Pl%20Unit%207D%2C%20Portland%2C%20OR%2097205&size=640x480&source=outdoor&signature=_qVu1TanIy9CX3bpgV5uFj5B_EY=',
       'county': {
