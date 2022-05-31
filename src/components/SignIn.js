@@ -10,7 +10,8 @@ export default function SignIn({ setUser }) {
     email: '',
     password: ''
   });
-
+  
+  //function to log a user in by email and password kept in supabase
   async function handleSignIn(e) {
     e.preventDefault();
 
@@ -19,6 +20,8 @@ export default function SignIn({ setUser }) {
     setUser(user);
     push('/');
   }
+
+  //function to clear the user and end a session
   async function handleLogout() {
     await logout();
 
@@ -27,22 +30,27 @@ export default function SignIn({ setUser }) {
   }
 
   return (
-    <div className='signIn'>
-      <img src={'public/generic-home2.jpg'}/>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSignIn}>
-        <label>Email<input required type='email' onChange={ e => setSignInData({
-          email: e.target.value,
-          password: signInData.password
-        })}/></label>
-        <label>Password<input required type='password' onChange={ e => setSignInData({
-          email: signInData.email,
-          password: e.target.value
-        })}/></label>
-        <button>Sign In</button>
-      </form>
-      <Link to={'/signup'}>Sign Up</Link>
-      <button onClick={handleLogout}>Logout</button>
+    <div className='signInPage'>
+      <div className='signIn'>
+        <h1>Sign In</h1>
+        <form onSubmit={handleSignIn}>
+          <label>Email<input required type='email' onChange={ e => setSignInData({
+            email: e.target.value,
+            password: signInData.password
+          })}/></label>
+          <label>Password<input required type='password' onChange={ e => setSignInData({
+            email: signInData.email,
+            password: e.target.value
+          })}/></label>
+          <button>Sign In</button>
+        </form>
+        <span className='signUpLink'>
+          {/* link to sign up page */}
+        Not a user yet? 
+          <Link to={'/signup'}> Sign Up</Link>
+        </span>
+      </div>
     </div>
+    
   );
 }

@@ -38,7 +38,7 @@ export default function CustomSlider({ setSignUpData, signUpData }) {
   };
 
   return (
-    <Box sx={{ width: 400 }}>
+    <Box sx={{ width: 300 }}>
       <Slider
         getAriaLabel={() => 'Minimum distance shift'}
         value={value2}
@@ -49,6 +49,7 @@ export default function CustomSlider({ setSignUpData, signUpData }) {
         min={0}
         max={3000000}
         step={50000}
+        sx={{ color: '#40798c', margin: '10px', padding: '10px' }}
       />
     </Box>
   );
