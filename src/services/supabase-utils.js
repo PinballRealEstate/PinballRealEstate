@@ -70,3 +70,11 @@ export async function updateFilter({ zip_code, low_price, high_price, id }){
 
   return body;
 }
+export async function updateProfile({ username, id }){
+  const { body } = await client
+    .from('profiles')
+    .update({ username })
+    .match({ id });
+
+  return body;
+}
