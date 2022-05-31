@@ -11,6 +11,11 @@ import { AttachMoney, Bathtub, Hotel, SquareFoot } from '@mui/icons-material';
 
 
 export default function PropertyCard({ home }) {
+  async function saveHome() {
+    const savedHome = {
+        
+    }
+  }
   return (
     <Card sx={{ width: 300, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px' }}>
       <CardHeader sx={{ backgroundColor: '#40798c', color: 'white' }}
@@ -44,7 +49,7 @@ export default function PropertyCard({ home }) {
         </IconButton>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton value={home.listing_id} aria-label="add to favorites" onClick={saveHome}>
           <FavoriteIcon sx={{ color: 'white' }} className='favorite-home' />
         </IconButton>
       </CardActions>
