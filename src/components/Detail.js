@@ -15,7 +15,7 @@ export default function Detail() {
     load();
     console.log(results[0]);
     console.log(details);
-  }, []);
+  }, []); 
 
   return (
     <div>

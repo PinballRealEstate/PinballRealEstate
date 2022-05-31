@@ -14,6 +14,8 @@ import CustomMenu from './components/CustomMenu';
 import { getUser } from './services/supabase-utils';
 import './components/Search.css';
 
+
+
 export default function App() {
   // const [listings, setListings] = useState([]);
   const [user, setUser] = useState();
