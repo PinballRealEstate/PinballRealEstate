@@ -4,7 +4,7 @@ import { results } from '../data';
 import CustomSlider from './CustomSlider';
 import Mapbox from './Mapbox';
 import PropertyCard from './PropertyCard.js';
-
+import Image from '../generic-home2.jpg';
 
 export default function Search() {
   const [homes, setHomes] = useState([]);
@@ -15,7 +15,7 @@ export default function Search() {
   return (
     <div>
       <div>
-        <img src={'/src/generic-home2.jpg'} />
+        <img src={Image} />
         <form>
           <input></input>
           <CustomSlider/>
