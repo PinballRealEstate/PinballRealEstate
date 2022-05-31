@@ -12,3 +12,8 @@ body{
   width: 100vw;
   flex-wrap: wrap;
 }
+
+.favorite-home:hover {
+  color: #D72638;
+  transform: scale(1.2);
+}
