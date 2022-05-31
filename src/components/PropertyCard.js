@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useHistory } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,15 +7,39 @@ import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { AttachMoney, Bathtub, Hotel, SquareFoot } from '@mui/icons-material';
+import { AttachMoney, Bathtub, Hotel, SquareFoot, Clear } from '@mui/icons-material';
+import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
 
 
-export default function PropertyCard({ home }) {
+export default function PropertyCard({ home, savedHomes, getSavedHomes }) {
+  const { push } = useHistory();
+
   async function saveHome() {
     const savedHome = {
-        
-    }
+      property_id: home.property_id,
+      primary_photo: home.primary_photo.href,
+      address: home.location.address.line,
+      bedrooms: home.description.beds,
+      bathrooms: home.description.baths,
+      square_feet: home.description.sqft,
+      list_price: home.list_price
+    };
+    await createSavedHome(savedHome);
+    await getSavedHomes();
   }
+
+  async function removeSavedHome() {
+    await deleteSavedHome(home.property_id);
+    await getSavedHomes();
+  }
+
+  function isSaved(property_id) {
+    const saved = savedHomes.find(item => Number(item.property_id) === Number(property_id));
+
+    console.log(saved);
+    return Boolean(saved);
+  }
+
   return (
     <Card sx={{ width: 300, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px' }}>
       <CardHeader sx={{ backgroundColor: '#40798c', color: 'white' }}
@@ -49,9 +73,15 @@ export default function PropertyCard({ home }) {
         </IconButton>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton value={home.listing_id} aria-label="add to favorites" onClick={saveHome}>
-          <FavoriteIcon sx={{ color: 'white' }} className='favorite-home' />
-        </IconButton>
+        { !isSaved(home.property_id) ?
+          <IconButton aria-label="add to favorites" onClick={saveHome}>
+            <FavoriteIcon sx={{ color: 'white' }} className='favorite-home' />
+          </IconButton>
+          :
+          <IconButton aria-label="remove from favorites" onClick={removeSavedHome}>
+            <FavoriteIcon sx={{ color: '#D72638' }} className='remove-home' />
+          </IconButton>
+        }
       </CardActions>
     </Card>
   );

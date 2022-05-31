@@ -10,8 +10,12 @@ body{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 300px;
+  justify-content: center;
   margin: 0px;
+}
+
+.css-yfo96e, .css-ttn1xo {
+  padding: 0px !important;
 }
 
 .searchPage{
@@ -54,5 +58,10 @@ body{
 
 .favorite-home:hover {
   color: #D72638;
+  transform: scale(1.2);
+}
+
+.remove-home:hover {
+  color: 'white';
   transform: scale(1.2);
 }

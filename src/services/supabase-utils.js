@@ -78,3 +78,20 @@ export async function updateProfile({ username, id }){
 
   return body;
 }
+
+export async function createSavedHome(savedHome){
+  const { body } = await client
+    .from('saved')
+    .insert(savedHome);
+
+  return body;
+}
+
+export async function deleteSavedHome(property_id){
+  const { body } = await client
+    .from('saved')
+    .delete()
+    .match({ property_id });
+
+  return body;
+}
