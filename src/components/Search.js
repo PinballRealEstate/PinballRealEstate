@@ -4,7 +4,7 @@ import { results } from '../data';
 import CustomSlider from './CustomSlider';
 import Mapbox from './Mapbox';
 import PropertyCard from './PropertyCard.js';
-import Image from '../generic-home2.jpg';
+import Image from '../generic-home.jpg';
 import './SignIn.css';
 import { getFilters, updateFilter } from '../services/supabase-utils';
 
@@ -43,7 +43,7 @@ export default function Search() {
   }, []);
   return (
     <div>
-      <div className="signIn">
+      <div className="search">
         <img src={Image} />
         <form>
           <label>Zip Code  <input value={userPrefs.zip_code} onChange={e => setUserPrefs({ ...userPrefs, zip_code: e.target.value })}></input></label>
