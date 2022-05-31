@@ -20,6 +20,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import { Avatar } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Logout } from '@mui/icons-material';
+import { logout } from '../services/supabase-utils';
 
 const drawerWidth = 240;
 
@@ -68,7 +70,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function CustomMenu() {
+export default function CustomMenu({ setUser }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -79,6 +81,11 @@ export default function CustomMenu() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  async function logOutHandler() {
+    await logout();
+    setUser('');
+  }
 
   return (
     <Box sx={{ display: 'flex' }} >
@@ -120,13 +127,14 @@ export default function CustomMenu() {
         </DrawerHeader>
         <Divider sx={{ background: '#1f363d', height: '2px' }} />
         <List sx={{ background: '#cfe0c3' }}>
-          {['Home', 'Saved Homes', 'Meet the Team'].map((text, index) => (
+          {['Home', 'Saved Homes', 'Meet the Team', 'Logout'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ color: '#1f363d' }}>
               <ListItemButton>
                 <ListItemIcon sx={{ color: '#284750' }} >
                   {index === 0 && <HomeIcon fontSize='large'/> 
                   || index === 1 && <FavoriteBorderIcon fontSize='large'/> 
-                  || index === 2 && <PeopleIcon fontSize='large'/>}
+                  || index === 2 && <PeopleIcon fontSize='large'/>
+                  || index === 3 && <Logout fontSize='large' onClick={logOutHandler}/>}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
