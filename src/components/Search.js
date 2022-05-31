@@ -4,7 +4,6 @@ import { results } from '../data';
 import CustomSlider from './CustomSlider';
 import Mapbox from './Mapbox';
 import PropertyCard from './PropertyCard.js';
-import Image from '../generic-home2.jpg';
 import './SignIn.css';
 import { getFilters, updateFilter } from '../services/supabase-utils';
 
@@ -42,19 +41,22 @@ export default function Search() {
     getUserPrefs();
   }, []);
   return (
-    <div>
-      <div className="signIn">
-        <img src={Image} />
+    <div className='searchPage'>
+      <div className="search">
         <form>
           <label>Zip Code  <input value={userPrefs.zip_code} onChange={e => setUserPrefs({ ...userPrefs, zip_code: e.target.value })}></input></label>
           <label>List Price  <CustomSlider signUpData={{}} setSignUpData={setSignUpData}/></label>
           <button onClick={handleSubmit}>Search</button>
         </form>
       </div>
+      
       <div className='card-container'>
         {homes.map((home, i) => <PropertyCard key={i} home={home}> </PropertyCard>)}
       </div>
       <Mapbox/>
+      <div>
+       
+      </div>
     </div>
   );
 }
