@@ -44,9 +44,11 @@ export default function SignIn({ setUser }) {
           })}/></label>
           <button>Sign In</button>
         </form>
-        {/* link to sign up page */}
-        <Link to={'/signup'}>Sign Up</Link>
-        <button onClick={handleLogout}>Logout</button>
+        <span className='signUpLink'>
+          {/* link to sign up page */}
+        Not a user yet? 
+          <Link to={'/signup'}> Sign Up</Link>
+        </span>
       </div>
     </div>
     

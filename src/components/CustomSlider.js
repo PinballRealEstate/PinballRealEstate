@@ -49,6 +49,7 @@ export default function CustomSlider({ setSignUpData, signUpData }) {
         min={0}
         max={3000000}
         step={50000}
+        sx={{ color: '#9ec1a3', margin: '10px', padding: '10px' }}
       />
     </Box>
   );

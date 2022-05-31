@@ -35,6 +35,9 @@
   display: flex;
   align-items: flex-end;
   flex-direction: column;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 10px;
 }
 
 .signIn input{
@@ -53,4 +56,15 @@
   padding: 5px;
   width: 100px;
   font-weight: 700;
+}
+
+.signIn button:hover{
+  cursor: pointer;
+  transform: scale(1.04);
+  font-size: 1.2rem;
+}
+
+.signUpLink{
+  margin: 10px;
+  font-size: medium;
 }

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
 .signUpPage{
     --color1: #1f363d;
     --color2: #40798c;
@@ -10,4 +12,48 @@
       var(--color1) 70%
     ),url(../generic-home3.jpg) 100%;  
     height: 100vh;
+    font-family: 'Poppins', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
+
+.signUp{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.signUp h1{
+  display: flex;
+}
+
+.signUp form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  margin-right: 100px;
+  font-size: large;
+  font-weight: 700;
+  color: var(--color5);
+}
+
+.signUp input{
+  margin: 10px;
+  border-radius: 5px;
+  width: 200px;
+  height: 20px;
+}
+
+.signUp button{
+  background-color: #131313;
+  color: var(--color3);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100px;
+  font-weight: 700;
+}
