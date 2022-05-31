@@ -9,29 +9,42 @@ body{
 .profile {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
+}
+.avatar-username{
+  display: flex;
+  
+
 }
 .filters{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   font-size: 20px;
   font-weight: 700;
   width: 100%;
   padding: 40px;
   margin: 40px;
-  postion: absolute
 }
+
 .current-filters{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   font-size: 20px;
   font-weight: 700;
   width: 100%;
   padding: 40px;
   margin: 40px;
+  box-shadow: 1px 1px 17px -1px rgba(0, 0, 0, 0.9);
+  border-radius: 10px;
+}
+.current-filters label{
+  border-bottom: #1f363d;
+  margin: 15px;
 }
 .current-filters form{
   display: flex;

@@ -59,9 +59,11 @@ export default function Profile() {
         <CustomMenu/>
       </header>
       <div className='profile'>
-        <img src='https://placedog.net/200'/>
-        <h2>Username: {profile.username}</h2>
-        <button onClick={handleEditNameVisible}>Change User Name?</button>
+        <div className='avatar-username'>
+          <img src='https://placedog.net/200'/>
+          <h2>Username: {profile.username}</h2>
+          <button onClick={handleEditNameVisible}>Change User Name?</button>
+        </div>
         <form className='' onSubmit={handleNameChange}>
           { visibleNameForm &&       
             <label>
@@ -73,8 +75,8 @@ export default function Profile() {
         <div className='filters-div'>
           <div className='current-filters'>
             <label>Zip Code: {filters.zip_code}</label>
-            <label>Low Price: {filters.low_price}</label>
-            <label>High Price: {filters.high_price}</label>
+            <label>Low Price: ${filters.low_price}</label>
+            <label>High Price: ${filters.high_price}</label>
             <button onClick={handleFilterVisible}>Update Filters</button><br/>
             <br/>
           </div>
