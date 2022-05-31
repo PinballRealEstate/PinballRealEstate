@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getProfileByID, getFilters, updateFilter, } from '../services/supabase-utils';
+import { getUser, getProfileByID, getFilters, updateFilter, updateProfile } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 import './Profile.css';
 export default function Profile() {
-
-  const [profile, setProfile] = useState({});
-  const [visible, setVisible] = useState(false);
+  const [profile, setProfile] = useState('');
+  const [visibleFilter, setVisibleFilter] = useState(false);
+  const [visibleNameForm, setVisibleNameForm] = useState(false);
   const [filters, setFilters] = useState({
     zip_code: 0,
     low_price: 0,
     high_price: 0,
+    id:0
   });
   useEffect(() => {
     async function getProfileOnLoad(){
-      // const { id } = await getUser();
+      const { id } = await getUser();
+      const profileData = await getProfileByID(id);
       const filterData = await getFilters();
-      setFilters(filterData);      
+      setProfile(profileData);
+      setFilters({
+        zip_code: filterData.zip_code,
+        low_price: filterData.low_price,
+        high_price: filterData.high_price,
+        id: filterData.id
+      }); 
     }
     return getProfileOnLoad;
   }, []);
@@ -23,28 +31,30 @@ export default function Profile() {
   async function handleFilterChange(e){
     e.preventDefault();
     await updateFilter(filters);
-    setVisible(false);
+    setVisibleFilter(false);
   }
   async function handleNameChange(e) {
     e.preventDefault();
-    // await editUser(userNameData);
+    await updateProfile(profile);
+    setVisibleNameForm(false);
   }
-
+  
   return (
     <div>
+      <header>
+        <CustomMenu/>
+      </header>
       <div className='profile'>
-        <header>
-          <CustomMenu/>
-        </header>
         <img src='https://placedog.net/200'/>
-        <h2>{profile.username}</h2>
-        <button onClick={(() => setVisible(true))}>Change User Name?</button>
-        <form>
-          <label>
+        <h2>Username: {profile.username}</h2>
+        <button onClick={(() => setVisibleNameForm(true))}>Change User Name?</button>
+        <form onSubmit={handleNameChange}>
+          { visibleNameForm &&       
+            <label>
           Edit User Name
-            <input onChange={e => setProfile.username(e.target.value)} />
-            {/* <button onClick={handleNameChange}>Change Name</button> */}
-          </label>
+              <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input>
+              <button onClick={handleNameChange}>Change Name</button>
+            </label>}
           
         </form>
         <div className='filters'>
@@ -52,13 +62,13 @@ export default function Profile() {
             <p>Zip Code: {filters.zip_code}</p>
             <p>Low Price: {filters.low_price}</p>
             <p>High Price: {filters.high_price}</p><br/>
-            <button onClick={(() => setVisible(true))}>Update Filters</button><br/>
+            <button onClick={(() => setVisibleFilter(true))}>Update Filters</button><br/>
             <br/>
           </div>
           <br/>
           <div className='filter_form'>
             <form onSubmit={handleFilterChange}>       
-              { visible && 
+              { visibleFilter && 
             <label> 
               Zip Code 
               <input value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
