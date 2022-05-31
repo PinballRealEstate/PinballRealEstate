@@ -12,7 +12,7 @@ import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
 
 
 export default function PropertyCard({ home, savedHomes, getSavedHomes }) {
-  const { push } = useHistory();
+//   const { push } = useHistory();
 
   async function saveHome() {
     const savedHome = {
@@ -35,8 +35,6 @@ export default function PropertyCard({ home, savedHomes, getSavedHomes }) {
 
   function isSaved(property_id) {
     const saved = savedHomes.find(item => Number(item.property_id) === Number(property_id));
-
-    console.log(saved);
     return Boolean(saved);
   }
 

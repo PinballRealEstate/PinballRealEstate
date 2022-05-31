@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { results } from '../data';
 import CustomSlider from './CustomSlider';
 import Mapbox from './Mapbox';
@@ -21,8 +20,6 @@ export default function Search() {
     const savedHomeArray = await getFavoriteHomes();
     setSavedHomes(savedHomeArray);
   }
-
-  const { push } = useHistory();
 
   async function handleSubmit(e){
     e.preventDefault();
@@ -48,7 +45,6 @@ export default function Search() {
     getSavedHomes();
   }, []);
 
-  console.log(savedHomes);
   return (
     <div className='searchPage'>
       <div className="search">
