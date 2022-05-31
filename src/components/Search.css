@@ -9,38 +9,44 @@ body{
 .card-container {
   display: flex;
   flex-direction: row;
-  width: 100vw;
   flex-wrap: wrap;
+  height: 300px;
+  margin: 0px;
+}
+
+.searchPage{
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .search{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-content: flex-start;
   font-family: 'Poppins', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   flex-direction: column;
-  height: 10%;
   box-shadow: 1px 1px 17px -1px rgba(0,0,0,0.9);
   background: rgba(255,255,255,0.57);
   margin: 0;
-  max-height: 500px;
+  height: 425px;
+  background: url('../generic-home.jpg');
+  background-position: center;
 }
 
 .search form{
   display: flex;
+  justify-content: space-around;
+  align-items: center;
   font-size: 20px;
-  font-weight: 500;
-  background: rgba(47, 147, 133, 0.57);
+  font-weight: 700;
+  background: rgba(48, 48, 48, 0.703);
   width: 100%;
+  padding: 10px 0px 0px 20px;
+  color: white;
 }
 
 .search input{
   width: 100px;
-}
-
-.search img{
-  width: 100%;
-  opacity: .87;
-  border-radius: 5px;
-  margin: 0;
 }
