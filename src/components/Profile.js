@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getProfileByID, getFilters, } from '../services/supabase-utils';
+import { getUser, getProfileByID, getFilters, updateFilter, } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 export default function Profile() {
 
   const [profile, setProfile] = useState({});
   const [visible, setVisible] = useState(false);
-  const [filters, setFilters] = useState();
+  const [filters, setFilters] = useState({
+    zip_code: 0,
+    low_price: 0,
+    high_price: 0,
+  });
   useEffect(() => {
     async function getProfileOnLoad(){
-      const { id } = await getUser();
-      const profileData = await getProfileByID(id);
-      const filterData = await getFilters(id);
-      setProfile(profileData);
-      setFilters(filterData);      
+      // const { id } = await getUser();
+      const filterData = await getFilters();
+      setFilters(filterData); 
+      console.log('filterData', filterData);     
     }
     return getProfileOnLoad;
   }, []);
 
+  async function handleFilterChange(e){
+    e.preventDefault();
+    await updateFilter(filters);
+  }
   async function handleNameChange(e) {
     e.preventDefault();
     // await editUser(userNameData);
@@ -37,7 +44,11 @@ export default function Profile() {
           <button onClick={handleNameChange}>Change Name</button>
         </label>
         }
-        <div className='filters'>Filters go here</div>
+        <div className='filters'>
+          Zip Code: {filters.zip_code}<br/>
+          Low Price: {filters.low_price}<br/>
+          High Price: {filters.high_price}<br/>
+        </div>
         <div className='cards'>Saved home cards here</div>
       </form>
     </div>
