@@ -15,8 +15,7 @@ export default function Profile() {
     async function getProfileOnLoad(){
       // const { id } = await getUser();
       const filterData = await getFilters();
-      setFilters(filterData); 
-      console.log('filterData', filterData);     
+      setFilters(filterData);      
     }
     return getProfileOnLoad;
   }, []);
@@ -37,7 +36,7 @@ export default function Profile() {
       </header>
       <img src='https://placedog.net/200'/>
       <h2>{profile.username}</h2>
-      <button onClick={(() => setVisible(true))}>Change User Name?</button>
+      {/* <button onClick={(() => setVisible(true))}>Change User Name?</button>
       <form>
         { visible && <label>
           Edit User Name
@@ -45,15 +44,30 @@ export default function Profile() {
           <button onClick={handleNameChange}>Change Name</button>
         </label>
         }
-        <div className='filters'>
+      </form> */}
+      <div className='filters'>
           Zip Code: {filters.zip_code}<br/>
           Low Price: {filters.low_price}<br/>
           High Price: {filters.high_price}<br/>
-          <CustomSlider/>
-        </div>
+        <CustomSlider/>
+        <button onClick={(() => setVisible(true))}>Filters</button>
+        <form onSubmit={handleFilterChange}>
+          { visible && 
+            <label> 
+              Zip Code
+              <input value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input><br/>
+              Low Price
+              <input value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input><br/>
+              High Price
+              <input value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input><br/>
+              <button onClick={handleFilterChange}>Update</button>
+            </label>
+            
+          }
+        </form>
+      </div>
         
-        <div className='cards'>Saved home cards here</div>
-      </form>
+      <div className='cards'>Saved home cards here</div>
     </div>
   );
 }
