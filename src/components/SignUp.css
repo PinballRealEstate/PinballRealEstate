@@ -1,7 +1,13 @@
-body{
+.signUpPage{
     --color1: #1f363d;
     --color2: #40798c;
     --color3: #70a9a1;
     --color4: #9ec1a3;
     --color5: #cfe0c3;
+    background: linear-gradient(
+      to right,
+      rgba(0,0,0, 0),
+      var(--color1) 70%
+    ),url(../generic-home3.jpg) 100%;  
+    height: 100vh;
   }
