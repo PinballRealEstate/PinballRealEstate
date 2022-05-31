@@ -11,12 +11,13 @@
       to bottom,
       rgba(0,0,0, 0),
       var(--color1) 70%
-    ),url(/src/generic-home2.jpg) 100%;
-    background-size: 1700px;
+    ),url(/src/generic-home2.jpg) 100% no-repeat;
+    /* background-size: 1700px; */
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
   }
 
 .signIn{
