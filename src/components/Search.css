@@ -31,8 +31,9 @@ body{
   background: rgba(255,255,255,0.57);
   margin: 0;
   height: 425px;
-  background: url('../generic-home.jpg');
+  background: url('../generic-home4.jpg') no-repeat;
   background-position: center;
+  background-size: cover;
 }
 
 .search form{
