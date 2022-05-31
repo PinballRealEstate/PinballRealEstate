@@ -49,6 +49,7 @@ export default function Profile() {
           Zip Code: {filters.zip_code}<br/>
           Low Price: {filters.low_price}<br/>
           High Price: {filters.high_price}<br/>
+          <CustomSlider/>
         </div>
         
         <div className='cards'>Saved home cards here</div>
