@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { results } from '../data';
+import Mapbox from './Mapbox';
 import PropertyCard from './PropertyCard.js';
 
 
@@ -16,6 +17,7 @@ export default function Search() {
       <div className='card-container'>
         {homes.map((home, i) => <PropertyCard key={i} home={home}> </PropertyCard>)}
       </div>
+      <Mapbox/>
     </div>
   );
 }
