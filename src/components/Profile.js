@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUser, getProfileByID, getFilters, } from '../services/supabase-utils';
-
+import CustomMenu from './CustomMenu';
 export default function Profile() {
 
   const [profile, setProfile] = useState({});
@@ -12,14 +12,11 @@ export default function Profile() {
       const profileData = await getProfileByID(id);
       const filterData = await getFilters(id);
       setProfile(profileData);
-      setFilters(filterData);
-      
+      setFilters(filterData);      
     }
     return getProfileOnLoad;
   }, []);
-  console.log('filters', filters);
-  
-  console.log('profile', profile);
+
   async function handleNameChange(e) {
     e.preventDefault();
     // await editUser(userNameData);
@@ -27,6 +24,9 @@ export default function Profile() {
 
   return (
     <div>
+      <header >
+        <CustomMenu/>
+      </header>
       <img src='https://placedog.net/200'/>
       <h2>{profile.username}</h2>
       <button onClick={(() => setVisible(true))}>Change User Name?</button>
