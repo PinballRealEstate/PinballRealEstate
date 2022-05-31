@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { AttachMoney, Bathtub, Hotel, SquareFoot, Clear } from '@mui/icons-material';
 import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
+import { Link } from 'react-router-dom';
 
 
 export default function PropertyCard({ home, savedHomes, getSavedHomes }) {
@@ -40,36 +41,38 @@ export default function PropertyCard({ home, savedHomes, getSavedHomes }) {
 
   return (
     <Card sx={{ width: 300, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px' }}>
-      <CardHeader sx={{ backgroundColor: '#40798c', color: 'white' }}
-        title={`${home.location.address.line}`}
-        subheader={`${home.location.address.city}, ${home.location.address.state_code} ${home.location.address.postal_code}`}
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image={home.primary_photo.href}
-        alt="front photo"
-      />
-      <CardContent sx={{ backgroundColor: 'white' }} className='flex-row'>
-        <div className='flex-column'>
-          <IconButton aria-label="bedrooms">
-            <Hotel/>
-            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.beds} beds`}</Typography>
+      <Link to={`/detail/${home.property_id}`}>
+        <CardHeader sx={{ backgroundColor: '#40798c', color: 'white' }}
+          title={`${home.location.address.line}`}
+          subheader={`${home.location.address.city}, ${home.location.address.state_code} ${home.location.address.postal_code}`}
+        />
+        <CardMedia
+          component="img"
+          height="194"
+          image={home.primary_photo.href}
+          alt="front photo"
+        />
+        <CardContent sx={{ backgroundColor: 'white' }} className='flex-row'>
+          <div className='flex-column'>
+            <IconButton aria-label="bedrooms">
+              <Hotel/>
+              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.beds} beds`}</Typography>
+            </IconButton>
+            <IconButton aria-label="bathrooms">
+              <Bathtub/>
+              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.baths} baths`}</Typography>
+            </IconButton>
+            <IconButton aria-label="square feet">
+              <SquareFoot/>
+              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.sqft} sq ft`}</Typography>
+            </IconButton>
+          </div>
+          <IconButton aria-label="list price">
+            <AttachMoney />
+            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`$${home.list_price.toLocaleString('en-US')}`}</Typography>
           </IconButton>
-          <IconButton aria-label="bathrooms">
-            <Bathtub/>
-            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.baths} baths`}</Typography>
-          </IconButton>
-          <IconButton aria-label="square feet">
-            <SquareFoot/>
-            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.sqft} sq ft`}</Typography>
-          </IconButton>
-        </div>
-        <IconButton aria-label="list price">
-          <AttachMoney />
-          <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`$${home.list_price}`}</Typography>
-        </IconButton>
-      </CardContent>
+        </CardContent>
+      </Link>
       <CardActions disableSpacing>
         { !isSaved(home.property_id) ?
           <IconButton aria-label="add to favorites" onClick={saveHome}>
