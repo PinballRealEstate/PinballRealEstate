@@ -24,7 +24,7 @@ import { Logout } from '@mui/icons-material';
 import { getProfileByID, getUser, logout } from '../services/supabase-utils';
 import { useHistory } from 'react-router-dom';
 
-const drawerWidth = 240;
+const drawerWidth = 245;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -74,7 +74,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function CustomMenu({ setUser }) {
   const { push } = useHistory();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  //tracking state to customize user toolbar
   const [currentUser, setCurrentUser] = useState({
     username: '',
     avatar: ''
@@ -87,27 +88,27 @@ export default function CustomMenu({ setUser }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+ // function to logout singular user
   async function logOutHandler() {
     await logout();
     setUser('');
   }
-
+  // function to push user to profile page
   function handleProfile(){
     push('/profile');
     setOpen(false);
   }
-
+  // function to push user to about team page
   function handleAbout(){
     push('/about');
     setOpen(false);
   }
-
+  // function to return user to home page
   function handleHome(){
     push('/');
     setOpen(false);
   }
-
+  //used to get userprofile information to display on menu
   useEffect(() => {
     async function getCurrentUser(){
       const userSession = await getUser();
@@ -150,7 +151,7 @@ export default function CustomMenu({ setUser }) {
         open={open}
       >
         <DrawerHeader sx={{ background: '#cfe0c3', display: 'flex', justifyContent: 'space-between' }}>
-          <Avatar alt={currentUser.username} src={currentUser.avatar}/> {`${currentUser.username}'s Profile`}
+          <Avatar alt={currentUser.username} src={currentUser.avatar} sx={{ margin: '0px 10px 0px 5px' }}/> {`${currentUser.username}'s Profile`}
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
@@ -175,7 +176,7 @@ export default function CustomMenu({ setUser }) {
           ))}
         </List>
         <List sx={{ background: '#cfe0c3', height: '100%' }} >
-            here we can loop through some local addresses
+          {}
         </List>
       </Drawer>
       <Main open={open}>

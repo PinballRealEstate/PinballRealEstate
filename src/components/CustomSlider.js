@@ -6,6 +6,21 @@ function ValueText(value) {
   return `${value}°C`;
 }
 
+const marks = [
+  {
+    value: 250000,
+    label: '$250,000'
+  },
+  {
+    value: 1500000,
+    label: '$1.5 Mil'
+  },
+  {
+    value: 3000000,
+    label: '$3 Mil'
+  },
+];
+
 const minDistance = 200000;
 
 export default function CustomSlider({ setSignUpData, signUpData }) {
@@ -50,6 +65,7 @@ export default function CustomSlider({ setSignUpData, signUpData }) {
         max={3000000}
         step={50000}
         sx={{ color: '#40798c', margin: '10px', padding: '10px' }}
+        marks={marks}
       />
     </Box>
   );
