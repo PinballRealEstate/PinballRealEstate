@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { results } from '../data';
-import TinySlider from 'tiny-slider-react';
-import 'tiny-slider/dist/tiny-slider.css';
 import SimpleImageSlider from 'react-simple-image-slider';
+import './Detail.css';
 
 
 export default function Detail() {
@@ -30,14 +29,16 @@ export default function Detail() {
     }
     load();
     
-    const imageArray = results[0].photos.map((photo) =>{ return { 'url': photo.href };});
+    const imageArray = results[0].photos.map((photo) => { return { 'url': photo.href };});
     setImages(imageArray);
   }, []); 
   console.log(images);  
 
 
   return (
-    <div>
+    <div className="detail-page">
+      <h1>{results[0].location.address.line}</h1>
+      <h2 className="sub-heading">{results[0].branding[0].type} | ${results[0].list_price} | {results[0].location.address.city}, {results[0].location.address.state}</h2>
       { images.length > 1 && <SimpleImageSlider
         width={896}
         height={504}
@@ -45,13 +46,7 @@ export default function Detail() {
         showBullets={true}
         showNavs={true}
       />}
-      {/* <TinySlider settings={settings}>
-        {results[0].photos.map((photo) => <img key={photo.href} src={photo.href}/>) }
-      </TinySlider> */}
-      {}
-      {/* <img src={results[0].photos[1].href}/> */}
-      <p>{results[0].location.address.line}</p>
-      <p>{results[0].location.address.city}, {results[0].location.address.state}</p>
+      {results[0].flags.is_new_listing && <p>This is a New Listing!</p>}
       
     </div>
   );
