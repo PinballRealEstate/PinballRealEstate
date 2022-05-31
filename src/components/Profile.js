@@ -23,6 +23,7 @@ export default function Profile() {
   async function handleFilterChange(e){
     e.preventDefault();
     await updateFilter(filters);
+    setVisible(false);
   }
   async function handleNameChange(e) {
     e.preventDefault();
@@ -47,14 +48,14 @@ export default function Profile() {
         }
       </form> */}
         <div className='filters'>
-          Zip Code: {filters.zip_code}<br/>
-          Low Price: {filters.low_price}<br/>
-          High Price: {filters.high_price}<br/>
-          <button onClick={(() => setVisible(true))}>Filters</button>
-          <form onSubmit={handleFilterChange}>
+          Zip Code: {filters.zip_code}
+          Low Price: {filters.low_price}
+          High Price: {filters.high_price}
+          <button onClick={(() => setVisible(true))}>Update Filters</button>
+          <form className='filter_form' onSubmit={handleFilterChange}>
             { visible && 
             <label> 
-              Zip Code
+              Zip Code 
               <input value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input><br/>
               Low Price
               <input value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input><br/>

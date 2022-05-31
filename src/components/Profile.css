@@ -33,3 +33,18 @@ body{
     width: 100px;
     font-weight: 700;
   }
+  .filters{
+    display: flex;
+    justify-content: center;
+  }
+  .filter_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    margin-right: 25px;
+    font-size: medium;
+    font-weight: 400;
+    color: var(--color1);
+  }
+  
