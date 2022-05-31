@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUser, getProfileByID, getFilters, updateFilter, } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
-import CustomSlider from './CustomSlider';
+import './Profile.css';
 export default function Profile() {
 
   const [profile, setProfile] = useState({});
@@ -31,12 +31,13 @@ export default function Profile() {
 
   return (
     <div>
-      <header >
-        <CustomMenu/>
-      </header>
-      <img src='https://placedog.net/200'/>
-      <h2>{profile.username}</h2>
-      {/* <button onClick={(() => setVisible(true))}>Change User Name?</button>
+      <div className='profile'>
+        <header>
+          <CustomMenu/>
+        </header>
+        <img src='https://placedog.net/200'/>
+        <h2>{profile.username}</h2>
+        {/* <button onClick={(() => setVisible(true))}>Change User Name?</button>
       <form>
         { visible && <label>
           Edit User Name
@@ -45,14 +46,13 @@ export default function Profile() {
         </label>
         }
       </form> */}
-      <div className='filters'>
+        <div className='filters'>
           Zip Code: {filters.zip_code}<br/>
           Low Price: {filters.low_price}<br/>
           High Price: {filters.high_price}<br/>
-        <CustomSlider/>
-        <button onClick={(() => setVisible(true))}>Filters</button>
-        <form onSubmit={handleFilterChange}>
-          { visible && 
+          <button onClick={(() => setVisible(true))}>Filters</button>
+          <form onSubmit={handleFilterChange}>
+            { visible && 
             <label> 
               Zip Code
               <input value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input><br/>
@@ -61,13 +61,13 @@ export default function Profile() {
               High Price
               <input value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input><br/>
               <button onClick={handleFilterChange}>Update</button>
-            </label>
-            
-          }
-        </form>
-      </div>
+            </label>            
+            }
+          </form>
+        </div>
         
-      <div className='cards'>Saved home cards here</div>
+        <div className='cards'>Saved home cards here</div>
+      </div>
     </div>
   );
 }
