@@ -59,8 +59,8 @@ export default function SignUp({ setUser }) {
           </label>
           <button>Sign Up</button>
         </form>
-        <Link to={'/signin'}>Sign In</Link>
-        <Link to={'/about'}>About</Link>
+        <Link to={'/signin'} className='link'>Sign In</Link>
+        <Link to={'/about'} className='link'>About</Link>
       </div>
       
     </div>
