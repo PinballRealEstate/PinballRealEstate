@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getUser, getProfileByID, getFilters, updateFilter, } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
+import CustomSlider from './CustomSlider';
 export default function Profile() {
 
   const [profile, setProfile] = useState({});
@@ -49,6 +50,7 @@ export default function Profile() {
           Low Price: {filters.low_price}<br/>
           High Price: {filters.high_price}<br/>
         </div>
+        
         <div className='cards'>Saved home cards here</div>
       </form>
     </div>
