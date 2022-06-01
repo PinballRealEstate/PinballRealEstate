@@ -14,17 +14,46 @@ body{
 
 .sub-heading {
   font-weight: lighter;
+  color: #1f363d;
+  
+  
 }
 
 .property-deets {
   display: flex;
   flex-direction: row;
+  background-color: #cfe0c3;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 896px;
+
 }
 
 .property-deets div {
   margin-right: 155px;
+  color:#1f363d;
+
 }
 
 .deets {
-  width: 900px;
+  width: 896px;
+  margin: 0px;
+  padding: 10px;
+  font-family:'Times New Roman', Times, serif;
+  font-size: larger;
+  color:#1f363d;
+}
+
+.street-address {
+  color:aliceblue;
+}
+
+.address-area {
+  background-color: #70a9a1;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  width: 896px;
+  border-radius: 25px 25px 0px 0px;
+  text-align: center;
+  
 }
