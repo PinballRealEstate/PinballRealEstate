@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { results } from '../data';
 import CustomSlider from './CustomSlider';
 import Mapbox from './Mapbox';
 import PropertyCard from './PropertyCard.js';
@@ -77,7 +76,6 @@ export default function Search() {
   
   async function getHomeData(){
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
-    console.log(data);
     if (data) {
       setHomes(data.home_search.results);
     }
@@ -86,6 +84,7 @@ export default function Search() {
   //on load of the page get user preferences and saved homes
   useEffect(() => {
     getInfoOnLoad();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getInfoOnLoad() {
@@ -104,6 +103,7 @@ export default function Search() {
 
   useEffect(() => {
     getHomeData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
 
   return (
