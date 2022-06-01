@@ -125,7 +125,16 @@ export default function Search() {
         responsive={responsive}
         autoPlay={false}
         autoPlaySpeed={20000}>
-        {homes.map((home, i) => <PropertyCard key={i} home={home} savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
+        {homes.map((home, i) => <PropertyCard key={i} 
+          address={home.location.address.line}
+          secondary_address={`${home.location.address.city}, ${home.location.address.state} ${home.location.address.postal_code}`}
+          bed={home.description.beds}
+          bath={home.description.baths}
+          sqft={home.description.sqft}
+          listprice={home.list_price}
+          image={home.primary_photo.href}
+          id={home.property_id}
+          savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
       </Carousel>
       {homes.length > 0 && <Mapbox homes={homes} zipCodeData={zipCodeData}/>}
     </div>

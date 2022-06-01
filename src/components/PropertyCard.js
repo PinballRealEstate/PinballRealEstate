@@ -12,25 +12,34 @@ import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
 import { Link } from 'react-router-dom';
 
 
-export default function PropertyCard({ home, savedHomes, getSavedHomes }) {
+export default function PropertyCard({ address,
+  secondary_address,
+  bed,
+  bath,
+  sqft,
+  listprice,
+  image,
+  id,
+  savedHomes, getSavedHomes }) {
 //   const { push } = useHistory();
 
   async function saveHome() {
     const savedHome = {
-      property_id: home.property_id,
-      primary_photo: home.primary_photo.href,
-      address: home.location.address.line,
-      bedrooms: home.description.beds,
-      bathrooms: home.description.baths,
-      square_feet: home.description.sqft,
-      list_price: home.list_price
+      property_id: id,
+      primary_photo: image,
+      address: address,
+      bedrooms: bed,
+      bathrooms: bath,
+      square_feet: sqft,
+      list_price: listprice,
+      secondary_address: secondary_address
     };
     await createSavedHome(savedHome);
     await getSavedHomes();
   }
 
   async function removeSavedHome() {
-    await deleteSavedHome(home.property_id);
+    await deleteSavedHome(id);
     await getSavedHomes();
   }
 
@@ -41,40 +50,40 @@ export default function PropertyCard({ home, savedHomes, getSavedHomes }) {
 
   return (
     <Card sx={{ width: 300, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px' }}>
-      <Link to={`/detail/${home.property_id}`}>
+      <Link to={`/detail/${id}`}>
         <CardHeader sx={{ backgroundColor: '#40798c', color: 'white' }}
-          title={`${home.location.address.line}`}
-          subheader={`${home.location.address.city}, ${home.location.address.state_code} ${home.location.address.postal_code}`}
+          title={address}
+          subheader={secondary_address}
         />
         <CardMedia
           component="img"
           height="194"
-          image={home.primary_photo.href}
+          image={image}
           alt="front photo"
         />
         <CardContent sx={{ backgroundColor: 'white' }} className='flex-row'>
           <div className='flex-column'>
             <IconButton aria-label="bedrooms">
               <Hotel/>
-              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.beds} beds`}</Typography>
+              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${bed} beds`}</Typography>
             </IconButton>
             <IconButton aria-label="bathrooms">
               <Bathtub/>
-              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.baths} baths`}</Typography>
+              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${bath} baths`}</Typography>
             </IconButton>
             <IconButton aria-label="square feet">
               <SquareFoot/>
-              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${home.description.sqft} sq ft`}</Typography>
+              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${sqft} sq ft`}</Typography>
             </IconButton>
           </div>
           <IconButton aria-label="list price">
             <AttachMoney />
-            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`$${home.list_price.toLocaleString('en-US')}`}</Typography>
+            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`$${listprice.toLocaleString('en-US')}`}</Typography>
           </IconButton>
         </CardContent>
       </Link>
       <CardActions disableSpacing>
-        { !isSaved(home.property_id) ?
+        { !isSaved(id) ?
           <IconButton aria-label="add to favorites" onClick={saveHome}>
             <FavoriteIcon sx={{ color: 'white' }} className='favorite-home' />
           </IconButton>
