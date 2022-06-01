@@ -7,7 +7,7 @@ import './SignIn.css';
 import { getFavoriteHomes, getFilters, updateFilter } from '../services/supabase-utils';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { geoCode } from '../services/fetch-utils';
+import { geoCode, getAllHomes } from '../services/fetch-utils';
 
 export default function Search() {
   const [userPrefs, setUserPrefs] = useState({
@@ -81,6 +81,11 @@ export default function Search() {
 
 
   useEffect(() => {
+    async function getHomeData(){
+      const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state);
+      console.log('data', data);
+      setHomes(data);
+    }
     async function getUserPrefs(){
       const filterResponse = await getFilters();
       setUserPrefs({
