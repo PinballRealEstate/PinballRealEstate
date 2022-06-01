@@ -10,12 +10,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { geoCode, getAllHomes } from '../services/fetch-utils';
 
 export default function Search() {
-  const [userPrefs, setUserPrefs] = useState({
-    zip_code: 97202,
-    low_price: 0,
-    high_price: 0,
-    id: 0
-  });
+  const [userPrefs, setUserPrefs] = useState({});
   const [zipCodeData, setZipCodeData] = useState({
     lat: 0,
     lon: 0,
@@ -58,38 +53,41 @@ export default function Search() {
     setSavedHomes(savedHomeArray);
   }
 
+  async function mapZipCode() {
+    const { data } = await geoCode(userPrefs.zip_code);
+    setZipCodeData({
+      lat: data.features[0].center[1],
+      lon: data.features[0].center[0],
+      city: data.features[0].context[0].text,
+      state_code: data.features[0].context[2].short_code.slice(-2)
+    });
+  }
+
   async function handleSubmit(e){
     e.preventDefault();
     setUserPrefs({
       ...userPrefs, zip_code: zipCodeInForm
     });
-    await updateFilter(userPrefs);
-    await getHomeData();
-  }
-
-  useEffect(() => {
-    async function mapZipCode() {
-      const { data } = await geoCode(userPrefs.zip_code);
-      setZipCodeData({
-        lat: data.features[0].center[1],
-        lon: data.features[0].center[0],
-        city: data.features[0].context[0].text,
-        state_code: data.features[0].context[2].short_code.slice(-2)
-      });
-    }
     if (userPrefs.zip_code > 0) {
       mapZipCode();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userPrefs]);
+    await updateFilter(userPrefs);
+  }
 
   
   async function getHomeData(){
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
-    console.log('data', data);
-    setHomes(data.home_search.results);
+    if (data) {
+      setHomes(data.home_search.results);
+    }
   }
+
+  //on load of the page get user preferences and saved homes
   useEffect(() => {
+    getInfoOnLoad();
+  }, []);
+
+  async function getInfoOnLoad() {
     async function getUserPrefs(){
       const filterResponse = await getFilters();
       setUserPrefs({
@@ -99,10 +97,13 @@ export default function Search() {
         id: filterResponse.id
       });
     }
-    getUserPrefs();
-    getSavedHomes();
+    await getUserPrefs();
+    await getSavedHomes();
+  }
+
+  useEffect(() => {
     getHomeData();
-  }, []);
+  }, [userPrefs]);
 
   return (
     <div className='searchPage'>
@@ -119,7 +120,7 @@ export default function Search() {
         autoPlaySpeed={20000}>
         {homes.map((home, i) => <PropertyCard key={i} home={home} savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
       </Carousel>
-      {userPrefs.zip_code && <Mapbox homes={homes} zipCodeData={zipCodeData}/>}
+      {homes.length > 0 && <Mapbox homes={homes} zipCodeData={zipCodeData}/>}
     </div>
   );
 }
