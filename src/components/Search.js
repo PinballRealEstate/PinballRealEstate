@@ -7,6 +7,7 @@ import './SignIn.css';
 import { getFavoriteHomes, getFilters, updateFilter } from '../services/supabase-utils';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { geoCode } from '../services/fetch-utils';
 
 export default function Search() {
   const [userPrefs, setUserPrefs] = useState({
@@ -14,6 +15,12 @@ export default function Search() {
     low_price: 0,
     high_price: 0,
     id: 0
+  });
+  const [zipCodeData, setZipCodeData] = useState({
+    lat: 0,
+    lon: 0,
+    city: '',
+    state: ''
   });
   const [homes, setHomes] = useState([]);
   const [savedHomes, setSavedHomes] = useState([]);
@@ -56,6 +63,22 @@ export default function Search() {
     await updateFilter(userPrefs);
   }
 
+  useEffect(() => {
+    async function mapZipCode() {
+      const { data } = await geoCode(userPrefs.zip_code);
+      setZipCodeData({
+        lat: data.features[0].center[1],
+        lon: data.features[0].center[0],
+        city: data.features[0].context[0].text,
+        state: data.features[0].context[2].short_code.slice(-2)
+      });
+    }
+    if (userPrefs.zip_code > 0) {
+      mapZipCode();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userPrefs]);
+
 
   useEffect(() => {
     async function getUserPrefs(){
@@ -86,7 +109,7 @@ export default function Search() {
         autoPlaySpeed={20000}>
         {homes.map((home, i) => <PropertyCard key={i} home={home} savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
       </Carousel>
-      {userPrefs.zip_code && <Mapbox homes={homes} zip_code={userPrefs.zip_code}/>}
+      {userPrefs.zip_code && <Mapbox homes={homes} zipCodeData={zipCodeData}/>}
     </div>
   );
 }

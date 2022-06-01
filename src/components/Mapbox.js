@@ -1,18 +1,15 @@
-/* eslint-disable quotes */
 import React, { useEffect, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { geoCode } from '../services/fetch-utils';
 
-export default function Mapbox({ homes, zip_code }) {
+export default function Mapbox({ homes, zipCodeData }) {
   const geojson = {
     type: 'FeatureCollection',
     features: [
       { type: 'Feature', geometry: { type: 'Point', coordinates: [-122.4, 37.8] } },
     ]
   };
-
-  const [coordinates, setCoordinates] = useState([]);
     
   const layerStyle = {
     id: 'point',
@@ -40,16 +37,8 @@ export default function Mapbox({ homes, zip_code }) {
     }
     const array1 = geojson.features;
     geojson.features = array1.concat(data);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [homes]);
-
-  useEffect(() => {
-    async function mapZipCode() {
-      const { data } = await geoCode(zip_code);
-      console.log('geocode response', data);
-      setCoordinates(data);
-    }
-    mapZipCode();
-  }, []);
 
 
   return (
@@ -57,8 +46,8 @@ export default function Mapbox({ homes, zip_code }) {
       {homes.length > 0 && <Map
         id="mymap"
         initialViewState={{
-          longitude: coordinates.features[0].center[0],
-          latitude: coordinates.features[0].center[1],
+          longitude: zipCodeData.lon,
+          latitude: zipCodeData.lat,
           zoom: 10
         }}
         style={{ width: '100vw', height: '300px' }}
