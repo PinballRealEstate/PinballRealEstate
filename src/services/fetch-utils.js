@@ -13,7 +13,6 @@ export async function getPinballMachines(query){ //eslint-disable-line
 }
 
 export async function geoCode(zip_code) {
-  console.log(zip_code);
   const response = await fetch(`/.netlify/functions/geocode?zip_code=${zip_code}`);
   const data = await response.json();
           
