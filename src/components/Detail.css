@@ -5,3 +5,26 @@ body{
     --color4: #9ec1a3;
     --color5: #cfe0c3;
   }
+
+  .detail-page {
+    margin: 100px;
+    justify-content: center;
+    align-content: center;
+  }
+
+.sub-heading {
+  font-weight: lighter;
+}
+
+.property-deets {
+  display: flex;
+  flex-direction: row;
+}
+
+.property-deets div {
+  margin-right: 155px;
+}
+
+.deets {
+  width: 900px;
+}
