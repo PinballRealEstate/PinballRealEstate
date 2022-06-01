@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getProfileByID, getFilters, updateFilter, updateProfile } from '../services/supabase-utils';
+import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
+import PropertyCard from './PropertyCard';
 import './Profile.css';
 export default function Profile() {
   const [profile, setProfile] = useState({
@@ -20,8 +21,6 @@ export default function Profile() {
       const profileData = await getProfileByID(id);
       const filterData = await getFilters();
       setProfile(profileData);
-      console.log('profileData', profileData);
-      console.log('id', id);
       setFilters({
         zip_code: filterData.zip_code,
         low_price: filterData.low_price,
@@ -56,7 +55,6 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
-
   return (
     <div className='profile-page'>
       <header>
@@ -108,7 +106,9 @@ export default function Profile() {
           </div>
         </div>
         
-        <div className='cards'>Saved home cards here</div>
+        <div className='cards'>
+          Cards here
+        </div>
       </div>
     </div>
   );
