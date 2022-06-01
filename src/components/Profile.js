@@ -14,6 +14,8 @@ export default function Profile() {
     low_price: 0,
     high_price: 0,
   });
+  const [image, setImage] = useState();
+  const [imageVisibilty, setImageVisiblity] = useState(false);
   useEffect(() => {
     async function getProfileOnLoad(){
       const { id } = await getUser();
@@ -54,6 +56,9 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
+  function handleAvatarSubmit(e){
+    e.preventDefault();
+  }
   return (
     <div className='profile-page'>
       <header>
@@ -62,6 +67,7 @@ export default function Profile() {
       <div className='profile'>
         <div className='avatar-username'>
           <img src='https://placedog.net/200'/>
+          <input type='file'/>
           <h2>Username: {profile.username}</h2>
           <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
         </div>
