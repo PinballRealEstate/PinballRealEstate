@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 import React, { useEffect, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -40,15 +39,16 @@ export default function Mapbox({ homes, zip_code }) {
     }
     const array1 = geojson.features;
     geojson.features = array1.concat(data);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [homes]);
 
   useEffect(() => {
     async function mapZipCode() {
       const { data } = await geoCode(zip_code);
-      console.log('geocode response', data);
       setCoordinates(data);
     }
     mapZipCode();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
