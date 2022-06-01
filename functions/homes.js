@@ -10,15 +10,17 @@ const headers = {
 
 exports.handler = async (event, context) => {
   try {
-    const response = await fetch(`https://us-real-estate.p.rapidapi.com/v2/for-sale?limit=20&state_code=
-    ${event.queryStringParameters.state_code}&city=${event.queryStringParameters.city}&location=${event.queryStringParameters.location}
-    `, {
-      headers: {
-        'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com',
-        'X-RapidAPI-Key': process.env.REAL_ESTATE_KEY
-      }
-    });
+    const response = await fetch(`https://us-real-estate.p.rapidapi.com/v2/for-sale?limit=20&state_code=${event.queryStringParameters.state_code}&city=${event.queryStringParameters.city}&location=${event.queryStringParameters.location}&price_min=${event.queryStringParameters.price_min}&price_max=${event.queryStringParameters.price_max}`,
+    
+      {
+        headers: {
+          'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com',
+          'X-RapidAPI-Key': process.env.REAL_ESTATE_KEY
+        }
+      });
+    
     const data = await response.json();
+    console.log('data', data);
     const json = JSON.stringify(data);
     
     return { 

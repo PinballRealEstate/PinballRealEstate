@@ -65,18 +65,22 @@ export default function Search() {
   async function handleSubmit(e){
     e.preventDefault();
     setUserPrefs({
-      ...userPrefs, zip_code: zipCodeInForm
+      ...userPrefs, zip_code: Number(zipCodeInForm)
     });
     if (userPrefs.zip_code > 0) {
       mapZipCode();
     }
     await updateFilter(userPrefs);
+    console.log('zipCodeData', zipCodeData);
+    console.log('zipCodeInForm', zipCodeInForm);
+    console.log('userPrefs', userPrefs);
   }
 
   
   async function getHomeData(){
-    const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
-    if (data) {
+    const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, String(userPrefs.low_price), String(userPrefs.high_price));
+    console.log('data', data);
+    if (data.home_search) {
       setHomes(data.home_search.results);
     }
   }
@@ -84,6 +88,7 @@ export default function Search() {
   //on load of the page get user preferences and saved homes
   useEffect(() => {
     getInfoOnLoad();
+    console.log('userPrefs', userPrefs);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
