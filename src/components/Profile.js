@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
-import PropertyCard from './PropertyCard';
 import './Profile.css';
 export default function Profile() {
   const [profile, setProfile] = useState({
