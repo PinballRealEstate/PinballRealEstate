@@ -1,5 +1,5 @@
-export async function getAllHomes(query) {
-  const response = await fetch(`/.netlify/functions/homes?city=${query}`);
+export async function getAllHomes(zip_code, city, state) {
+  const response = await fetch(`/.netlify/functions/homes?city=${city}?zip_code=${zip_code}?state=${state}`);
   const { data } = await response.json();
 
   return data;
