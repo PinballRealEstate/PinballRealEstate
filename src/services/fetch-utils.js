@@ -18,3 +18,10 @@ export async function geoCode(zip_code) {
           
   return data;
 }
+
+export async function getSingleHome(property_id) {
+  const response = await fetch(`/.netlify/functions/property?property_id=${property_id}`);
+  const { data } = await response.json();
+
+  return data;
+}

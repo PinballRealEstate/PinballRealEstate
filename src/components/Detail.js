@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { results } from '../data';
 import SimpleImageSlider from 'react-simple-image-slider';
 import './Detail.css';
-import { singleProperty } from '../single-property-data';
+import { useParams } from 'react-router-dom';
+import { getSingleHome } from '../services/fetch-utils';
 
 
 export default function Detail() {
-
+  const { id } = useParams();
   const [details, setDetails] = useState({});
 
   const [images, setImages] = useState([]);
@@ -24,13 +25,13 @@ export default function Detail() {
 
   useEffect(() => {
     async function load() {
-     
-      //setDetails(results[0]);
-      const aSingleHouse = results[0];
+      const propertyInfo = await getSingleHome(id);
+      console.log(propertyInfo);
+      setDetails(propertyInfo);
     }
     load();
     
-    const imageArray = singleProperty.property_detail.photos.map((photo) => { return { 'url': photo.href };});
+    const imageArray = details.property_detail.photos.map((photo) => { return { 'url': photo.href };});
     setImages(imageArray);
   }, []); 
 
@@ -38,7 +39,7 @@ export default function Detail() {
   return (
     <div className="detail-page">
       <h1>{results[0].location.address.line}</h1>
-      <h2 className="sub-heading">{singleProperty.property_detail.prop_common.sqft} SF | ${singleProperty.property_detail.prop_common.price.toLocaleString('en-US')}  (${Math.floor(singleProperty.property_detail.prop_common.price / singleProperty.property_detail.prop_common.sqft)}/SF) | {singleProperty.property_detail.address.city}, {singleProperty.property_detail.address.state}</h2>
+      <h2 className="sub-heading">{details.property_detail.prop_common.sqft} SF | ${details.property_detail.prop_common.price.toLocaleString('en-US')}  (${Math.floor(details.property_detail.prop_common.price / details.property_detail.prop_common.sqft)}/SF) | {details.property_detail.address.city}, {details.property_detail.address.state}</h2>
       { images.length > 1 && <SimpleImageSlider
         width={896}
         height={504}
@@ -46,18 +47,18 @@ export default function Detail() {
         showBullets={true}
         showNavs={true}
       />}
-      <p className="deets">{singleProperty.property_detail.prop_common.description}</p>
+      <p className="deets">{details.property_detail.prop_common.description}</p>
       <div className="property-deets">
         <div>
-          <p>Bedrooms: <b>{singleProperty.property_detail.prop_common.bed}</b></p>
-          <p>Bathrooms: <b>{singleProperty.property_detail.prop_common.bath}</b></p>
-          <p>Buiding Height: <b>{singleProperty.property_detail.prop_common.stories} Story</b></p>
-          <p>Price Per SF: <b>${Math.floor(singleProperty.property_detail.prop_common.price / singleProperty.property_detail.prop_common.sqft)}</b></p>
+          <p>Bedrooms: <b>{details.property_detail.prop_common.bed}</b></p>
+          <p>Bathrooms: <b>{details.property_detail.prop_common.bath}</b></p>
+          <p>Buiding Height: <b>{details.property_detail.prop_common.stories} Story</b></p>
+          <p>Price Per SF: <b>${Math.floor(details.property_detail.prop_common.price / details.property_detail.prop_common.sqft)}</b></p>
         </div>
         <div>
-          <p>Property Type: <b>{singleProperty.property_detail.prop_common.type.charAt(0).toUpperCase() + singleProperty.property_detail.prop_common.type.slice(1).toLowerCase()}</b></p>
-          <p>Year Built: <b>{singleProperty.property_detail.prop_common.year_built}</b></p>
-          <p>Garage: <b>{singleProperty.property_detail.flags.is_garage_present ? 'Yes' : 'No' }</b></p>
+          <p>Property Type: <b>{details.property_detail.prop_common.type.charAt(0).toUpperCase() + details.property_detail.prop_common.type.slice(1).toLowerCase()}</b></p>
+          <p>Year Built: <b>{details.property_detail.prop_common.year_built}</b></p>
+          <p>Garage: <b>{details.property_detail.flags.is_garage_present ? 'Yes' : 'No' }</b></p>
           <p>Nearest Pinball: <b>2.38 miles</b></p>
         </div>
       </div>

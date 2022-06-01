@@ -77,6 +77,7 @@ export default function Search() {
   
   async function getHomeData(){
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
+    console.log(data);
     if (data) {
       setHomes(data.home_search.results);
     }
