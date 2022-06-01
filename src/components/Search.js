@@ -7,11 +7,11 @@ import './SignIn.css';
 import { getFavoriteHomes, getFilters, updateFilter } from '../services/supabase-utils';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { geoCode } from '../services/fetch-utils';
+import { geoCode, getAllHomes } from '../services/fetch-utils';
 
 export default function Search() {
   const [userPrefs, setUserPrefs] = useState({
-    zip_code: 0,
+    zip_code: 97202,
     low_price: 0,
     high_price: 0,
     id: 0
@@ -20,8 +20,9 @@ export default function Search() {
     lat: 0,
     lon: 0,
     city: '',
-    state: ''
+    state_code: ''
   });
+  const [zipCodeInForm, setZipCodeInForm] = useState(userPrefs.zip_code);
   const [homes, setHomes] = useState([]);
   const [savedHomes, setSavedHomes] = useState([]);
   const responsive = {
@@ -59,8 +60,11 @@ export default function Search() {
 
   async function handleSubmit(e){
     e.preventDefault();
-    setHomes(results);
+    setUserPrefs({
+      ...userPrefs, zip_code: zipCodeInForm
+    });
     await updateFilter(userPrefs);
+    await getHomeData();
   }
 
   useEffect(() => {
@@ -70,7 +74,7 @@ export default function Search() {
         lat: data.features[0].center[1],
         lon: data.features[0].center[0],
         city: data.features[0].context[0].text,
-        state: data.features[0].context[2].short_code.slice(-2)
+        state_code: data.features[0].context[2].short_code.slice(-2)
       });
     }
     if (userPrefs.zip_code > 0) {
@@ -79,7 +83,12 @@ export default function Search() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
 
-
+  
+  async function getHomeData(){
+    const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
+    console.log('data', data);
+    setHomes(data.home_search.results);
+  }
   useEffect(() => {
     async function getUserPrefs(){
       const filterResponse = await getFilters();
@@ -92,15 +101,16 @@ export default function Search() {
     }
     getUserPrefs();
     getSavedHomes();
+    getHomeData();
   }, []);
 
   return (
     <div className='searchPage'>
       <div className="search">
-        <form>
-          <label>Zip Code  <input value={userPrefs.zip_code} onChange={e => setUserPrefs({ ...userPrefs, zip_code: e.target.value })}></input></label>
+        <form onSubmit={handleSubmit}>
+          <label>Zip Code  <input value={zipCodeInForm} onChange={e => setZipCodeInForm(e.target.value)}></input></label>
           <label>List Price  <CustomSlider low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
-          <button onClick={handleSubmit}>Search</button>
+          <button>Search</button>
         </form>
       </div>
       <Carousel

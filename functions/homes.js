@@ -10,7 +10,12 @@ const headers = {
 
 exports.handler = async (event, context) => {
   try {
-    const response = await fetch(`https://us-real-estate.p.rapidapi.com/v2/for-sale?limit=20&state_code=OR&city=${event.queryStringParameters.city}`, {
+    const apiCall = `https://us-real-estate.p.rapidapi.com/v2/for-sale?limit=20&state_code=${event.queryStringParameters.state_code}&city=Portland&location=97202
+    `;
+    console.log('apiCall', apiCall);
+    const response = await fetch(`https://us-real-estate.p.rapidapi.com/v2/for-sale?limit=20&state_code=
+    ${event.queryStringParameters.state_code}&city=${event.queryStringParameters.city}&location=${event.queryStringParameters.location}
+    `, {
       headers: {
         'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com',
         'X-RapidAPI-Key': process.env.REAL_ESTATE_KEY

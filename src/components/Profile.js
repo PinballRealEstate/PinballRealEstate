@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getProfileByID, getFilters, updateFilter, updateProfile } from '../services/supabase-utils';
+import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 import './Profile.css';
 export default function Profile() {
-  const [profile, setProfile] = useState('');
+  const [profile, setProfile] = useState({
+    username:'',
+    id:0, 
+  });
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
   const [filters, setFilters] = useState({
     zip_code: 0,
     low_price: 0,
     high_price: 0,
-    id:0
   });
+  const [image, setImage] = useState();
+  const [imageVisibilty, setImageVisiblity] = useState(false);
   useEffect(() => {
     async function getProfileOnLoad(){
       const { id } = await getUser();
@@ -25,7 +29,7 @@ export default function Profile() {
         id: filterData.id
       }); 
     }
-    return getProfileOnLoad;
+    getProfileOnLoad();
   }, []);
 
   async function handleFilterChange(e){
@@ -52,7 +56,9 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
-
+  function handleAvatarSubmit(e){
+    e.preventDefault();
+  }
   return (
     <div className='profile-page'>
       <header>
@@ -61,8 +67,9 @@ export default function Profile() {
       <div className='profile'>
         <div className='avatar-username'>
           <img src='https://placedog.net/200'/>
+          <input type='file'/>
           <h2>Username: {profile.username}</h2>
-          <button className='profile-button' onClick={handleEditNameVisible}>Change User Name?</button>
+          <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
         </div>
         <form className='' onSubmit={handleNameChange}>
           { visibleNameForm &&       
@@ -104,7 +111,9 @@ export default function Profile() {
           </div>
         </div>
         
-        <div className='cards'>Saved home cards here</div>
+        <div className='cards'>
+          Cards here
+        </div>
       </div>
     </div>
   );
