@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getProfileByID, getFilters, updateFilter, updateProfile } from '../services/supabase-utils';
+import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
+import PropertyCard from './PropertyCard';
+import Carousel from 'tiny-slider-react/build/Carousel';
 import './Profile.css';
+
 export default function Profile() {
   const [profile, setProfile] = useState({
     username:'',
@@ -14,29 +17,38 @@ export default function Profile() {
     low_price: 0,
     high_price: 0,
   });
-  // const [image, setImage] = useState();
-  // const [imageVisibilty, setImageVisiblity] = useState(false);
+  const [savedHomes, setSavedHomes] = useState([]);
+  
+  async function getSavedHomes(){
+    const savedHomesArray = await getFavoriteHomes();
+    setSavedHomes(savedHomesArray);
+  }
+  async function getProfileOnLoad(){
+    const { id } = await getUser();
+    const profileData = await getProfileByID(id);
+    const filterData = await getFilters();
+    setProfile(profileData);
+    setFilters({
+      zip_code: filterData.zip_code,
+      low_price: filterData.low_price,
+      high_price: filterData.high_price,
+      id: filterData.id
+    }); 
+  }
+  async function getDataOnLoad(){
+    await getSavedHomes();
+    await getProfileOnLoad();
+  }
   useEffect(() => {
-    async function getProfileOnLoad(){
-      const { id } = await getUser();
-      const profileData = await getProfileByID(id);
-      const filterData = await getFilters();
-      setProfile(profileData);
-      setFilters({
-        zip_code: filterData.zip_code,
-        low_price: filterData.low_price,
-        high_price: filterData.high_price,
-        id: filterData.id
-      }); 
-    }
-    getProfileOnLoad();
+    getDataOnLoad();
   }, []);
-
+  console.log('savedHomes', savedHomes);
   async function handleFilterChange(e){
     e.preventDefault();
     await updateFilter(filters);
     setVisibleFilter(false);
   }
+  
   function handleFilterVisible(){
     if (visibleFilter === false){
       setVisibleFilter(true);
@@ -44,11 +56,13 @@ export default function Profile() {
       setVisibleFilter(false);
     }
   }
+  
   async function handleNameChange(e) {
     e.preventDefault();
     await updateProfile(profile);
     setVisibleNameForm(false);
   }
+  
   function handleEditNameVisible(){
     if (visibleNameForm === false){
       setVisibleNameForm(true);
@@ -56,9 +70,8 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
-  // function handleAvatarSubmit(e){
-  //   e.preventDefault();
-  // }
+
+  
   return (
     <div className='profile-page'>
       <header>
@@ -108,11 +121,25 @@ export default function Profile() {
             </div>            
               }
             </form>
+            <div>
+              {
+                savedHomes.length > 0 &&
+                //address, city, state, zip, bed, bath, sq ft, list price, property id, image
+                savedHomes.map((savedHome, i) => <PropertyCard key={i} 
+                  savedHomes={savedHomes}  
+                  getSavedHomes={getSavedHomes}
+                  address={savedHome.address}
+                  secondary_address={savedHome.secondary_address}
+                  bed={savedHome.bedrooms}
+                  bath={savedHome.bathrooms}
+                  sqft={savedHome.square_feet}
+                  listprice={savedHome.list_price}
+                  image={savedHome.primary_photo}
+                  id={savedHome.property_id}>
+                </PropertyCard>)
+              }
+            </div>
           </div>
-        </div>
-        
-        <div className='cards'>
-          Cards here
         </div>
       </div>
     </div>
