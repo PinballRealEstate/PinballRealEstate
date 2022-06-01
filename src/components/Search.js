@@ -87,9 +87,6 @@ export default function Search() {
         {homes.map((home, i) => <PropertyCard key={i} home={home} savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
       </Carousel>
       {userPrefs.zip_code && <Mapbox homes={homes} zip_code={userPrefs.zip_code}/>}
-      <div>
-       
-      </div>
     </div>
   );
 }
