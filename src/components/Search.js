@@ -83,10 +83,13 @@ export default function Search() {
           <button onClick={handleSubmit}>Search</button>
         </form>
       </div>
-      <div className='card-container'>
+      <Carousel
+        responsive={responsive}
+        autoPlay={false}
+        autoPlaySpeed={20000}>
         {homes.map((home, i) => <PropertyCard key={i} home={home} savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
-      </div>
-      <Mapbox homes={homes}/>
+      </Carousel>
+      {userPrefs.zip_code && <Mapbox homes={homes} zip_code={userPrefs.zip_code}/>}
       <div>
        
       </div>
