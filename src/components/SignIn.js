@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { logout, signIn } from '../services/supabase-utils';
+import { signIn } from '../services/supabase-utils';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './SignIn.css';
@@ -19,14 +19,6 @@ export default function SignIn({ setUser }) {
 
     setUser(user);
     push('/');
-  }
-
-  //function to clear the user and end a session
-  async function handleLogout() {
-    await logout();
-
-    setSignInData(null);
-    setUser(null);
   }
 
   return (

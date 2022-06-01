@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { geoCode } from '../services/fetch-utils';
 
 export default function Mapbox({ homes, zipCodeData }) {
   const geojson = {

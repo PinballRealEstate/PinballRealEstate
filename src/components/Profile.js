@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes } from '../services/supabase-utils';
+import { getUser, getProfileByID, getFilters, updateFilter, updateProfile } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 import './Profile.css';
 export default function Profile() {
@@ -14,8 +14,8 @@ export default function Profile() {
     low_price: 0,
     high_price: 0,
   });
-  const [image, setImage] = useState();
-  const [imageVisibilty, setImageVisiblity] = useState(false);
+  // const [image, setImage] = useState();
+  // const [imageVisibilty, setImageVisiblity] = useState(false);
   useEffect(() => {
     async function getProfileOnLoad(){
       const { id } = await getUser();
@@ -56,9 +56,9 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
-  function handleAvatarSubmit(e){
-    e.preventDefault();
-  }
+  // function handleAvatarSubmit(e){
+  //   e.preventDefault();
+  // }
   return (
     <div className='profile-page'>
       <header>
