@@ -46,8 +46,6 @@ export default function Detail() {
             <p>Bathrooms: <b>{details.prop_common.bath}</b></p>
             <p>Buiding Height: <b>{details.prop_common.stories} Story</b></p>
             <p>Price Per SF: <b>${Math.floor(details.prop_common.price / details.prop_common.sqft)}</b></p>
-          </div>
-          <div>
             <p>Property Type: <b>{details.prop_common.type.charAt(0).toUpperCase() + details.prop_common.type.slice(1).toLowerCase()}</b></p>
             <p>Year Built: <b>{details.prop_common.year_built}</b></p>
             <p>Garage: <b>{details.flags.is_garage_present ? 'Yes' : 'No' }</b></p>
@@ -57,7 +55,11 @@ export default function Detail() {
           <div>
             <p>Nearby Schools:</p>
             {details.schools.map(school => <p key={school.name}><b>{school.name}</b></p>)}
-            
+          </div>
+          <div>
+            <p>Previous Listing Price:</p>
+            { details.property_history.map(history => <p key={history.source}>Listed at <b>{history.price.toLocaleString('en-US')}</b> on {history.date}</p>)}
+            {/* {details.schools.map(school => <p key={school.name}><b>{school.name}</b></p>)} */}
           </div>
         </div> 
       </div>}
