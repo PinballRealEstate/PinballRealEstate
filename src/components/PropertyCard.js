@@ -7,7 +7,7 @@ import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { AttachMoney, Bathtub, Hotel, SquareFoot, Clear } from '@mui/icons-material';
+import { AttachMoney, Bathtub, Hotel, SquareFoot } from '@mui/icons-material';
 import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
 import { Link } from 'react-router-dom';
 
