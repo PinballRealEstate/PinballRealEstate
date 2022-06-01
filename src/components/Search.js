@@ -5,6 +5,8 @@ import Mapbox from './Mapbox';
 import PropertyCard from './PropertyCard.js';
 import './SignIn.css';
 import { getFavoriteHomes, getFilters, updateFilter } from '../services/supabase-utils';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 export default function Search() {
   const [userPrefs, setUserPrefs] = useState({
@@ -15,6 +17,33 @@ export default function Search() {
   });
   const [homes, setHomes] = useState([]);
   const [savedHomes, setSavedHomes] = useState([]);
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 8,
+      slidesToSlide: 8,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1250 },
+      items: 4,
+      slidesToSlide: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1250, min: 950 },
+      items: 3,
+      slidesToSlide: 3,
+    },
+    smallTablet: {
+      breakpoint: { max: 950, min: 650 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    mobile: {
+      breakpoint: { max: 650, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    }
+  };
 
   async function getSavedHomes() {
     const savedHomeArray = await getFavoriteHomes();
@@ -54,11 +83,10 @@ export default function Search() {
           <button onClick={handleSubmit}>Search</button>
         </form>
       </div>
-      
       <div className='card-container'>
         {homes.map((home, i) => <PropertyCard key={i} home={home} savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
       </div>
-      {/* <Mapbox/> */}
+      <Mapbox homes={homes}/>
       <div>
        
       </div>
