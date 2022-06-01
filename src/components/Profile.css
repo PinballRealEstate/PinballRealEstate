@@ -66,8 +66,8 @@ body{
   color: white;
 }
 button {
-  background-color: #131313;
-  color: var(--color3);
+  background-color: var(--color2);
+  color: var(--color5);
   font-size: 1.2rem;
   border: none;
   border-radius: 5px;

@@ -3,14 +3,16 @@ import { getUser, getProfileByID, getFilters, updateFilter, updateProfile } from
 import CustomMenu from './CustomMenu';
 import './Profile.css';
 export default function Profile() {
-  const [profile, setProfile] = useState('');
+  const [profile, setProfile] = useState({
+    username:'',
+    id:0, 
+  });
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
   const [filters, setFilters] = useState({
     zip_code: 0,
     low_price: 0,
     high_price: 0,
-    id:0
   });
   useEffect(() => {
     async function getProfileOnLoad(){
@@ -18,6 +20,8 @@ export default function Profile() {
       const profileData = await getProfileByID(id);
       const filterData = await getFilters();
       setProfile(profileData);
+      console.log('profileData', profileData);
+      console.log('id', id);
       setFilters({
         zip_code: filterData.zip_code,
         low_price: filterData.low_price,
@@ -25,7 +29,7 @@ export default function Profile() {
         id: filterData.id
       }); 
     }
-    return getProfileOnLoad;
+    getProfileOnLoad();
   }, []);
 
   async function handleFilterChange(e){
@@ -62,7 +66,7 @@ export default function Profile() {
         <div className='avatar-username'>
           <img src='https://placedog.net/200'/>
           <h2>Username: {profile.username}</h2>
-          <button className='profile-button' onClick={handleEditNameVisible}>Change User Name?</button>
+          <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
         </div>
         <form className='' onSubmit={handleNameChange}>
           { visibleNameForm &&       
