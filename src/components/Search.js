@@ -27,9 +27,6 @@ export default function Search() {
     await updateFilter(userPrefs);
   }
 
-  function setSignUpData(){
-    console.log('hello?');
-  }
 
   useEffect(() => {
     async function getUserPrefs(){
@@ -50,7 +47,7 @@ export default function Search() {
       <div className="search">
         <form>
           <label>Zip Code  <input value={userPrefs.zip_code} onChange={e => setUserPrefs({ ...userPrefs, zip_code: e.target.value })}></input></label>
-          <label>List Price  <CustomSlider signUpData={{}} setSignUpData={setSignUpData}/></label>
+          <label>List Price  <CustomSlider low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
           <button onClick={handleSubmit}>Search</button>
         </form>
       </div>
