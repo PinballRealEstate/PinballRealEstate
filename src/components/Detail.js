@@ -3,7 +3,6 @@ import SimpleImageSlider from 'react-simple-image-slider';
 import './Detail.css';
 import { useParams } from 'react-router-dom';
 import { getSingleHome } from '../services/fetch-utils';
-import { singleProperty } from '../single-property-data';
 
 
 export default function Detail() {
@@ -14,7 +13,7 @@ export default function Detail() {
 
   useEffect(() => {
     async function load() {
-      const { property_detail } = singleProperty;//await getSingleHome(id);
+      const { property_detail } = await getSingleHome(id);
       setDetails(property_detail);
       const imageArray = property_detail.photos.map((photo) => { return { 'url': photo.href };});
       setImages(imageArray);
@@ -57,9 +56,7 @@ export default function Detail() {
             {details.schools.map(school => <p key={school.name}><b>{school.name}</b></p>)}
           </div>
           <div>
-            <p>Previous Listing Price:</p>
-            { details.property_history.map(history => <p key={history.source}>Listed at <b>{history.price.toLocaleString('en-US')}</b> on {history.date}</p>)}
-            {/* {details.schools.map(school => <p key={school.name}><b>{school.name}</b></p>)} */}
+            { details.property_history.map(history => <p key={history.source}>Listed at $<b>{history.price.toLocaleString('en-US')}</b> on {history.date}</p>)}
           </div>
         </div> 
       </div>}
