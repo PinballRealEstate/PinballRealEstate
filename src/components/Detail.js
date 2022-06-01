@@ -46,7 +46,7 @@ export default function Detail() {
         showBullets={true}
         showNavs={true}
       />}
-      <p>{singleProperty.property_detail.prop_common.description}</p>
+      <p className="deets">{singleProperty.property_detail.prop_common.description}</p>
       <div className="property-deets">
         <div>
           <p>Bedrooms: <b>{singleProperty.property_detail.prop_common.bed}</b></p>

@@ -24,3 +24,7 @@ body{
 .property-deets div {
   margin-right: 155px;
 }
+
+.deets {
+  width: 900px;
+}
