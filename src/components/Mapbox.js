@@ -5,9 +5,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 export default function Mapbox({ homes, zipCodeData }) {
   const geojson = {
     type: 'FeatureCollection',
-    features: [
-      { type: 'Feature', geometry: { type: 'Point', coordinates: [-122.4, 37.8] } },
-    ]
+    features: []
   };
     
   const layerStyle = {
@@ -20,7 +18,9 @@ export default function Mapbox({ homes, zipCodeData }) {
   };
   
   useEffect(() => {
-    let data = [];
+    let data = [
+      { type: 'Feature', geometry: { type: 'Point', coordinates: [-122.4, 37.8] } },
+    ];
     if (homes.length > 0) {
       data = homes.map(home => { 
         if (home.location.address.coordinate) {
@@ -47,7 +47,7 @@ export default function Mapbox({ homes, zipCodeData }) {
         initialViewState={{
           longitude: zipCodeData.lon,
           latitude: zipCodeData.lat,
-          zoom: 10
+          zoom: 12
         }}
         style={{ width: '100vw', height: '300px' }}
         mapStyle="mapbox://styles/willgundy/cl3951tjg000014o8h75x3u7n"

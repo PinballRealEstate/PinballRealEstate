@@ -16,7 +16,7 @@ export default function Search() {
     city: '',
     state_code: ''
   });
-  const [zipCodeInForm, setZipCodeInForm] = useState(userPrefs.zip_code);
+  const [zipCodeInForm, setZipCodeInForm] = useState(0);
   const [homes, setHomes] = useState([]);
   const [savedHomes, setSavedHomes] = useState([]);
   const responsive = {
@@ -47,11 +47,13 @@ export default function Search() {
     }
   };
 
+  //function get saved homes by the user so that previously saved homes show differently than non saved
   async function getSavedHomes() {
     const savedHomeArray = await getFavoriteHomes();
     setSavedHomes(savedHomeArray);
   }
 
+  //map the zip code 
   async function mapZipCode() {
     const { data } = await geoCode(userPrefs.zip_code);
     setZipCodeData({
@@ -71,14 +73,6 @@ export default function Search() {
       mapZipCode();
     }
     await updateFilter(userPrefs);
-  }
-
-  
-  async function getHomeData(){
-    const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
-    if (data) {
-      setHomes(data.home_search.results);
-    }
   }
 
   //on load of the page get user preferences and saved homes
@@ -101,10 +95,22 @@ export default function Search() {
     await getSavedHomes();
   }
 
+  //get home information anytime userPreference information is changed
   useEffect(() => {
     getHomeData();
+    setZipCodeInForm(userPrefs.zip_code);
+    if (userPrefs.zip_code > 0) {
+      mapZipCode();
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
+
+  async function getHomeData(){
+    const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
+    if (data) {
+      setHomes(data.home_search.results);
+    }
+  }
 
   return (
     <div className='searchPage'>
