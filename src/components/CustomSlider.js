@@ -23,7 +23,7 @@ const marks = [
 
 const minDistance = 200000;
 
-export default function CustomSlider({ setSignUpData, signUpData }) {
+export default function CustomSlider({ setSignUpData, signUpData, low_price, high_price }) {
     
   const [value2, setValue2] = React.useState([0, 400000]);
 
@@ -44,13 +44,18 @@ export default function CustomSlider({ setSignUpData, signUpData }) {
       setValue2(newValue);
     }
     
-    setSignUpData({
+    {setSignUpData && setSignUpData({
       ...signUpData,
       low_price: value2[0],
       high_price: value2[1]
-    });
-
+    });}
   };
+
+  React.useEffect(() => {
+    if (low_price & high_price){
+      setValue2([low_price, high_price]);
+    }
+  }, [high_price, low_price]);
 
   return (
     <Box sx={{ width: 300, display: 'flex' }}>
@@ -66,7 +71,7 @@ export default function CustomSlider({ setSignUpData, signUpData }) {
         step={50000}
         sx={{ color: '#40798c', margin: '10px', padding: '10px', '& .MuiSlider-thumb': {
           borderRadius: '20px', border: '#40798c 2px solid', color: 'white'
-        }, '& .MuiSlider-valueLabel' :{ fontSize: '30px' }
+        }, '& .MuiSlider-valueLabel' :{ fontSize: '25px' }
         }}
         marks={marks}
         
