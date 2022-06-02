@@ -95,3 +95,10 @@ export async function deleteSavedHome(property_id){
 
   return body;
 }
+
+export async function uploadAvatar(avatar){
+  const { body } = await client
+    .storage
+    .from('avatars')
+    .upload({ avatar });
+}

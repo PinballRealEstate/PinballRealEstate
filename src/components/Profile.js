@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes } from '../services/supabase-utils';
+import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes, uploadAvatar } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 import PropertyCard from './PropertyCard';
 import Carousel from 'tiny-slider-react/build/Carousel';
@@ -9,6 +9,7 @@ export default function Profile() {
   const [profile, setProfile] = useState({
     username:'',
     id:0, 
+    avatar:'',
   });
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
@@ -84,9 +85,10 @@ export default function Profile() {
     }
   }
   
-  async function handleNameChange(e) {
+  async function handleProfileChange(e) {
     e.preventDefault();
     await updateProfile(profile);
+    handleUpload();
     setVisibleNameForm(false);
   }
   
@@ -97,6 +99,10 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
+  async function handleUpload(){
+    await uploadAvatar(profile.avatar);
+    setVisibleNameForm(false);
+  }
 
   
   return (
@@ -106,18 +112,20 @@ export default function Profile() {
       </header>
       <div className='profile'>
         <div className='avatar-username'>
-          <img src='https://placedog.net/200'/>
-          {/* <input type='file'/> */}
-          <h2>Username: {profile.username}</h2>
-          <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
+          <img src={profile.avatar}/>
+          <h2>{profile.username}</h2>
         </div>
-        <form className='name-form' onSubmit={handleNameChange}>
-          { visibleNameForm &&       
-            <label>
-          Edit User Name
-              <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input>
-              <button onClick={handleNameChange}>Change Name</button>
-            </label>}          
+        <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
+        <form className='name-form' onSubmit={handleProfileChange}>
+          { visibleNameForm &&              
+              <> 
+                Upload Photo<br/>
+                <input type='file' value={profile.avatar} onChange={e => setProfile({ ... profile, avatar: e.target.files })}></input><br/>
+                Edit Username <br/>
+                <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input><br/>
+                <button onClick={handleProfileChange}>Submit</button><br/>
+              </>
+          }          
         </form>
         <div className='filters-div'>
           <div className='current-filters'>
@@ -128,21 +136,21 @@ export default function Profile() {
             <br/>
           </div>
           <br/>
-          <div className='filter-form'>
+          <div className='filter-form-container'>
             <form onSubmit={handleFilterChange}>       
               { visibleFilter && 
-            <div> 
+            <div className='filter-form'> 
               <label>
-              Zip Code 
-                <input value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
+                Zip Code <br/>
+                <input className='zip-code-input' value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
               </label>
               <label>
-              Low Price
-                <input value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
+                Minimum Price <br/>
+                <input className='min-price-input'value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
               </label>
               <label>
-              High Price
-                <input value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
+                High Price <br/>
+                <input className='max-price-input'value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
               </label>
               <button onClick={handleFilterChange}>Update</button>
             </div>            

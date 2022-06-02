@@ -7,6 +7,11 @@ body{
   }
 
 .profile-page{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: nowrap;
   background: linear-gradient(45deg, var(--color1), var(--color2));
   height: 100vh;
 }
@@ -19,21 +24,26 @@ body{
   border-radius: 10px;
   padding: 15px;
   background: rgba(255, 255, 255, 0.57);
-  width: 50vh;
+  width: 37vh;
+  height: 50vh;
 }
 .profile button{
   display: flex;
-  align-self: center;
+  align-self: flex-start;
+  padding:20px;
+
 }
 .avatar-username{
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .avatar-username img{
-  border-radius: 20%;
+  border-radius: 30%;
+  padding: 20px;
 }
 form{
     display: flex;
@@ -44,7 +54,7 @@ form{
     width: 100%;
     padding: 10px;
 }
-.filters-div {
+.filters-container {
   display: flex;
   align-self: flex-start;
   flex-direction: column;
@@ -67,9 +77,11 @@ form{
   align-items: flex-start;
   font-size: 20px;
   font-weight: 700;
-  width: 100%;
+  width: 20vh;
   padding:10px;
-  margin: 10px;
+  border: 1px black solid;
+  border-radius: 10px;
+  background-color: var(--color2);
 }
 .current-filters button{
   display: flex;
@@ -81,36 +93,64 @@ form{
   border-bottom: #1f363d;
   margin: 15px;
 }
-form{
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 20px;
+form.name-form{
+  display: block;
+  justify-content: left;
+  align-items: flex-start;
+  align-content: space-between;
+  font-size: 17px;
   font-weight: 700;
   width: 100%;
   padding: 10px;
   color: black;
 }
-button {
-  align-content: center;
-  background-color: var(--color2);
-  color: var(--color5);
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  width: 100px;
-  height: 50px;
-  font-weight: 700;
+.profile button{
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	background-color:#ededed;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+}
+
+button:hover {
+  background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	background-color:#dfdfdf;
+}
+button:active{
+  position:relative;
+	top:1px;
 }
 .css-1lfl8nc, .css-1k455el {
   padding: 0px !important;
 }
 .card-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: row; 
+  flex-wrap: nowrap;
   justify-content: center;
   margin: 0px;
-  
+  flex: 1;
+  height: auto;
 }
+
+.filter-form{
+  display:flex;
+  flex: 2;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  padding: 10px;
+  align-content: space-between;
+
+}
+
+/* CSS FOR PROPERTY CARD */
