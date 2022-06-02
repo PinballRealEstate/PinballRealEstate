@@ -10,8 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { AttachMoney, Bathtub, Hotel, SquareFoot } from '@mui/icons-material';
 import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
 import { Link } from 'react-router-dom';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { borderRadius } from '@mui/system';
+import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 
 
 export default function PropertyCard({ address,
@@ -65,7 +64,7 @@ export default function PropertyCard({ address,
         alt="front photo"
       />{ !isSaved(id) ?
         <IconButton aria-label="add to favorites" onClick={saveHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
-          <FavoriteBorderIcon sx={{ color: '#1f363d', fontSize: '30px' }} className='favorite-home' />
+          <FavoriteTwoToneIcon sx={{ color: '#cfe0c3', fontSize: '30px' }} className='favorite-home' colorPrimary='#1f363d' colorSecondary='#cfe0c3'/>
         </IconButton>
         :
         <IconButton aria-label="remove from favorites" onClick={removeSavedHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
