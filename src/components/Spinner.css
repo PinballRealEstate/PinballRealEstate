@@ -1,0 +1,45 @@
+.bounceball {
+  position: relative;
+  display: inline-block;
+  height: 37px;
+  width: 20px;
+  margin-right: 20px;
+}
+
+.bounceball:before {
+    position: absolute;
+    content: '';
+    display: block;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: url('../pinball.png') no-repeat;
+    animation: bounce 150ms alternate infinite ease;
+}
+
+@keyframes bounce {
+  0% {
+    top: 30px;
+    height: 5px;
+    border-radius: 60px 60px 20px 20px;
+    transform: scaleX(2);
+  }
+  35% {
+    height: 15px;
+    border-radius: 50%;
+    transform: scaleX(1);
+  }
+  100% {
+    top: 0;
+  }
+}
+
+.loadScreen {
+  display: flex;
+  flex-direction: row;
+  height: 60vh;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
