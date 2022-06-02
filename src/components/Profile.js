@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes } from '../services/supabase-utils';
+import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes, uploadAvatar } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 import PropertyCard from './PropertyCard';
-import Carousel from 'tiny-slider-react/build/Carousel';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import './Profile.css';
 
 export default function Profile() {
@@ -18,6 +19,33 @@ export default function Profile() {
     high_price: 0,
   });
   const [savedHomes, setSavedHomes] = useState([]);
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 8,
+      slidesToSlide: 8,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1250 },
+      items: 4,
+      slidesToSlide: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1250, min: 950 },
+      items: 3,
+      slidesToSlide: 3,
+    },
+    smallTablet: {
+      breakpoint: { max: 950, min: 650 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    mobile: {
+      breakpoint: { max: 650, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    }
+  };
   
   async function getSavedHomes(){
     const savedHomesArray = await getFavoriteHomes();
@@ -42,7 +70,7 @@ export default function Profile() {
   useEffect(() => {
     getDataOnLoad();
   }, []);
-  console.log('savedHomes', savedHomes);
+
   async function handleFilterChange(e){
     e.preventDefault();
     await updateFilter(filters);
@@ -57,9 +85,10 @@ export default function Profile() {
     }
   }
   
-  async function handleNameChange(e) {
+  async function handleProfileChange(e) {
     e.preventDefault();
     await updateProfile(profile);
+    handleUpload(profile.avatar);
     setVisibleNameForm(false);
   }
   
@@ -70,78 +99,88 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
-
   
+  async function handleUpload(){
+    await uploadAvatar(profile.avatar);
+    setVisibleNameForm(false);
+  }
+
+  console.log('savedHomes', savedHomes);
   return (
     <div className='profile-page'>
-      <header>
-        <CustomMenu/>
-      </header>
+      <Carousel
+        responsive={responsive}>
+        
+        {savedHomes.map((savedHome) => <PropertyCard key={savedHome.id} 
+          savedHomes={savedHomes}  
+          getSavedHomes={getSavedHomes}
+          address={savedHome.address}
+          secondary_address={savedHome.secondary_address}
+          bed={savedHome.bedrooms}
+          bath={savedHome.bathrooms}
+          sqft={savedHome.square_feet}
+          listprice={savedHome.list_price}
+          image={savedHome.primary_photo}
+          id={savedHome.property_id}/>
+        )
+        }
+      </Carousel>
       <div className='profile'>
         <div className='avatar-username'>
-          <img src='https://placedog.net/200'/>
-          <input type='file'/>
-          <h2>Username: {profile.username}</h2>
-          <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
+          <img src={profile.avatar}/>
+          <h2>{profile.username}</h2>
         </div>
-        <form className='' onSubmit={handleNameChange}>
-          { visibleNameForm &&       
-            <label>
-          Edit User Name
-              <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input>
-              <button onClick={handleNameChange}>Change Name</button>
-            </label>}          
+        <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
+        <form className='name-form' onSubmit={handleProfileChange}>
+          { visibleNameForm &&              
+              <> 
+                Upload Photo<br/>
+                <input type='file' value={profile.avatar} onChange={e => setProfile({ ... profile, avatar: e.target.files })}></input><br/>
+                Edit Username <br/>
+                <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input><br/>
+                <button onClick={handleProfileChange}>Submit</button><br/>
+              </>
+          }          
         </form>
         <div className='filters-div'>
           <div className='current-filters'>
             <label>Zip Code: {filters.zip_code}</label>
             <label>Low Price: ${filters.low_price.toLocaleString('en-US')}</label>
             <label>High Price: ${filters.high_price.toLocaleString('en-US')}</label>
-            <button onClick={handleFilterVisible}>Update Filters</button><br/>
+            <button onClick={handleFilterVisible}>Filters</button><br/>
             <br/>
           </div>
           <br/>
-          <div className='filter-form'>
+          <div className='filter-form-container'>
             <form onSubmit={handleFilterChange}>       
               { visibleFilter && 
-            <div> 
+            <div className='filter-form'> 
               <label>
-              Zip Code 
-                <input value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
+                Zip Code 
+                <br/>
+                <input className='zip-code-input' value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
               </label>
               <label>
-              Low Price
-                <input value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
+                <br/>
+                Minimum Price 
+                <br/>
+                <input className='min-price-input'value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
               </label>
               <label>
-              High Price
-                <input value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
+                <br/>
+                High Price 
+                <br/>
+                <input className='max-price-input'value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
+                <br/>
               </label>
               <button onClick={handleFilterChange}>Update</button>
             </div>            
               }
             </form>
-            <div>
-              {
-                savedHomes.length > 0 &&
-                //address, city, state, zip, bed, bath, sq ft, list price, property id, image
-                savedHomes.map((savedHome, i) => <PropertyCard key={i} 
-                  savedHomes={savedHomes}  
-                  getSavedHomes={getSavedHomes}
-                  address={savedHome.address}
-                  secondary_address={savedHome.secondary_address}
-                  bed={savedHome.bedrooms}
-                  bath={savedHome.bathrooms}
-                  sqft={savedHome.square_feet}
-                  listprice={savedHome.list_price}
-                  image={savedHome.primary_photo}
-                  id={savedHome.property_id}>
-                </PropertyCard>)
-              }
-            </div>
           </div>
         </div>
       </div>
+     
     </div>
   );
 }
