@@ -153,7 +153,8 @@ export default function Search() {
         <Mapbox 
           homes={homes} 
           initial_lat={zipCodeData.lat} 
-          initial_lon={zipCodeData.lon}/>}
+          initial_lon={zipCodeData.lon}
+          detail={false}/>}
     </div>
   );
 }

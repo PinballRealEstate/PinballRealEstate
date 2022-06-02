@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-export default function Mapbox({ homes, initial_lat, initial_lon }) {
+export default function Mapbox({ homes, initial_lat, initial_lon, detail }) {
   const [geojson, setgeoJson] = useState({
     type: 'FeatureCollection',
     features: []
@@ -13,8 +13,8 @@ export default function Mapbox({ homes, initial_lat, initial_lon }) {
     id: 'point',
     type: 'circle',
     paint: {
-      'circle-radius': 10,
-      'circle-color': '#007cbf'
+      'circle-radius': 8,
+      'circle-color': '#b7de9c'
     }
   };
   
@@ -54,9 +54,9 @@ export default function Mapbox({ homes, initial_lat, initial_lon }) {
         initialViewState={{
           longitude: centerCoordinates.lon,
           latitude: centerCoordinates.lat,
-          zoom: 10
+          zoom: detail ? 14 : 12
         }}
-        style={{ width: '70vw', height: '300px' }}
+        style={{ width: detail ? '70vw' : '100vw', height: '300px' }}
         mapStyle="mapbox://styles/willgundy/cl3951tjg000014o8h75x3u7n"
         mapboxAccessToken={'pk.eyJ1Ijoid2lsbGd1bmR5IiwiYSI6ImNsMzNtd3RwZDAyaDAzYm0xa2F5bWRxd2UifQ.K6k7FavnWDdnUB_CVEIzzA'}
       >

@@ -61,7 +61,7 @@ export default function Detail() {
           </div>
           
         </div> 
-        <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon}/>
+        <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon} detail={true}/>
       </div>}
     </div>
   );
