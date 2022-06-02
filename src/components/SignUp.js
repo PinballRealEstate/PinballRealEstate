@@ -23,7 +23,7 @@ export default function SignUp({ setUser }) {
     await createProfile(signUpData);
     await createFilter(signUpData);
     setUser(user);
-    push('/');
+    push('/search');
   }
 
   return (
