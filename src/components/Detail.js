@@ -3,6 +3,7 @@ import SimpleImageSlider from 'react-simple-image-slider';
 import './Detail.css';
 import { useParams } from 'react-router-dom';
 import { getSingleHome } from '../services/fetch-utils';
+import Mapbox from './Mapbox';
 
 
 export default function Detail() {
@@ -26,11 +27,13 @@ export default function Detail() {
   return (
     <div className="detail-page">
       { details &&
-      <div>
-        <h1>{details.address.line}</h1>
-        <h2 className="sub-heading">{details.prop_common.sqft} SF | ${details.prop_common.price.toLocaleString('en-US')}  (${Math.floor(details.prop_common.price / details.prop_common.sqft)}/SF) | {details.address.city}, {details.address.state}</h2>
+      <div className='card-details'>
+        <div className="address-area">
+          <h1 className="street-address">{details.address.line}</h1>
+          <h2 className="sub-heading">{details.prop_common.sqft} SF | ${details.prop_common.price.toLocaleString('en-US')}  (${Math.floor(details.prop_common.price / details.prop_common.sqft)}/SF) | {details.address.city}, {details.address.state}</h2>
+        </div>
         { images.length > 1 && <SimpleImageSlider
-          width={896}
+          width={'70vw'}
           height={504}
           images={images}
           showBullets={true}
@@ -43,14 +46,22 @@ export default function Detail() {
             <p>Bathrooms: <b>{details.prop_common.bath}</b></p>
             <p>Buiding Height: <b>{details.prop_common.stories} Story</b></p>
             <p>Price Per SF: <b>${Math.floor(details.prop_common.price / details.prop_common.sqft)}</b></p>
-          </div>
-          <div>
             <p>Property Type: <b>{details.prop_common.type.charAt(0).toUpperCase() + details.prop_common.type.slice(1).toLowerCase()}</b></p>
             <p>Year Built: <b>{details.prop_common.year_built}</b></p>
             <p>Garage: <b>{details.flags.is_garage_present ? 'Yes' : 'No' }</b></p>
+            <p>Year Built: <b>{details.prop_common.year_built}</b></p>
             <p>Nearest Pinball: <b>2.38 miles</b></p>
           </div>
+          <div>
+            <p>Nearby Schools:</p>
+            {details.schools.map(school => <p key={school.name}><b>{school.name}</b></p>)}
+          </div>
+          <div>
+            { details.property_history.map(history => <p key={history.source}>Listed at $<b>{history.price.toLocaleString('en-US')}</b> on {history.date}</p>)}
+          </div>
+          
         </div> 
+        <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon}/>
       </div>}
     </div>
   );
