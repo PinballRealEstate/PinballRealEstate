@@ -17,11 +17,10 @@ body{
   }
   .profile {
     display: inline-block;
-
     box-shadow: 1px 1px 17px -1px rgba(0, 0, 0, 0.9);
     border-radius: 10px;
     padding: 15px;
-    background: rgba(255, 255, 255, 0.57);
+    background:white;
   }
   .filters-container {
     display: flex;
@@ -65,7 +64,9 @@ body{
     text-decoration:none;
     text-shadow:0px 1px 0px #ffffff;
   }
-
+.avatar-username img{
+  border-radius: 80px;
+}
   .current-filters{
     display: flex;
     align-self: flex-start;

@@ -111,7 +111,7 @@ export default function Profile() {
     
       <div className='profile'>
         <div className='avatar-username'>
-          <img src={profile.avatar}/>
+          <img src='https://placedog.net/100'/>
           <h2>{profile.username}</h2>
         </div>
         <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
