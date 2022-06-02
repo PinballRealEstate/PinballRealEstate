@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-export default function Mapbox({ homes, zipCodeData }) {
+export default function Mapbox({ homes, initial_lat, initial_lon }) {
   const geojson = {
     type: 'FeatureCollection',
     features: []
@@ -33,6 +33,12 @@ export default function Mapbox({ homes, zipCodeData }) {
           return null;
         }
       }).filter(i => i);
+    } else {
+      data = [{ 
+        type: 'Feature', 
+        geometry: { type: 'Point', 
+          coordinates: [initial_lon, initial_lat] } 
+      }];
     }
     const array1 = geojson.features;
     geojson.features = array1.concat(data);
@@ -42,12 +48,12 @@ export default function Mapbox({ homes, zipCodeData }) {
 
   return (
     <div>
-      {homes.length > 0 && <Map
+      {<Map
         id="mymap"
         initialViewState={{
-          longitude: zipCodeData.lon,
-          latitude: zipCodeData.lat,
-          zoom: 12
+          longitude: initial_lon,
+          latitude: initial_lat,
+          zoom: 10
         }}
         style={{ width: '100vw', height: '300px' }}
         mapStyle="mapbox://styles/willgundy/cl3951tjg000014o8h75x3u7n"
