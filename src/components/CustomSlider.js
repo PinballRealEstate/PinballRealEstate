@@ -23,7 +23,7 @@ const marks = [
 
 const minDistance = 200000;
 
-export default function CustomSlider({ setSignUpData, signUpData, low_price, high_price }) {
+export default function CustomSlider({ setSignUpData, signUpData, low_price, high_price, setPriceRange, priceRange }) {
     
   const [value2, setValue2] = React.useState([0, 400000]);
 
@@ -44,11 +44,18 @@ export default function CustomSlider({ setSignUpData, signUpData, low_price, hig
       setValue2(newValue);
     }
     
-    {setSignUpData && setSignUpData({
-      ...signUpData,
-      low_price: value2[0],
-      high_price: value2[1]
-    });}
+    {if (setSignUpData){
+      setSignUpData({
+        ...signUpData,
+        low_price: value2[0],
+        high_price: value2[1]
+      });} else if (setPriceRange){
+      setPriceRange({
+        ...priceRange, 
+        low_price: value2[0],
+        high_price: value2[1],
+      });
+    } }
   };
 
   React.useEffect(() => {

@@ -10,6 +10,11 @@ import { geoCode, getAllHomes } from '../services/fetch-utils';
 
 export default function Search() {
   const [userPrefs, setUserPrefs] = useState({});
+  const [priceRange, setPriceRange] = useState({
+    low_price: userPrefs.low_price,
+    high_price: userPrefs.high_price
+  });
+  console.log('priceRange', priceRange);
   const [zipCodeData, setZipCodeData] = useState({
     lat: 0,
     lon: 0,
@@ -47,6 +52,7 @@ export default function Search() {
     }
   };
 
+
   async function getSavedHomes() {
     const savedHomeArray = await getFavoriteHomes();
     setSavedHomes(savedHomeArray);
@@ -65,32 +71,30 @@ export default function Search() {
   async function handleSubmit(e){
     e.preventDefault();
     setUserPrefs({
-      ...userPrefs, zip_code: Number(zipCodeInForm)
+      ...userPrefs, zip_code: Number(zipCodeInForm), high_price: priceRange.high_price, low_price: priceRange.low_price
     });
     if (userPrefs.zip_code > 0) {
       mapZipCode();
     }
     await updateFilter(userPrefs);
-    console.log('zipCodeData', zipCodeData);
-    console.log('zipCodeInForm', zipCodeInForm);
-    console.log('userPrefs', userPrefs);
   }
 
   
   async function getHomeData(){
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, String(userPrefs.low_price), String(userPrefs.high_price));
-    console.log('data', data);
     if (data.home_search) {
       setHomes(data.home_search.results);
     }
   }
+  
 
   //on load of the page get user preferences and saved homes
   useEffect(() => {
     getInfoOnLoad();
-    console.log('userPrefs', userPrefs);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // console.log('userPrefs', userPrefs);
 
   async function getInfoOnLoad() {
     async function getUserPrefs(){
@@ -110,13 +114,14 @@ export default function Search() {
     getHomeData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
+  console.log('userPrefs', userPrefs);
 
   return (
     <div className='searchPage'>
       <div className="search">
         <form onSubmit={handleSubmit}>
           <label>Zip Code  <input value={zipCodeInForm} onChange={e => setZipCodeInForm(e.target.value)}></input></label>
-          <label>List Price  <CustomSlider low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
+          <label>List Price  <CustomSlider setPriceRange={setPriceRange} priceRange={priceRange} low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
           <button>Search</button>
         </form>
       </div>
