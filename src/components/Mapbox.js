@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default function Mapbox({ homes, initial_lat, initial_lon }) {
-  const geojson = {
+  const [geojson, setgeoJson] = useState({
     type: 'FeatureCollection',
     features: []
-  };
+  });
     
   const layerStyle = {
     id: 'point',
@@ -40,8 +40,7 @@ export default function Mapbox({ homes, initial_lat, initial_lon }) {
           coordinates: [initial_lon, initial_lat] } 
       }];
     }
-    const array1 = geojson.features;
-    geojson.features = array1.concat(data);
+    setgeoJson({ ...geojson, features: data });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [homes]);
 
