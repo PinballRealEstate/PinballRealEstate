@@ -18,7 +18,7 @@ export default function SignIn({ setUser }) {
     const user = await signIn(signInData.email, signInData.password);
 
     setUser(user);
-    push('/');
+    push('/search');
   }
 
   return (

@@ -77,8 +77,11 @@ export default function CustomSlider({ setSignUpData, signUpData, low_price, hig
         max={3000000}
         step={50000}
         sx={{ color: '#40798c', marginLeft: '10px', padding: '10px', '& .MuiSlider-thumb': {
-          borderRadius: '20px', border: '#40798c 2px solid', color: 'white'
-        }, '& .MuiSlider-valueLabel' :{ fontSize: '25px' }, '& .MuiSlider-marked' :{ color: 'white' }
+          borderRadius: '20px', border: '#40798c 3px solid', color: 'white'
+        }, '& .MuiSlider-valueLabel' :{ fontSize: '25px', color: '#70a9a1', background: '#1f363d' }, '& .MuiSlider-marked' :{ color: '#70a9a1' }, 
+        '& .MuiSlider-markLabel' :{ color: '#cfe0c3', paddingBottom: '10px', fontWeight: 'bolder' },
+        '& .MuiSlider-rail' :{ color: '#40798c', height: '6px', opacity: '0.67' },
+        '& .MuiSlider-track' :{ color: '#70a9a1', height: '6px', opacity: '0.67' }
         }}
         marks={marks}
       />

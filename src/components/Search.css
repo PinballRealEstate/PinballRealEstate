@@ -49,12 +49,20 @@ body{
   font-weight: 700;
   background: rgba(48, 48, 48, 0.703);
   width: 100%;
-  padding: 10px 0px 0px 20px;
+  padding: 10px 0px 15px 20px;
   color: white;
 }
 
 .search input{
   width: 100px;
+  border-radius: 5px;
+  height: 25px;
+}
+
+.search button:hover{
+  color: #1f363d;
+  transform: scale(1.04);
+  cursor: pointer;
 }
 
 /* CSS FOR PROPERTY CARD */
