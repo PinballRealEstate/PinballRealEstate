@@ -15,6 +15,7 @@ import CustomMenu from './components/CustomMenu';
 import { getUser } from './services/supabase-utils';
 import './components/Search.css';
 import './components/Spinner.css';
+import About from './components/About';
 
 
 
@@ -61,6 +62,9 @@ export default function App() {
             </Route>
             <Route exact path="/profile">
               {user ? <Profile /> : <Redirect to="/"/>}
+            </Route>
+            <Route exact path="/about">
+              {user ? <About /> : <Redirect to="/"/>}
             </Route>
           </Switch>
         </main>
