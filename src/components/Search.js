@@ -28,11 +28,16 @@ export default function Search() {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 8,
-      slidesToSlide: 8,
+      items: 9,
+      slidesToSlide: 9,
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1250 },
+      breakpoint: { max: 3000, min: 1850 },
+      items: 5,
+      slidesToSlide: 5,
+    },
+    midDesktop: {
+      breakpoint: { max: 1850, min: 1250 },
       items: 4,
       slidesToSlide: 4,
     },

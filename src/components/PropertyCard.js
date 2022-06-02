@@ -54,8 +54,8 @@ export default function PropertyCard({ address,
     <Card sx={{ width: 280, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px', height: 350 }}>
       <Link to={`/detail/${id}`}>
         <CardHeader sx={{ backgroundColor: '#40798c', color: 'white', padding: '0px', margin: '10px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'elipsis' }}
-          title={address}
-          subheader={secondary_address}
+          title={address ? address : 'No Address Found'}
+          subheader={secondary_address ? secondary_address : 'No Address Found'}
         />
       </Link>
       <CardMedia
@@ -77,21 +77,21 @@ export default function PropertyCard({ address,
           <div className='flex-column'>
             <IconButton aria-label="bedrooms">
               <Hotel/>
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bed} beds`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bed ? bed : '0'} beds`}</Typography>
             </IconButton>
             <IconButton aria-label="bathrooms">
               <Bathtub/>
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bath} bath`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bath ? bath : '0'} bath`}</Typography>
             </IconButton>
           </div>
           <div className='flex-column'>
             <IconButton aria-label="list price">
               <AttachMoney />
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`$${listprice.toLocaleString('en-US')}`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`$${listprice ? listprice.toLocaleString('en-US') : 'No List Price'}`}</Typography>
             </IconButton>
             <IconButton aria-label="square feet">
               <SquareFoot/>
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${sqft} sq ft`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${sqft ? sqft : '0'} sq ft`}</Typography>
             </IconButton>
           </div>
         </CardContent>
