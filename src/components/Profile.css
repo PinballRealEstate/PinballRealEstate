@@ -5,13 +5,78 @@ body{
     --color4: #9ec1a3;
     --color5: #cfe0c3;
   }
+  .profile-page{
+    background: linear-gradient(45deg, var(--color5), var(--color3));
+    height: 100vh;
+  }
+  .profile {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-direction: column;
+    box-shadow: 1px 1px 17px -1px rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.57);
+    width: 20vw;
+    height: 50vh;
+  }
+  .filters-container {
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    font-size: 20px;
+    font-weight: 700;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+  }
+  .profile button{
+    display: flex;
+    align-self: flex-start;
+    padding:20px;
+  
+  }
+  .avatar-username{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .profile button{
+    box-shadow:inset 0px 1px 0px 0px #ffffff;
+    background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+    background-color:#ededed;
+    border-radius:6px;
+    border:1px solid #dcdcdc;
+    display:inline-block;
+    cursor:pointer;
+    color:#777777;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    padding:6px 24px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #ffffff;
+  }
 
-.profile-page{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: baseline;
-  flex-wrap: nowrap;
+  .current-filters{
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: baseline;
+    align-items: flex-start;
+    font-size: 20px;
+    font-weight: 700;
+    padding:10px;
+    border-radius: 10px;
+  }
+/* .profile-page{
   background: linear-gradient(45deg, var(--color1), var(--color2));
   height: 100vh;
 }
@@ -24,7 +89,7 @@ body{
   border-radius: 10px;
   padding: 15px;
   background: rgba(255, 255, 255, 0.57);
-  width: 37vh;
+  width: 20vw;
   height: 50vh;
 }
 .profile button{
@@ -44,6 +109,7 @@ body{
 .avatar-username img{
   border-radius: 30%;
   padding: 20px;
+  height: 10vh;
 }
 form{
     display: flex;
@@ -77,7 +143,8 @@ form{
   align-items: flex-start;
   font-size: 20px;
   font-weight: 700;
-  width: 20vh;
+  width: 11vw;
+  height: 17vh;
   padding:10px;
   border: 1px black solid;
   border-radius: 10px;
@@ -134,12 +201,10 @@ button:active{
 }
 .card-container {
   display: flex;
-  flex-direction: row; 
-  flex-wrap: nowrap;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   margin: 0px;
-  flex: 1;
-  height: auto;
 }
 
 .filter-form{
@@ -151,6 +216,6 @@ button:active{
   padding: 10px;
   align-content: space-between;
 
-}
+} */
 
 /* CSS FOR PROPERTY CARD */

@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes, uploadAvatar } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 import PropertyCard from './PropertyCard';
-import Carousel from 'tiny-slider-react/build/Carousel';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import './Profile.css';
 
 export default function Profile() {
   const [profile, setProfile] = useState({
     username:'',
     id:0, 
-    avatar:'',
   });
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
@@ -88,7 +88,7 @@ export default function Profile() {
   async function handleProfileChange(e) {
     e.preventDefault();
     await updateProfile(profile);
-    handleUpload();
+    handleUpload(profile.avatar);
     setVisibleNameForm(false);
   }
   
@@ -99,17 +99,32 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
+  
   async function handleUpload(){
     await uploadAvatar(profile.avatar);
     setVisibleNameForm(false);
   }
 
-  
+  console.log('savedHomes', savedHomes);
   return (
     <div className='profile-page'>
-      <header>
-        <CustomMenu/>
-      </header>
+      <Carousel
+        responsive={responsive}>
+        
+        {savedHomes.map((savedHome) => <PropertyCard key={savedHome.id} 
+          savedHomes={savedHomes}  
+          getSavedHomes={getSavedHomes}
+          address={savedHome.address}
+          secondary_address={savedHome.secondary_address}
+          bed={savedHome.bedrooms}
+          bath={savedHome.bathrooms}
+          sqft={savedHome.square_feet}
+          listprice={savedHome.list_price}
+          image={savedHome.primary_photo}
+          id={savedHome.property_id}/>
+        )
+        }
+      </Carousel>
       <div className='profile'>
         <div className='avatar-username'>
           <img src={profile.avatar}/>
@@ -141,16 +156,22 @@ export default function Profile() {
               { visibleFilter && 
             <div className='filter-form'> 
               <label>
-                Zip Code <br/>
+                Zip Code 
+                <br/>
                 <input className='zip-code-input' value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
               </label>
               <label>
-                Minimum Price <br/>
+                <br/>
+                Minimum Price 
+                <br/>
                 <input className='min-price-input'value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
               </label>
               <label>
-                High Price <br/>
+                <br/>
+                High Price 
+                <br/>
                 <input className='max-price-input'value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
+                <br/>
               </label>
               <button onClick={handleFilterChange}>Update</button>
             </div>            
@@ -159,28 +180,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <Carousel
-        responsive={responsive}
-        autoPlay={false}
-        autoPlaySpeed={20000}>
-        <div className='card-container'>
-          {savedHomes.length > 0 &&
-                //address, city, state, zip, bed, bath, sq ft, list price, property id, image
-                savedHomes.map((savedHome, i) => <PropertyCard key={i} 
-                  savedHomes={savedHomes}  
-                  getSavedHomes={getSavedHomes}
-                  address={savedHome.address}
-                  secondary_address={savedHome.secondary_address}
-                  bed={savedHome.bedrooms}
-                  bath={savedHome.bathrooms}
-                  sqft={savedHome.square_feet}
-                  listprice={savedHome.list_price}
-                  image={savedHome.primary_photo}
-                  id={savedHome.property_id}>
-                </PropertyCard>)
-          }
-        </div>
-      </Carousel>
+     
     </div>
   );
 }
