@@ -60,8 +60,9 @@ export default function Detail() {
           <div>
             { details.property_history.map(history => <p key={history.source}>Listed at $<b>{history.price.toLocaleString('en-US')}</b> on {history.date}</p>)}
           </div>
+          
         </div> 
-        <Mapbox homes={details} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon}/>
+        <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon}/>
       </div>}
     </div>
   );
