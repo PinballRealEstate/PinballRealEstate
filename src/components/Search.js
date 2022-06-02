@@ -14,7 +14,6 @@ export default function Search() {
     low_price: userPrefs.low_price,
     high_price: userPrefs.high_price
   });
-  console.log('priceRange', priceRange);
   const [zipCodeData, setZipCodeData] = useState({
     lat: 0,
     lon: 0,
@@ -82,16 +81,7 @@ export default function Search() {
     }
     await updateFilter(userPrefs);
   }
-
   
-  async function getHomeData(){
-    const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, String(userPrefs.low_price), String(userPrefs.high_price));
-    if (data.home_search) {
-      setHomes(data.home_search.results);
-    }
-  }
-  
-
   //on load of the page get user preferences and saved homes
   useEffect(() => {
     getInfoOnLoad();
@@ -124,11 +114,13 @@ export default function Search() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
   console.log('userPrefs', userPrefs);
+  console.log('zipCodeData', zipCodeData);
 
   //function to get home data based on user passed in preferences
   async function getHomeData(){
-    const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
-    if (data) {
+    console.log('pass-ins', userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
+    const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
+    if (data.home_search) {
       setHomes(data.home_search.results);
     }
   }
@@ -138,8 +130,7 @@ export default function Search() {
       <div className="search">
         <form onSubmit={handleSubmit}>
           <label>Zip Code  <input value={zipCodeInForm} onChange={e => setZipCodeInForm(e.target.value)}></input></label>
-          <label>List Price  <CustomSlider setPriceRange={setPriceRange} priceRange={priceRange} low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
-          <label className='flex-row'>List Price  <CustomSlider low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
+          <label className='flex-row'>List Price  <CustomSlider setPriceRange={setPriceRange} priceRange={priceRange} low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
           <button>Search</button>
         </form>
       </div>
