@@ -17,11 +17,11 @@ export default function About() {
         <AboutCard 
           name={'Khayman King'} 
           image_url={'../assets/khaymanHeadshot.png'} 
-          bio={''} 
-          architecture={''} 
-          pinball={''} 
-          github_link={''} 
-          linkedin_link={''}/>
+          bio={'Alleged software developer, currently living in Western Washington'} 
+          architecture={'Industrial'} 
+          pinball={'Terminator 2'} 
+          github_link={'https://github.com/khaymanaking'} 
+          linkedin_link={'https://www.linkedin.com/in/khaymanaking/'}/>
         <AboutCard 
           name={'Elliott Cheifetz'} 
           image_url={'../assets/elliottHeadshot.png'} 

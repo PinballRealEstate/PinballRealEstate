@@ -106,4 +106,3 @@ export async function uploadAvatar(imageFile){
     });
   return body;
 }
-
