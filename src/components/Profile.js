@@ -74,6 +74,7 @@ export default function Profile() {
   }
   useEffect(() => {
     getDataOnLoad();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleFilterChange(e){
