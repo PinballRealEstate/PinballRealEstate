@@ -7,15 +7,15 @@
 }
 
 .bounceball:before {
-    position: absolute;
-    content: '';
-    display: block;
-    top: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: url('../pinball.png') no-repeat;
-    animation: bounce 150ms alternate infinite ease;
+  position: absolute;
+  content: '';
+  display: block;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: black;
+  animation: bounce 150ms alternate infinite ease;
 }
 
 @keyframes bounce {

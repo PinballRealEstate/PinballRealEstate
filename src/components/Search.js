@@ -93,7 +93,6 @@ export default function Search() {
   // console.log('userPrefs', userPrefs);
 
   async function getInfoOnLoad() {
-    setIsLoading(true);
     async function getUserPrefs(){
       const filterResponse = await getFilters();
       setUserPrefs({
@@ -105,15 +104,12 @@ export default function Search() {
     }
     await getUserPrefs();
     await getSavedHomes();
-    setIsLoading(false);
   }
 
   console.log(isLoading);
 
   //get home information anytime userPreference information is changed
   useEffect(() => {
-    setIsLoading(true);
-
     getHomeData();
 
     setZipCodeInForm(userPrefs.zip_code);
@@ -122,17 +118,18 @@ export default function Search() {
       mapZipCode();
     }
 
-    setIsLoading(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
 
   //function to get home data based on user passed in preferences
   async function getHomeData(){
+    setIsLoading(true);
     console.log('pass-ins', userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
     if (data.home_search) {
       setHomes(data.home_search.results);
     }
+    setIsLoading(false);
   }
 
   return (

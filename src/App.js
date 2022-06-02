@@ -14,6 +14,7 @@ import CustomMenu from './components/CustomMenu';
 // import { getAllHomes } from './services/fetch-utils';
 import { getUser } from './services/supabase-utils';
 import './components/Search.css';
+import './components/Spinner.css';
 
 
 
