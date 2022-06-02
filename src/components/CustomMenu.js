@@ -105,7 +105,7 @@ export default function CustomMenu({ setUser }) {
   }
   // function to return user to home page
   function handleHome(){
-    push('/');
+    push('/search');
     setOpen(false);
   }
   //used to get userprofile information to display on menu

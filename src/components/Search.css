@@ -36,8 +36,8 @@ body{
   background: rgba(255,255,255,0.57);
   margin: 0;
   height: 250px;
-  background: url('../generic-home4.jpg') no-repeat;
-  background-position: center;
+  background: url('../generic-home7.jpg') no-repeat;
+  background-position: 20%;
   background-size: cover;
 }
 
@@ -102,4 +102,10 @@ a {
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.sorry{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
