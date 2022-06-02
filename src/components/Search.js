@@ -113,12 +113,9 @@ export default function Search() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
-  console.log('userPrefs', userPrefs);
-  console.log('zipCodeData', zipCodeData);
 
   //function to get home data based on user passed in preferences
   async function getHomeData(){
-    console.log('pass-ins', userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
     if (data.home_search) {
       setHomes(data.home_search.results);
