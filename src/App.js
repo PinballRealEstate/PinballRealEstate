@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
@@ -13,28 +14,22 @@ import CustomMenu from './components/CustomMenu';
 // import { getAllHomes } from './services/fetch-utils';
 import { getUser } from './services/supabase-utils';
 import './components/Search.css';
+import './components/Spinner.css';
 
 
 
 export default function App() {
-  // const [listings, setListings] = useState([]);
-  const [user, setUser] = useState();
-
-  async function getUserOnLoad(){
-    const userOnLoad = await getUser();
-    
-    if (userOnLoad) {
-      setUser(userOnLoad);
-    }
-  }
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // async function getListings() {
-    //   const { home_search } = await getAllHomes();
-    //   console.log('data', home_search);
-    //   setListings(home_search.results);
-    // }
-    // getListings();
+    async function getUserOnLoad() {
+      const user = await getUser();
+
+      if (user) {
+        setUser(user);
+      }
+    }
+
     getUserOnLoad();
   }, []);
 
@@ -46,23 +41,29 @@ export default function App() {
             user && <CustomMenu setUser={setUser}/>
           }
         </header>
-        <Switch>
-          <Route exact path="/signin">
-            <SignIn setUser={setUser}/>
-          </Route>
-          <Route exact path="/signup">
-            <SignUp setUser={setUser}/>
-          </Route>
-          <Route exact path="/">
-            {user ? <Search /> : <SignIn setUser={setUser}/>}
-          </Route>
-          <Route exact path="/detail/:id">
-            {user ? <Detail /> : <SignIn setUser={setUser}/>}
-          </Route>
-          <Route exact path="/profile">
-            {user ? <Profile /> : <SignIn setUser={setUser}/>}
-          </Route>
-        </Switch>
+        <main>
+          <Switch>
+            <Route exact path="/">
+              {user
+                ? <Redirect to="/search"/>
+                : <SignIn setUser={setUser}/>}
+            </Route>
+            <Route exact path="/signup">
+              {user
+                ? <Redirect to="/search"/>
+                : <SignUp setUser={setUser}/>}
+            </Route>
+            <Route exact path="/search">
+              {user ? <Search /> : <Redirect to="/"/>}
+            </Route>
+            <Route exact path="/detail/:id">
+              {user ? <Detail /> : <Redirect to="/"/>}
+            </Route>
+            <Route exact path="/profile">
+              {user ? <Profile /> : <Redirect to="/"/>}
+            </Route>
+          </Switch>
+        </main>
       </div>
     </Router>
   );

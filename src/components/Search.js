@@ -7,8 +7,10 @@ import { getFavoriteHomes, getFilters, updateFilter } from '../services/supabase
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { geoCode, getAllHomes } from '../services/fetch-utils';
+import Spinner from './Spinner';
 
 export default function Search() {
+  const [isLoading, setIsLoading] = useState(false);
   const [userPrefs, setUserPrefs] = useState({});
   const [priceRange, setPriceRange] = useState({
     low_price: userPrefs.low_price,
@@ -104,22 +106,30 @@ export default function Search() {
     await getSavedHomes();
   }
 
+  console.log(isLoading);
+
   //get home information anytime userPreference information is changed
   useEffect(() => {
     getHomeData();
+
     setZipCodeInForm(userPrefs.zip_code);
+
     if (userPrefs.zip_code > 0) {
       mapZipCode();
     }
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
 
   //function to get home data based on user passed in preferences
   async function getHomeData(){
+    setIsLoading(true);
+    console.log('pass-ins', userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
     if (data.home_search) {
       setHomes(data.home_search.results);
     }
+    setIsLoading(false);
   }
 
   return (
@@ -131,26 +141,31 @@ export default function Search() {
           <button>Search</button>
         </form>
       </div>
-      <Carousel
-        responsive={responsive}
-        autoPlay={false}
-        autoPlaySpeed={20000}>
-        {homes.map((home, i) => <PropertyCard key={i} 
-          address={home.location.address.line}
-          secondary_address={`${home.location.address.city}, ${home.location.address.state} ${home.location.address.postal_code}`}
-          bed={home.description.beds}
-          bath={home.description.baths}
-          sqft={home.description.sqft}
-          listprice={home.list_price}
-          image={home.primary_photo.href}
-          id={home.property_id}
-          savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
-      </Carousel>
-      {homes.length > 0 && 
+      {isLoading ? <Spinner /> :
+        <div>
+          <Carousel
+            responsive={responsive}
+            autoPlay={false}
+            autoPlaySpeed={20000}>
+            {homes.map((home, i) => <PropertyCard key={i} 
+              address={home.location.address.line}
+              secondary_address={`${home.location.address.city}, ${home.location.address.state} ${home.location.address.postal_code}`}
+              bed={home.description.beds}
+              bath={home.description.baths}
+              sqft={home.description.sqft}
+              listprice={home.list_price}
+              image={home.primary_photo.href}
+              id={home.property_id}
+              savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
+          </Carousel>
+          {homes.length > 0 && 
         <Mapbox 
           homes={homes} 
           initial_lat={zipCodeData.lat} 
-          initial_lon={zipCodeData.lon}/>}
+          initial_lon={zipCodeData.lon}
+          detail={false}/>}
+        </div>
+      }
     </div>
   );
 }
