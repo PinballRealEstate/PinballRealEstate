@@ -15,15 +15,15 @@
   height: 20px;
   border-radius: 50%;
   background-color: black;
-  animation: bounce 150ms alternate infinite ease;
+  animation: bounce .4s alternate infinite ease;
 }
 
 @keyframes bounce {
   0% {
-    top: 30px;
-    height: 5px;
+    top: 50px;
+    height: 20px;
     border-radius: 60px 60px 20px 20px;
-    transform: scaleX(2);
+    /* transform: scaleX(2); */
   }
   35% {
     height: 15px;
@@ -31,15 +31,66 @@
     transform: scaleX(1);
   }
   100% {
-    top: 0;
+    top: 15;
   }
 }
 
 .loadScreen {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 60vh;
   justify-content: center;
   align-items: center;
   color: black;
+}
+
+.flipper-container{
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+
+.flipper1{
+  height: 60px;
+  margin: 0;
+  animation: flipper1 .5s infinite ease-in-out;
+  margin: 5px;
+}
+
+.flipper2{
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  animation: flipper2 .5s infinite ease-in-out;
+  margin: 10px;
+}
+
+@keyframes flipper1 {
+  0%{
+    transform: rotate(0deg);
+  }
+  25%{
+    transform: rotate(-35deg);
+  }
+  50%{
+    transform: rotate(-15deg);
+  }
+  100%{
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes flipper2 {
+  10%{
+    transform: rotate(0deg);
+  }
+  40%{
+    transform: rotate(35deg);
+  }
+  65%{
+    transform: rotate(15deg);
+  }
+  100%{
+    transform: rotate(0deg);
+  }
 }
