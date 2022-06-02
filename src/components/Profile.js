@@ -108,23 +108,7 @@ export default function Profile() {
   console.log('savedHomes', savedHomes);
   return (
     <div className='profile-page'>
-      <Carousel
-        responsive={responsive}>
-        
-        {savedHomes.map((savedHome) => <PropertyCard key={savedHome.id} 
-          savedHomes={savedHomes}  
-          getSavedHomes={getSavedHomes}
-          address={savedHome.address}
-          secondary_address={savedHome.secondary_address}
-          bed={savedHome.bedrooms}
-          bath={savedHome.bathrooms}
-          sqft={savedHome.square_feet}
-          listprice={savedHome.list_price}
-          image={savedHome.primary_photo}
-          id={savedHome.property_id}/>
-        )
-        }
-      </Carousel>
+    
       <div className='profile'>
         <div className='avatar-username'>
           <img src={profile.avatar}/>
@@ -180,7 +164,25 @@ export default function Profile() {
           </div>
         </div>
       </div>
-     
+      <div>
+        <Carousel
+          responsive={responsive}>
+        
+          {savedHomes.map((savedHome) => <PropertyCard key={savedHome.id} 
+            savedHomes={savedHomes}  
+            getSavedHomes={getSavedHomes}
+            address={savedHome.address}
+            secondary_address={savedHome.secondary_address}
+            bed={savedHome.bedrooms}
+            bath={savedHome.bathrooms}
+            sqft={savedHome.square_feet}
+            listprice={savedHome.list_price}
+            image={savedHome.primary_photo}
+            id={savedHome.property_id}/>
+          )
+          }
+        </Carousel>
+      </div>
     </div>
   );
 }
