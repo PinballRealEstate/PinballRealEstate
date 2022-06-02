@@ -18,6 +18,33 @@ export default function Profile() {
     high_price: 0,
   });
   const [savedHomes, setSavedHomes] = useState([]);
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 8,
+      slidesToSlide: 8,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1250 },
+      items: 4,
+      slidesToSlide: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1250, min: 950 },
+      items: 3,
+      slidesToSlide: 3,
+    },
+    smallTablet: {
+      breakpoint: { max: 950, min: 650 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    mobile: {
+      breakpoint: { max: 650, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    }
+  };
   
   async function getSavedHomes(){
     const savedHomesArray = await getFavoriteHomes();
@@ -42,7 +69,7 @@ export default function Profile() {
   useEffect(() => {
     getDataOnLoad();
   }, []);
-  console.log('savedHomes', savedHomes);
+
   async function handleFilterChange(e){
     e.preventDefault();
     await updateFilter(filters);
@@ -80,11 +107,11 @@ export default function Profile() {
       <div className='profile'>
         <div className='avatar-username'>
           <img src='https://placedog.net/200'/>
-          <input type='file'/>
+          {/* <input type='file'/> */}
           <h2>Username: {profile.username}</h2>
           <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
         </div>
-        <form className='' onSubmit={handleNameChange}>
+        <form className='name-form' onSubmit={handleNameChange}>
           { visibleNameForm &&       
             <label>
           Edit User Name
@@ -97,7 +124,7 @@ export default function Profile() {
             <label>Zip Code: {filters.zip_code}</label>
             <label>Low Price: ${filters.low_price.toLocaleString('en-US')}</label>
             <label>High Price: ${filters.high_price.toLocaleString('en-US')}</label>
-            <button onClick={handleFilterVisible}>Update Filters</button><br/>
+            <button onClick={handleFilterVisible}>Filters</button><br/>
             <br/>
           </div>
           <br/>
@@ -121,9 +148,15 @@ export default function Profile() {
             </div>            
               }
             </form>
-            <div>
-              {
-                savedHomes.length > 0 &&
+          </div>
+        </div>
+      </div>
+      <Carousel
+        responsive={responsive}
+        autoPlay={false}
+        autoPlaySpeed={20000}>
+        <div className='card-container'>
+          {savedHomes.length > 0 &&
                 //address, city, state, zip, bed, bath, sq ft, list price, property id, image
                 savedHomes.map((savedHome, i) => <PropertyCard key={i} 
                   savedHomes={savedHomes}  
@@ -137,11 +170,9 @@ export default function Profile() {
                   image={savedHome.primary_photo}
                   id={savedHome.property_id}>
                 </PropertyCard>)
-              }
-            </div>
-          </div>
+          }
         </div>
-      </div>
+      </Carousel>
     </div>
   );
 }
