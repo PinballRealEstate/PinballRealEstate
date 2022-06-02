@@ -23,6 +23,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { Logout } from '@mui/icons-material';
 import { getProfileByID, getUser, logout } from '../services/supabase-utils';
 import { useHistory } from 'react-router-dom';
+import './CustomMenu.css';
 
 const drawerWidth = 245;
 
@@ -121,7 +122,7 @@ export default function CustomMenu({ setUser }) {
     <Box sx={{ display: 'flex' }} >
       <CssBaseline />
       <AppBar position="fixed" open={open} >
-        <Toolbar sx={{ background: '#40798c' }}>
+        <Toolbar sx={{ background: '#40798c', height: '80px' }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -129,10 +130,12 @@ export default function CustomMenu({ setUser }) {
             edge="start"
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <MenuIcon sx={{ color: '#1f363d', fontSize: '2rem' }}/>
+            <MenuIcon sx={{ color: '#1f363d', fontSize: '3rem', position: 'absolute', top: '10px' }}/>
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Welcome, {currentUser.username}
+          <Typography variant="h6" noWrap component="div" sx={{ display: 'flex' }}>
+            <h1 className='welcome'>Welcome, {currentUser.username}</h1>
+            <h1 className='favicon'>PINBALL REAL ESTATE<img src={process.env.PUBLIC_URL + '/Logo.png'} /></h1>
+            
           </Typography>
         </Toolbar>
       </AppBar>
