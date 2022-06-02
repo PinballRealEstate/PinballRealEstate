@@ -11,7 +11,6 @@ import { AttachMoney, Bathtub, Hotel, SquareFoot } from '@mui/icons-material';
 import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
 import { Link } from 'react-router-dom';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { borderRadius } from '@mui/system';
 
 
 export default function PropertyCard({ address,

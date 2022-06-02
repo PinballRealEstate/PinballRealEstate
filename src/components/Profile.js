@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes, uploadAvatar } from '../services/supabase-utils';
-import CustomMenu from './CustomMenu';
 import PropertyCard from './PropertyCard';
 import { Avatar } from '@mui/material';
 import Carousel from 'react-multi-carousel';
@@ -71,6 +70,7 @@ export default function Profile() {
   }
   useEffect(() => {
     getDataOnLoad();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleFilterChange(e){
@@ -101,7 +101,6 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
-  console.log(visibleNameForm);
   
   async function handleUpload(){
     await uploadAvatar(`https://rvwuetvxaktsvpmhimdk.supabase.co/storage/v1/object/sign/avatar/${profile.avatar}?token=${process.env.REACT_APP_SUPABASE_KEY}`);
