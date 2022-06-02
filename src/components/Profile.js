@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes, uploadAvatar } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 import PropertyCard from './PropertyCard';
+import { Avatar } from '@mui/material';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './Profile.css';
@@ -10,6 +11,7 @@ export default function Profile() {
   const [profile, setProfile] = useState({
     username:'',
     id:0, 
+    avatar:''
   });
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
@@ -22,23 +24,23 @@ export default function Profile() {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 8,
-      slidesToSlide: 8,
+      items: 10,
+      slidesToSlide: 10,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1250 },
-      items: 4,
-      slidesToSlide: 4,
+      items: 6,
+      slidesToSlide: 6,
     },
     tablet: {
       breakpoint: { max: 1250, min: 950 },
-      items: 3,
-      slidesToSlide: 3,
+      items: 5,
+      slidesToSlide: 5,
     },
     smallTablet: {
       breakpoint: { max: 950, min: 650 },
-      items: 2,
-      slidesToSlide: 2,
+      items: 3,
+      slidesToSlide: 3,
     },
     mobile: {
       breakpoint: { max: 650, min: 0 },
@@ -99,35 +101,19 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
+  console.log(visibleNameForm);
   
   async function handleUpload(){
-    await uploadAvatar(profile.avatar);
+    await uploadAvatar(`https://rvwuetvxaktsvpmhimdk.supabase.co/storage/v1/object/sign/avatar/${profile.avatar}?token=${process.env.REACT_APP_SUPABASE_KEY}`);
     setVisibleNameForm(false);
   }
 
-  console.log('savedHomes', savedHomes);
   return (
     <div className='profile-page'>
-      <Carousel
-        responsive={responsive}>
-        
-        {savedHomes.map((savedHome) => <PropertyCard key={savedHome.id} 
-          savedHomes={savedHomes}  
-          getSavedHomes={getSavedHomes}
-          address={savedHome.address}
-          secondary_address={savedHome.secondary_address}
-          bed={savedHome.bedrooms}
-          bath={savedHome.bathrooms}
-          sqft={savedHome.square_feet}
-          listprice={savedHome.list_price}
-          image={savedHome.primary_photo}
-          id={savedHome.property_id}/>
-        )
-        }
-      </Carousel>
+    
       <div className='profile'>
         <div className='avatar-username'>
-          <img src={profile.avatar}/>
+          <Avatar src={profile.avatar}/>
           <h2>{profile.username}</h2>
         </div>
         <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
@@ -135,7 +121,7 @@ export default function Profile() {
           { visibleNameForm &&              
               <> 
                 Upload Photo<br/>
-                <input type='file' value={profile.avatar} onChange={e => setProfile({ ... profile, avatar: e.target.files })}></input><br/>
+                <input type='file' onChange={e => setProfile({ ... profile, avatar: e.target.value })}></input><br/>
                 Edit Username <br/>
                 <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input><br/>
                 <button onClick={handleProfileChange}>Submit</button><br/>
@@ -180,7 +166,25 @@ export default function Profile() {
           </div>
         </div>
       </div>
-     
+      <div>
+        <Carousel
+          responsive={responsive}>
+        
+          {savedHomes.map((savedHome) => <PropertyCard key={savedHome.id} 
+            savedHomes={savedHomes}  
+            getSavedHomes={getSavedHomes}
+            address={savedHome.address}
+            secondary_address={savedHome.secondary_address}
+            bed={savedHome.bedrooms}
+            bath={savedHome.bathrooms}
+            sqft={savedHome.square_feet}
+            listprice={savedHome.list_price}
+            image={savedHome.primary_photo}
+            id={savedHome.property_id}/>
+          )
+          }
+        </Carousel>
+      </div>
     </div>
   );
 }
