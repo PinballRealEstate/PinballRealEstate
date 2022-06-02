@@ -4,6 +4,7 @@ import './Detail.css';
 import { useParams } from 'react-router-dom';
 import { getSingleHome } from '../services/fetch-utils';
 import Mapbox from './Mapbox';
+
 import Spinner from './Spinner';
 
 
@@ -60,12 +61,15 @@ export default function Detail() {
                 <p>Nearby Schools:</p>
                 {details.schools.map(school => <p key={school.name}><b>{school.name}</b></p>)}
               </div>
-              <div>
-                { details.property_history.map(history => <p key={history.source}>Listed at $<b>{history.price.toLocaleString('en-US')}</b> on {history.date}</p>)}
+              <div className="table-holder">
+                <div className="row-class2"><p><b>Event</b></p><p><b>Price</b></p><p><b>Date</b></p></div>
+                { details.property_history.map(history => <div className="row-class" key={history.source}><p>{history.event_name}</p><p>$ {history.price.toLocaleString('en-US')}</p><p>{history.date}</p></div>)}
+                
+                
               </div>
               
-            </div> 
-            <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon} detail={true}/>
+            </div>
+            <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon}/>
           </div>}
         </>}
     </div>

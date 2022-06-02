@@ -61,3 +61,41 @@ body{
   text-align: center;
   
 }
+
+.table-holder {
+  margin: 30px;
+}
+.row-class {
+  background-color:#cfe0c3;
+  padding: 3px;
+  margin-top: -3px;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+}
+
+.row-class p {
+  width: 100px;
+  outline: 3px solid #40798c;
+  padding: 2px 2px 2px 5px;
+  
+  margin: 0px 3px 0px 0px;
+}
+
+.row-class2 {
+  
+  padding: 3px;
+  margin-top: -3px;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+}
+
+.row-class2 p {
+  width: 100px;
+  outline: 3px solid #40798c;
+  padding: 2px 2px 2px 5px;
+  background-color:#40798c;
+  margin: 0px 3px 0px 0px;
+  color:#cfe0c3;
+}
