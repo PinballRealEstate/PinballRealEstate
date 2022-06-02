@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
@@ -46,23 +47,25 @@ export default function App() {
             user && <CustomMenu setUser={setUser}/>
           }
         </header>
-        <Switch>
-          <Route exact path="/signin">
-            <SignIn setUser={setUser}/>
-          </Route>
-          <Route exact path="/signup">
-            <SignUp setUser={setUser}/>
-          </Route>
-          <Route exact path="/">
-            {user ? <Search /> : <SignIn setUser={setUser}/>}
-          </Route>
-          <Route exact path="/detail/:id">
-            {user ? <Detail /> : <SignIn setUser={setUser}/>}
-          </Route>
-          <Route exact path="/profile">
-            {user ? <Profile /> : <SignIn setUser={setUser}/>}
-          </Route>
-        </Switch>
+        <main>
+          <Switch>
+            <Route exact path="/signin">
+              <SignIn setUser={setUser}/>
+            </Route>
+            <Route exact path="/signup">
+              <SignUp setUser={setUser}/>
+            </Route>
+            <Route exact path="/">
+              {user ? <Search /> : <Redirect to="/signin"/>}
+            </Route>
+            <Route exact path="/detail/:id">
+              {user ? <Detail /> : <Redirect to="/signin"/>}
+            </Route>
+            <Route exact path="/profile">
+              {user ? <Profile /> : <Redirect to="/signin"/>}
+            </Route>
+          </Switch>
+        </main>
       </div>
     </Router>
   );
