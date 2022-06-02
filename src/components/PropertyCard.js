@@ -10,7 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { AttachMoney, Bathtub, Hotel, SquareFoot } from '@mui/icons-material';
 import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
 import { Link } from 'react-router-dom';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 
 
 export default function PropertyCard({ address,
@@ -53,8 +53,8 @@ export default function PropertyCard({ address,
     <Card sx={{ width: 280, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px', height: 350 }}>
       <Link to={`/detail/${id}`}>
         <CardHeader sx={{ backgroundColor: '#40798c', color: 'white', padding: '0px', margin: '10px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'elipsis' }}
-          title={address}
-          subheader={secondary_address}
+          title={address ? address : 'No Address Found'}
+          subheader={secondary_address ? secondary_address : 'No Address Found'}
         />
       </Link>
       <CardMedia
@@ -63,11 +63,11 @@ export default function PropertyCard({ address,
         image={image}
         alt="front photo"
       />{ !isSaved(id) ?
-        <IconButton aria-label="add to favorites" onClick={saveHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '210px' }}>
-          <FavoriteBorderIcon sx={{ color: '#1f363d', fontSize: '30px' }} className='favorite-home' />
+        <IconButton aria-label="add to favorites" onClick={saveHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
+          <FavoriteTwoToneIcon sx={{ color: '#cfe0c3', fontSize: '30px' }} className='favorite-home' colorPrimary='#1f363d' colorSecondary='#cfe0c3'/>
         </IconButton>
         :
-        <IconButton aria-label="remove from favorites" onClick={removeSavedHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '210px' }}>
+        <IconButton aria-label="remove from favorites" onClick={removeSavedHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
           <FavoriteIcon sx={{ color: '#D72638', fontSize: '30px' }} className='remove-home' />
         </IconButton>
       }
@@ -76,21 +76,21 @@ export default function PropertyCard({ address,
           <div className='flex-column'>
             <IconButton aria-label="bedrooms">
               <Hotel/>
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bed} beds`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bed ? bed : '0'} beds`}</Typography>
             </IconButton>
             <IconButton aria-label="bathrooms">
               <Bathtub/>
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bath} bath`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bath ? bath : '0'} bath`}</Typography>
             </IconButton>
           </div>
           <div className='flex-column'>
             <IconButton aria-label="list price">
               <AttachMoney />
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`$${listprice.toLocaleString('en-US')}`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`$${listprice ? listprice.toLocaleString('en-US') : 'No List Price'}`}</Typography>
             </IconButton>
             <IconButton aria-label="square feet">
               <SquareFoot/>
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${sqft} sq ft`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${sqft ? sqft : '0'} sq ft`}</Typography>
             </IconButton>
           </div>
         </CardContent>

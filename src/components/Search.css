@@ -11,6 +11,7 @@ body{
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   margin: 0px;
 }
 
@@ -35,8 +36,8 @@ body{
   background: rgba(255,255,255,0.57);
   margin: 0;
   height: 250px;
-  background: url('../generic-home4.jpg') no-repeat;
-  background-position: center;
+  background: url('../generic-home7.jpg') no-repeat;
+  background-position: 20%;
   background-size: cover;
 }
 
@@ -59,10 +60,22 @@ body{
   height: 25px;
 }
 
+.search button{
+  background-color: var(--color5);
+  color: var(--color1);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100px;
+  font-weight: 700;
+}
+
 .search button:hover{
-  color: #1f363d;
+  color: var(--color4);
   transform: scale(1.04);
   cursor: pointer;
+  background-color: var(--color2);
 }
 
 /* CSS FOR PROPERTY CARD */
@@ -89,4 +102,10 @@ a {
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.sorry{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

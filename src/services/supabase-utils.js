@@ -16,7 +16,7 @@ export async function signUp(email, password){
 
 export async function logout(){
   await client.auth.signOut();
-  return (window.location.href = '../signin');
+  return (window.location.href = '../');
 }
 
 export async function getFavoriteHomes(){

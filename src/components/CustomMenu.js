@@ -105,7 +105,7 @@ export default function CustomMenu({ setUser }) {
   }
   // function to return user to home page
   function handleHome(){
-    push('/');
+    push('/search');
     setOpen(false);
   }
   //used to get userprofile information to display on menu
@@ -130,7 +130,7 @@ export default function CustomMenu({ setUser }) {
             edge="start"
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <MenuIcon sx={{ color: '#1f363d', fontSize: '3rem', position: 'absolute', top: '10px' }}/>
+            <MenuIcon sx={{ color: '#1f363d', fontSize: '3rem' }}/>
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ display: 'flex' }}>
             <h1 className='welcome'>Welcome, {currentUser.username}</h1>

@@ -28,11 +28,16 @@ export default function Search() {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 8,
-      slidesToSlide: 8,
+      items: 9,
+      slidesToSlide: 9,
     },
     desktop: {
-      breakpoint: { max: 3000, min: 1250 },
+      breakpoint: { max: 3000, min: 1850 },
+      items: 5,
+      slidesToSlide: 5,
+    },
+    midDesktop: {
+      breakpoint: { max: 1850, min: 1250 },
       items: 4,
       slidesToSlide: 4,
     },
@@ -101,6 +106,7 @@ export default function Search() {
         high_price: filterResponse.high_price,
         id: filterResponse.id
       });
+      
     }
     await getUserPrefs();
     await getSavedHomes();
@@ -115,7 +121,6 @@ export default function Search() {
     if (userPrefs.zip_code > 0) {
       mapZipCode();
     }
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
 
@@ -138,31 +143,38 @@ export default function Search() {
           <button>Search</button>
         </form>
       </div>
-      {isLoading ? <Spinner /> :
+      {/* added turnary in case homes state is empty */}
+      {homes.length > 0 ? 
         <div>
-          <Carousel
-            responsive={responsive}
-            autoPlay={false}
-            autoPlaySpeed={20000}>
-            {homes.map((home, i) => <PropertyCard key={i} 
-              address={home.location.address.line}
-              secondary_address={`${home.location.address.city}, ${home.location.address.state} ${home.location.address.postal_code}`}
-              bed={home.description.beds}
-              bath={home.description.baths}
-              sqft={home.description.sqft}
-              listprice={home.list_price}
-              image={home.primary_photo.href}
-              id={home.property_id}
-              savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
-          </Carousel>
-          {homes.length > 0 && 
+          {isLoading ? <Spinner /> :
+            <div>
+              <Carousel
+                responsive={responsive}
+                autoPlay={false}
+                autoPlaySpeed={20000}>
+                {homes.map((home, i) => <PropertyCard key={i} 
+                  address={home.location.address.line}
+                  secondary_address={`${home.location.address.city}, ${home.location.address.state} ${home.location.address.postal_code}`}
+                  bed={home.description.beds}
+                  bath={home.description.baths}
+                  sqft={home.description.sqft}
+                  listprice={home.list_price}
+                  image={home.primary_photo.href}
+                  id={home.property_id}
+                  savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
+              </Carousel>
+              {homes.length > 0 && 
         <Mapbox 
           homes={homes} 
           initial_lat={zipCodeData.lat} 
           initial_lon={zipCodeData.lon}
           detail={false}/>}
-        </div>
-      }
+            </div>
+          }
+        </div> 
+        // weird turnery to make sure spinner comes up on page load and no homes comes up when there are no homes
+        : <div className='sorry'>{isLoading && homes.length === 0 ? <Spinner /> : <h1>Oh No! No Homes Found. Try Again</h1>}</div>}
+      
     </div>
   );
 }
