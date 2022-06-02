@@ -121,7 +121,7 @@ export default function Search() {
         autoPlaySpeed={20000}>
         {homes.map((home, i) => <PropertyCard key={i} home={home} savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
       </Carousel>
-      {homes.length > 0 && <Mapbox homes={homes} zipCodeData={zipCodeData}/>}
+      {homes.length > 0 && <Mapbox homes={homes} initial_lat={zipCodeData.lat} initial_lon={zipCodeData.lon}/>}
     </div>
   );
 }
