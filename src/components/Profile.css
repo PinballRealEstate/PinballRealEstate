@@ -7,19 +7,23 @@ body{
   }
   .profile-page{
     background: linear-gradient(45deg, var(--color5), var(--color3));
+    background-repeat: no-repeat;
+    background-size: 800vh;
     height: 100vh;
+    /* display: flex; */
+    flex-direction: row-reverse;
+    justify-content: center;
+
   }
   .profile {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    flex-direction: column;
+    display: inline-block;
     box-shadow: 1px 1px 17px -1px rgba(0, 0, 0, 0.9);
     border-radius: 10px;
     padding: 15px;
-    background: rgba(255, 255, 255, 0.57);
-    width: 20vw;
-    height: 50vh;
+    background:white;
+    padding:20px;
+    margin-top: 30px;
+    color: var(--color2);
   }
   .filters-container {
     display: flex;
@@ -63,7 +67,10 @@ body{
     text-decoration:none;
     text-shadow:0px 1px 0px #ffffff;
   }
-
+.avatar-username img{
+  border-radius: 80px;
+  height: 75px;
+}
   .current-filters{
     display: flex;
     align-self: flex-start;
@@ -76,6 +83,7 @@ body{
     padding:10px;
     border-radius: 10px;
   }
+
 /* .profile-page{
   background: linear-gradient(45deg, var(--color1), var(--color2));
   height: 100vh;
