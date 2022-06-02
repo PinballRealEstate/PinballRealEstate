@@ -53,7 +53,7 @@ export default function Search() {
     setSavedHomes(savedHomeArray);
   }
 
-  //map the zip code 
+  //take the zip code value and geoCode for the map and to get the city and state to pass into the call
   async function mapZipCode() {
     const { data } = await geoCode(userPrefs.zip_code);
     setZipCodeData({
@@ -64,6 +64,8 @@ export default function Search() {
     });
   }
 
+  //handle the submit of the filter form and update the users preferences
+  //this also triggers the useEffect that looks up new homes
   async function handleSubmit(e){
     e.preventDefault();
     setUserPrefs({
@@ -105,6 +107,7 @@ export default function Search() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPrefs]);
 
+  //function to get home data based on user passed in preferences
   async function getHomeData(){
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code);
     if (data) {
@@ -136,7 +139,11 @@ export default function Search() {
           id={home.property_id}
           savedHomes={savedHomes} getSavedHomes={getSavedHomes}> </PropertyCard>)}
       </Carousel>
-      {homes.length > 0 && <Mapbox homes={homes} initial_lat={zipCodeData.lat} initial_lon={zipCodeData.lon}/>}
+      {homes.length > 0 && 
+        <Mapbox 
+          homes={homes} 
+          initial_lat={zipCodeData.lat} 
+          initial_lon={zipCodeData.lon}/>}
     </div>
   );
 }

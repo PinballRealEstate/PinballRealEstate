@@ -7,6 +7,7 @@ export default function Mapbox({ homes, initial_lat, initial_lon }) {
     type: 'FeatureCollection',
     features: []
   });
+  const [centerCoordinates, setCenterCoordinates] = useState({ lat: initial_lat, lon: initial_lon });
     
   const layerStyle = {
     id: 'point',
@@ -41,6 +42,7 @@ export default function Mapbox({ homes, initial_lat, initial_lon }) {
       }];
     }
     setgeoJson({ ...geojson, features: data });
+    setCenterCoordinates({ lat: initial_lat, lon: initial_lon });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [homes]);
 
@@ -50,8 +52,8 @@ export default function Mapbox({ homes, initial_lat, initial_lon }) {
       {<Map
         id="mymap"
         initialViewState={{
-          longitude: initial_lon,
-          latitude: initial_lat,
+          longitude: centerCoordinates.lon,
+          latitude: centerCoordinates.lat,
           zoom: 10
         }}
         style={{ width: '70vw', height: '300px' }}
