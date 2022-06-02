@@ -51,7 +51,7 @@ export default function PropertyCard({ address,
   return (
     <Card sx={{ width: 300, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px' }}>
       <Link to={`/detail/${id}`}>
-        <CardHeader sx={{ backgroundColor: '#40798c', color: 'white' }}
+        <CardHeader sx={{ backgroundColor: '#40798c', color: 'white', padding: '0px', margin: '10px' }}
           title={address}
           subheader={secondary_address}
         />
@@ -65,20 +65,20 @@ export default function PropertyCard({ address,
           <div className='flex-column'>
             <IconButton aria-label="bedrooms">
               <Hotel/>
-              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${bed} beds`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bed} beds`}</Typography>
             </IconButton>
             <IconButton aria-label="bathrooms">
               <Bathtub/>
-              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${bath} baths`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${bath} baths`}</Typography>
             </IconButton>
             <IconButton aria-label="square feet">
               <SquareFoot/>
-              <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`${sqft} sq ft`}</Typography>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`${sqft} sq ft`}</Typography>
             </IconButton>
           </div>
           <IconButton aria-label="list price">
             <AttachMoney />
-            <Typography sx={{ marginLeft: '10px', fontWeight: 'bolder' }}>{`$${listprice.toLocaleString('en-US')}`}</Typography>
+            <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`$${listprice.toLocaleString('en-US')}`}</Typography>
           </IconButton>
         </CardContent>
       </Link>

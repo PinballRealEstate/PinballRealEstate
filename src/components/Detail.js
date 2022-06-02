@@ -27,13 +27,13 @@ export default function Detail() {
   return (
     <div className="detail-page">
       { details &&
-      <div>
+      <div className='card-details'>
         <div className="address-area">
           <h1 className="street-address">{details.address.line}</h1>
           <h2 className="sub-heading">{details.prop_common.sqft} SF | ${details.prop_common.price.toLocaleString('en-US')}  (${Math.floor(details.prop_common.price / details.prop_common.sqft)}/SF) | {details.address.city}, {details.address.state}</h2>
         </div>
         { images.length > 1 && <SimpleImageSlider
-          width={896}
+          width={'70vw'}
           height={504}
           images={images}
           showBullets={true}

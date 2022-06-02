@@ -12,7 +12,6 @@ body{
   flex-wrap: wrap;
   justify-content: center;
   margin: 0px;
-  
 }
 
 .css-yfo96e, .css-ttn1xo {
@@ -35,7 +34,7 @@ body{
   box-shadow: 1px 1px 17px -1px rgba(0,0,0,0.9);
   background: rgba(255,255,255,0.57);
   margin: 0;
-  height: 425px;
+  height: 250px;
   background: url('../generic-home4.jpg') no-repeat;
   background-position: center;
   background-size: cover;
@@ -45,6 +44,7 @@ body{
   display: flex;
   justify-content: space-around;
   align-items: center;
+  align-content: center;
   font-size: 20px;
   font-weight: 700;
   background: rgba(48, 48, 48, 0.703);
@@ -56,6 +56,8 @@ body{
 .search input{
   width: 100px;
 }
+
+/* CSS FOR PROPERTY CARD */
 
 .favorite-home:hover {
   color: #D72638;
@@ -69,4 +71,14 @@ body{
 
 a {
   text-decoration: none;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
