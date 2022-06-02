@@ -120,7 +120,7 @@ export default function Search() {
       <div className="search">
         <form onSubmit={handleSubmit}>
           <label>Zip Code  <input value={zipCodeInForm} onChange={e => setZipCodeInForm(e.target.value)}></input></label>
-          <label>List Price  <CustomSlider low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
+          <label className='flex-row'>List Price  <CustomSlider low_price={userPrefs.low_price} high_price={userPrefs.high_price} /></label>
           <button>Search</button>
         </form>
       </div>
