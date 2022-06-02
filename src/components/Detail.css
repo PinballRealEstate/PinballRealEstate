@@ -7,16 +7,21 @@ body{
   }
 
   .detail-page {
-    margin: 100px;
+    margin-top: 30px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+  }
+
+  .card-details {
+    width: 70vw;
   }
 
 .sub-heading {
   font-weight: lighter;
   color: #1f363d;
-  
-  
 }
 
 .property-deets {
@@ -25,8 +30,7 @@ body{
   background-color: #cfe0c3;
   padding-left: 10px;
   padding-right: 10px;
-  width: 896px;
-
+  width: 100%;
 }
 
 .property-deets div {
@@ -36,7 +40,7 @@ body{
 }
 
 .deets {
-  width: 896px;
+  width: 100%;
   margin: 0px;
   padding: 10px;
   font-family:'Times New Roman', Times, serif;
@@ -52,7 +56,7 @@ body{
   background-color: #70a9a1;
   padding-bottom: 5px;
   padding-top: 5px;
-  width: 896px;
+  width: 100%;
   border-radius: 25px 25px 0px 0px;
   text-align: center;
   
