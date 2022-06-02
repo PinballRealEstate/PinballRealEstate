@@ -22,23 +22,23 @@ export default function Profile() {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 8,
-      slidesToSlide: 8,
+      items: 10,
+      slidesToSlide: 10,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1250 },
-      items: 4,
-      slidesToSlide: 4,
+      items: 6,
+      slidesToSlide: 6,
     },
     tablet: {
       breakpoint: { max: 1250, min: 950 },
-      items: 3,
-      slidesToSlide: 3,
+      items: 5,
+      slidesToSlide: 5,
     },
     smallTablet: {
       breakpoint: { max: 950, min: 650 },
-      items: 2,
-      slidesToSlide: 2,
+      items: 3,
+      slidesToSlide: 3,
     },
     mobile: {
       breakpoint: { max: 650, min: 0 },
