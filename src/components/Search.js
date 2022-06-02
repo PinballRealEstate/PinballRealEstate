@@ -106,8 +106,6 @@ export default function Search() {
     await getSavedHomes();
   }
 
-  console.log(isLoading);
-
   //get home information anytime userPreference information is changed
   useEffect(() => {
     getHomeData();
@@ -124,7 +122,6 @@ export default function Search() {
   //function to get home data based on user passed in preferences
   async function getHomeData(){
     setIsLoading(true);
-    console.log('pass-ins', userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
     const data = await getAllHomes(userPrefs.zip_code, zipCodeData.city, zipCodeData.state_code, userPrefs.high_price, userPrefs.low_price);
     if (data.home_search) {
       setHomes(data.home_search.results);

@@ -1,0 +1,85 @@
+.about-main{
+    background-color: #cfe0c3;
+    overflow: hidden;
+}
+
+.about-imgs{
+    height: 200px;
+    border-radius: 50%;
+    border: var(--color1) inset 5px;
+}
+
+.about-team{
+    background-color: #1f363d;
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.footer-right {
+    margin-left: 0;
+}
+.about-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.about-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    margin: 20px 20%;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-bio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-name {
+    text-align: center;
+    padding: 10px;
+}
+.about-bio {
+    margin: 30px 10px;
+    text-align: center;
+}
+.about-img-bio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.icon{
+    height: 45px;
+    width: 52px;
+    border-radius: 50%;
+    background-color: goldenrod;
+    margin: 30px 5px 10px 30px;
+    border: goldenrod inset 8px;
+    box-shadow: 5px 5px 14px -2px rgba(6, 6, 6, 0.53);
+}
+
+.icon:hover{
+    animation: shake 4s infinite;
+}
+
+@keyframes shake {
+    0%{ transform: rotate(10deg); }
+    25%{ transform: rotate(-25deg)}
+    50%{ transform: rotate(25deg) }
+    75% { transform: rotate(-25deg)}
+    100%{ transform: rotate(10deg)}
+}
+
