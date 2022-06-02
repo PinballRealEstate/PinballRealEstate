@@ -64,11 +64,11 @@ export default function PropertyCard({ address,
         image={image}
         alt="front photo"
       />{ !isSaved(id) ?
-        <IconButton aria-label="add to favorites" onClick={saveHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '210px' }}>
+        <IconButton aria-label="add to favorites" onClick={saveHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
           <FavoriteBorderIcon sx={{ color: '#1f363d', fontSize: '30px' }} className='favorite-home' />
         </IconButton>
         :
-        <IconButton aria-label="remove from favorites" onClick={removeSavedHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '210px' }}>
+        <IconButton aria-label="remove from favorites" onClick={removeSavedHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
           <FavoriteIcon sx={{ color: '#D72638', fontSize: '30px' }} className='remove-home' />
         </IconButton>
       }

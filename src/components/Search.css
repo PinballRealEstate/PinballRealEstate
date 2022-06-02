@@ -59,10 +59,22 @@ body{
   height: 25px;
 }
 
+.search button{
+  background-color: var(--color5);
+  color: var(--color1);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100px;
+  font-weight: 700;
+}
+
 .search button:hover{
-  color: #1f363d;
+  color: var(--color4);
   transform: scale(1.04);
   cursor: pointer;
+  background-color: var(--color2);
 }
 
 /* CSS FOR PROPERTY CARD */
