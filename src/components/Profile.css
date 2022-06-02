@@ -69,6 +69,7 @@ body{
   }
 .avatar-username img{
   border-radius: 80px;
+  height: 75px;
 }
   .current-filters{
     display: flex;

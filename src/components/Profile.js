@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getUser, getProfileByID, getFilters, updateFilter, updateProfile, getFavoriteHomes, uploadAvatar } from '../services/supabase-utils';
 import CustomMenu from './CustomMenu';
 import PropertyCard from './PropertyCard';
+import { Avatar } from '@mui/material';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './Profile.css';
@@ -10,6 +11,7 @@ export default function Profile() {
   const [profile, setProfile] = useState({
     username:'',
     id:0, 
+    avatar:''
   });
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
@@ -99,19 +101,19 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
+  console.log(visibleNameForm);
   
   async function handleUpload(){
-    await uploadAvatar(profile.avatar);
+    await uploadAvatar(`https://rvwuetvxaktsvpmhimdk.supabase.co/storage/v1/object/sign/avatar/${profile.avatar}?token=${process.env.REACT_APP_SUPABASE_KEY}`);
     setVisibleNameForm(false);
   }
 
-  console.log('savedHomes', savedHomes);
   return (
     <div className='profile-page'>
     
       <div className='profile'>
         <div className='avatar-username'>
-          <img src='https://placedog.net/100'/>
+          <Avatar src={profile.avatar}/>
           <h2>{profile.username}</h2>
         </div>
         <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
@@ -119,7 +121,7 @@ export default function Profile() {
           { visibleNameForm &&              
               <> 
                 Upload Photo<br/>
-                <input type='file' value={profile.avatar} onChange={e => setProfile({ ... profile, avatar: e.target.files })}></input><br/>
+                <input type='file' onChange={e => setProfile({ ... profile, avatar: e.target.value })}></input><br/>
                 Edit Username <br/>
                 <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input><br/>
                 <button onClick={handleProfileChange}>Submit</button><br/>
