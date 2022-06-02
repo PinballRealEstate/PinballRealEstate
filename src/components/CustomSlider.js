@@ -69,12 +69,11 @@ export default function CustomSlider({ setSignUpData, signUpData, low_price, hig
         min={0}
         max={3000000}
         step={50000}
-        sx={{ color: '#40798c', margin: '10px', padding: '10px', '& .MuiSlider-thumb': {
+        sx={{ color: '#40798c', marginLeft: '10px', padding: '10px', '& .MuiSlider-thumb': {
           borderRadius: '20px', border: '#40798c 2px solid', color: 'white'
-        }, '& .MuiSlider-valueLabel' :{ fontSize: '25px' }
+        }, '& .MuiSlider-valueLabel' :{ fontSize: '25px' }, '& .MuiSlider-marked' :{ color: 'white' }
         }}
         marks={marks}
-        
       />
     </Box>
   );
