@@ -4,6 +4,7 @@ import './Detail.css';
 import { useParams } from 'react-router-dom';
 import { getSingleHome } from '../services/fetch-utils';
 import Mapbox from './Mapbox';
+import { singleProperty } from '../single-property-data.js';
 
 import Spinner from './Spinner';
 
@@ -17,7 +18,7 @@ export default function Detail() {
   useEffect(() => {
     async function load() {
       setIsLoading(true);
-      const { property_detail } = await getSingleHome(id);
+      const { property_detail } = singleProperty;//await getSingleHome(id);
       setDetails(property_detail);
       const imageArray = property_detail.photos.map((photo) => { return { 'url': photo.href };});
       setImages(imageArray);
@@ -59,11 +60,11 @@ export default function Detail() {
               </div>
               <div>
                 <p>Nearby Schools:</p>
-                {details.schools.map(school => <p key={school.name}><b>{school.name}</b></p>)}
+                {details.schools.map(school => <div key={school.name}><div className="school-item"><p><b>{school.name}</b></p><p>Grades:<b>{school.grades.range.low}-{school.grades.range.high}</b>   Distance:<b>{school.distance_in_miles}</b></p></div></div>)}
               </div>
               <div className="table-holder">
-                <div className="row-class2"><p><b>Event</b></p><p><b>Price</b></p><p><b>Date</b></p></div>
-                { details.property_history.map(history => <div className="row-class" key={history.source}><p>{history.event_name}</p><p>$ {history.price.toLocaleString('en-US')}</p><p>{history.date}</p></div>)}
+                <div className="row-class2"><p><b>Date</b></p><p><b>Price</b></p><p><b>Event</b></p></div>
+                { details.property_history.map(history => <div className="row-class" key={history.source}><p>{history.date}</p><p>$ {history.price.toLocaleString('en-US')}</p><p>{history.event_name}</p></div>)}
                 
                 
               </div>

@@ -99,3 +99,13 @@ body{
   margin: 0px 3px 0px 0px;
   color:#cfe0c3;
 }
+
+.school-item {
+  width: 100%;
+  margin: 5px;
+}
+
+.school-item p {
+  font-size: smaller;
+  margin: 0px;
+}
