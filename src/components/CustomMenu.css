@@ -1,0 +1,49 @@
+.favicon img{
+    height: 60px;
+    top: 10px;
+  }
+
+.favicon{
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    color: white
+}
+
+.welcome{
+    font-size: 1.5rem;
+    top: 25px;
+    position: absolute;
+    
+}
+
+@media  (max-width: 900px) {
+    .favicon{
+        font-size: 1.5rem;
+        top: -8px;
+        animation: shrink 1s forwards;
+    }
+    
+}
+
+@media  (max-width: 700px) {
+    .favicon{
+        font-size: 1rem;
+        top: 17px;
+    }
+    .favicon img{
+        height: 40px;
+    }
+    
+}
+
+@media  (max-width: 600px) {
+    .favicon{
+        font-size: .5rem;
+        top: 22px;
+    }
+    .favicon img{
+        height: 40px;
+    }
+    
+}
