@@ -25,6 +25,7 @@ export default function Search() {
   const [zipCodeInForm, setZipCodeInForm] = useState(0);
   const [homes, setHomes] = useState([]);
   const [savedHomes, setSavedHomes] = useState([]);
+  // makes the carousel responsive to different screen sizes
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -95,8 +96,7 @@ export default function Search() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // console.log('userPrefs', userPrefs);
-
+  //function to grab the user preferences and saved homes on load of the page
   async function getInfoOnLoad() {
     async function getUserPrefs(){
       const filterResponse = await getFilters();
@@ -106,7 +106,6 @@ export default function Search() {
         high_price: filterResponse.high_price,
         id: filterResponse.id
       });
-      
     }
     await getUserPrefs();
     await getSavedHomes();

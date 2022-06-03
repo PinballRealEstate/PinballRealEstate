@@ -16,6 +16,7 @@ export default function Detail() {
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
 
+  //use effect to get property data based on the passed in property id from the url parameters
   useEffect(() => {
     async function load() {
       setIsLoading(true);

@@ -19,9 +19,8 @@ ChartJS.register(
   Legend
 );
 
-
-
 export default function DetailBarChart({ chartData }) {
+  //basic options for the bar chart data (i.e. title, legend, etc.)
   const options = {
     responsive: true,
     plugins: {
@@ -35,6 +34,7 @@ export default function DetailBarChart({ chartData }) {
     },
   };
 
+  //data munging to display in the bar chart
   const data = {
     labels: Object.keys(chartData),
     datasets: [
@@ -50,5 +50,9 @@ export default function DetailBarChart({ chartData }) {
       },
     ],
   };
-  return <Bar options={options} data={data} />;
+  
+  return (
+    //initialization of the bar chart in the detail page
+    <Bar options={options} data={data} />
+  );
 }

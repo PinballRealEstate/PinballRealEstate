@@ -5,6 +5,7 @@ import { Bungalow, VideogameAsset } from '@mui/icons-material';
 
 export default function AboutCard({ name, image_url, bio, architecture, pinball, github_link, linkedin_link }) {
   return (
+    // Standard card for each team member in the About page
     <div className='about-team flex-row'>
       <div className='about-name-img-container'>
         <h3 className='about-name'>{name}</h3>
