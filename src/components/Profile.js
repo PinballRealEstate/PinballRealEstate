@@ -13,10 +13,8 @@ export default function Profile() {
     id:0, 
     avatar:'',
   });
-<<<<<<< HEAD
-=======
+  
   //Visibility State for the filter form and the name change form
->>>>>>> 1925d6a65560d9aa62f4d5d667487ec8de0a655e
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
   const [filters, setFilters] = useState({
@@ -117,10 +115,6 @@ export default function Profile() {
     setVisibleNameForm(false);
   }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1925d6a65560d9aa62f4d5d667487ec8de0a655e
   return (
     <div className='profile-page'>
     
