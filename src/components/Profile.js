@@ -7,12 +7,13 @@ import 'react-multi-carousel/lib/styles.css';
 import './Profile.css';
 
 export default function Profile() {
+  //State of the user which is set onload with useEffect.
   const [profile, setProfile] = useState({
     username:'',
     id:0, 
     avatar:'',
   });
-  const [token, setToken] = useState();
+  //Visibility State for the filter form and the name change form
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
   const [filters, setFilters] = useState({
@@ -20,7 +21,9 @@ export default function Profile() {
     low_price: 0,
     high_price: 0,
   });
+  //State for the homes that are mapped over and applied to cards.
   const [savedHomes, setSavedHomes] = useState([]);
+  //Used for the carousel
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -48,19 +51,17 @@ export default function Profile() {
       slidesToSlide: 1,
     }
   };
-  
+  //Used to retrieve all of the saved homes in Supabase
   async function getSavedHomes(){
     const savedHomesArray = await getFavoriteHomes();
     setSavedHomes(savedHomesArray);
   }
+  //Used to retrieve user profile from Supabase
   async function getProfileOnLoad(){
     const userData = await getUser();
     const profileData = await getProfileByID(userData.id);
     const filterData = await getFilters();
     setProfile(profileData); 
-    console.log('userData', userData);
-    console.log('userData.access_token', userData.access_token);
-    setToken(userData.access_token);
     setFilters({
       zip_code: filterData.zip_code,
       low_price: filterData.low_price,
@@ -68,10 +69,12 @@ export default function Profile() {
       id: filterData.id
     }); 
   }
+  //Combines functions into one
   async function getDataOnLoad(){
     await getSavedHomes();
     await getProfileOnLoad();
   }
+  //Uses above line to retrieve both functions 
   useEffect(() => {
     getDataOnLoad();
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,7 +85,7 @@ export default function Profile() {
     await updateFilter(filters);
     setVisibleFilter(false);
   }
-  
+  //Allows filter to appear and disappear onclick 
   function handleFilterVisible(){
     if (visibleFilter === false){
       setVisibleFilter(true);
@@ -90,14 +93,14 @@ export default function Profile() {
       setVisibleFilter(false);
     }
   }
-  
+  //Sends info to Supabase to update name change. 
   async function handleProfileChange(e) {
     e.preventDefault();
     await updateProfile(profile);
     handleUpload(profile.avatar);
     setVisibleNameForm(false);
   }
-  
+  //Allows name change form to appear and disappear on click
   function handleEditNameVisible(){
     if (visibleNameForm === false){
       setVisibleNameForm(true);
@@ -105,13 +108,12 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
+  
   async function handleUpload(){
-    // e.preventDefault();
     await uploadAvatar(profile.avatar);
     setVisibleNameForm(false);
   }
 
-  console.log('profile.avatar', profile.avatar);
 
   return (
     <div className='profile-page'>
