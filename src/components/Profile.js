@@ -107,9 +107,11 @@ export default function Profile() {
   }
   async function handleUpload(){
     // e.preventDefault();
-    await uploadAvatar(`https://rvwuetvxaktsvpmhimdk.supabase.co/storage/v1/object/public/avatar/C:/fakepath/${profile.avatar}`);
+    await uploadAvatar(profile.avatar);
     setVisibleNameForm(false);
   }
+
+  console.log('profile.avatar', profile.avatar);
 
   return (
     <div className='profile-page'>
@@ -124,7 +126,7 @@ export default function Profile() {
           { visibleNameForm &&              
               <div className='username-avatar-change'> 
                 Upload Photo<br/>
-                <input type='file' onChange={e => setProfile({ ... profile, avatar: e.target.value })}></input><br/>
+                <input type='file' onChange={e => setProfile({ ... profile, avatar:e.target.files })} /><br/>
                 Edit Username <br/>
                 <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input><br/>
                 <button onClick={handleProfileChange}>Submit</button><br/>
