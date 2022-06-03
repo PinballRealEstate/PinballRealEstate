@@ -56,13 +56,15 @@ export default function PropertyCard({ address,
           title={address ? address : 'No Address Found'}
           subheader={secondary_address ? secondary_address : 'No Address Found'}
         />
+     
+        <CardMedia
+          component="img"
+          height="120"
+          image={image}
+          alt="front photo"
+        /> 
       </Link>
-      <CardMedia
-        component="img"
-        height="120"
-        image={image}
-        alt="front photo"
-      />{ !isSaved(id) ?
+      { !isSaved(id) ?
         <IconButton aria-label="add to favorites" onClick={saveHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
           <FavoriteTwoToneIcon sx={{ color: '#cfe0c3', fontSize: '30px' }} className='favorite-home' />
         </IconButton>

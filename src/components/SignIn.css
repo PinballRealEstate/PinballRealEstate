@@ -12,7 +12,8 @@
       rgba(0,0,0, 0),
       var(--color1) 70%
     ),url(/src/generic-home2.jpg) 100% no-repeat;
-    /* background-size: 1700px; */
+    background-position: center;
+    background-size: cover;
     height: 100vh;
     display: flex;
     justify-content: center;
