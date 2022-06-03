@@ -30,13 +30,13 @@ body{
   background-color: #cfe0c3;
   padding-left: 10px;
   padding-right: 10px;
+  padding-top: 10px;
   width: 100%;
+  justify-content: space-around;
 }
 
 .property-deets div {
-  margin-right: 155px;
   color:#1f363d;
-
 }
 
 .deets {
@@ -80,6 +80,7 @@ body{
   padding: 2px 2px 2px 5px;
   
   margin: 0px 3px 0px 0px;
+  background-color: white;
 }
 
 .row-class2 {
@@ -97,5 +98,42 @@ body{
   padding: 2px 2px 2px 5px;
   background-color:#40798c;
   margin: 0px 3px 0px 0px;
-  color:#cfe0c3;
+  color:white;
+}
+
+.school-item-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  
+}
+.school-item {
+  align-content: center;
+  margin: 5px;
+}
+
+.school-item p {
+  font-size: smaller;
+  margin: 0px;
+  
+}
+
+.school-grade {
+  background-color: #40798c;
+  width: 50px;
+  color:white;
+  border-radius: 25px;
+  height: 45px;
+  width: 45px;
+  text-align:center;
+  padding-top: 9px;
+  margin-top: 5px;
+}
+
+.school-value {
+  font-size: larger;
+}
+
+.deets-column {
+  margin: 25px;
 }

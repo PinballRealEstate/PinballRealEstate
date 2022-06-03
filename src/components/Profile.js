@@ -10,8 +10,9 @@ export default function Profile() {
   const [profile, setProfile] = useState({
     username:'',
     id:0, 
-    avatar:''
+    avatar:'',
   });
+  const [token, setToken] = useState();
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
   const [filters, setFilters] = useState({
@@ -23,23 +24,23 @@ export default function Profile() {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 10,
-      slidesToSlide: 10,
+      items: 9,
+      slidesToSlide: 1,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1250 },
       items: 6,
-      slidesToSlide: 6,
+      slidesToSlide: 1,
     },
     tablet: {
       breakpoint: { max: 1250, min: 950 },
-      items: 5,
-      slidesToSlide: 5,
+      items: 3,
+      slidesToSlide: 1,
     },
     smallTablet: {
       breakpoint: { max: 950, min: 650 },
-      items: 3,
-      slidesToSlide: 3,
+      items: 2,
+      slidesToSlide: 1,
     },
     mobile: {
       breakpoint: { max: 650, min: 0 },
@@ -53,10 +54,13 @@ export default function Profile() {
     setSavedHomes(savedHomesArray);
   }
   async function getProfileOnLoad(){
-    const { id } = await getUser();
-    const profileData = await getProfileByID(id);
+    const userData = await getUser();
+    const profileData = await getProfileByID(userData.id);
     const filterData = await getFilters();
-    setProfile(profileData);
+    setProfile(profileData); 
+    console.log('userData', userData);
+    console.log('userData.access_token', userData.access_token);
+    setToken(userData.access_token);
     setFilters({
       zip_code: filterData.zip_code,
       low_price: filterData.low_price,
@@ -101,11 +105,13 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
-  
   async function handleUpload(){
-    await uploadAvatar(`https://rvwuetvxaktsvpmhimdk.supabase.co/storage/v1/object/sign/avatar/${profile.avatar}?token=${process.env.REACT_APP_SUPABASE_KEY}`);
+    // e.preventDefault();
+    await uploadAvatar(profile.avatar);
     setVisibleNameForm(false);
   }
+
+  console.log('profile.avatar', profile.avatar);
 
   return (
     <div className='profile-page'>
@@ -118,13 +124,13 @@ export default function Profile() {
         <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
         <form className='name-form' onSubmit={handleProfileChange}>
           { visibleNameForm &&              
-              <> 
+              <div className='username-avatar-change'> 
                 Upload Photo<br/>
-                <input type='file' onChange={e => setProfile({ ... profile, avatar: e.target.value })}></input><br/>
+                <input type='file' onChange={e => setProfile({ ... profile, avatar:e.target.files })} /><br/>
                 Edit Username <br/>
                 <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input><br/>
                 <button onClick={handleProfileChange}>Submit</button><br/>
-              </>
+              </div>
           }          
         </form>
         <div className='filters-div'>
@@ -137,31 +143,26 @@ export default function Profile() {
           </div>
           <br/>
           <div className='filter-form-container'>
-            <form onSubmit={handleFilterChange}>       
-              { visibleFilter && 
-            <div className='filter-form'> 
-              <label>
+            { visibleFilter && 
+              <form onSubmit={handleFilterChange}>
+                <div className='filter-form'> 
+                  <label>
                 Zip Code 
-                <br/>
-                <input className='zip-code-input' value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
-              </label>
-              <label>
-                <br/>
+                    <input className='zip-code-input' value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
+                  </label>
+                  <label>
                 Minimum Price 
-                <br/>
-                <input className='min-price-input'value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
-              </label>
-              <label>
-                <br/>
+                    <input className='min-price-input'value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
+                  </label>
+                  <label>
                 High Price 
-                <br/>
-                <input className='max-price-input'value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
-                <br/>
-              </label>
-              <button onClick={handleFilterChange}>Update</button>
-            </div>            
-              }
-            </form>
+                    <input className='max-price-input'value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
+                  </label>
+                  <button onClick={handleFilterChange}>Update</button>
+                </div>
+              </form>            
+            }
+            
           </div>
         </div>
       </div>

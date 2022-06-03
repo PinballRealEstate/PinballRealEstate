@@ -99,11 +99,10 @@ export async function deleteSavedHome(property_id){
 export async function uploadAvatar(imageFile){
   const { body } = await client
     .storage
-    .from('avatars')
+    .from('avatar')
     .upload(imageFile, {
       cacheControl: '3600',
       upsert: true
     });
   return body;
 }
-
