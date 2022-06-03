@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+// eslint-disable-next-line no-unused-vars
+import mapboxgl from '!mapbox-gl';
 
 export default function Mapbox({ homes, initial_lat, initial_lon, detail }) {
   const [geojson, setgeoJson] = useState({
