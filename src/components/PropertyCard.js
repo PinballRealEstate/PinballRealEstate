@@ -12,7 +12,7 @@ import { createSavedHome, deleteSavedHome } from '../services/supabase-utils';
 import { Link } from 'react-router-dom';
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 
-
+//property card used on both search and profile page, extracted props to make it usable on both page data structures
 export default function PropertyCard({ address,
   secondary_address,
   bed,
@@ -22,8 +22,8 @@ export default function PropertyCard({ address,
   image,
   id,
   savedHomes, getSavedHomes }) {
-//   const { push } = useHistory();
 
+  //function used on the card to save a home when the user clicks the heart icon
   async function saveHome() {
     const savedHome = {
       property_id: id,
@@ -39,11 +39,14 @@ export default function PropertyCard({ address,
     await getSavedHomes();
   }
 
+  //function used if the user clicks on the heart icon of an already saved home
+  //deletes the saved home from supabase as well as retrieves the new list of saved homes
   async function removeSavedHome() {
     await deleteSavedHome(id);
     await getSavedHomes();
   }
 
+  //function to check if a property has already been saved by the user
   function isSaved(property_id) {
     const saved = savedHomes.find(item => Number(item.property_id) === Number(property_id));
     return Boolean(saved);

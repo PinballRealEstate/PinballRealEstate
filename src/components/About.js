@@ -6,6 +6,7 @@ export default function About() {
   return (
     <main className='about-main'>
       <div className='about-container'>
+        {/* Card for each member of the team, props passed in are individualized to the person */}
         <AboutCard 
           name={'Beau Elliott'} 
           image_url={'../assets/Beau-headshot copy.png'} 

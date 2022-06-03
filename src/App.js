@@ -64,7 +64,7 @@ export default function App() {
               {user ? <Profile /> : <Redirect to="/"/>}
             </Route>
             <Route exact path="/about">
-              {user ? <About /> : <Redirect to="/"/>}
+              <About />
             </Route>
           </Switch>
         </main>
