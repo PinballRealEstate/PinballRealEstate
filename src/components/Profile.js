@@ -13,10 +13,6 @@ export default function Profile() {
     id:0, 
     avatar:'',
   });
-<<<<<<< HEAD
-  
-=======
->>>>>>> 2f0108b84fb709f1f8678865d4bd4f566d118be5
   //Visibility State for the filter form and the name change form
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
