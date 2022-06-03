@@ -15,6 +15,7 @@
     "netlify-cli": "^9.4.4",
     "owl.carousel": "^2.3.4",
     "react": "^17.0.2",
+    "react-chartjs-2": "^4.1.0",
     "react-dom": "^17.0.2",
     "react-map-gl": "^7.0.15",
     "react-multi-carousel": "^2.8.0",

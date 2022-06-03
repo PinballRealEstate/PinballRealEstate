@@ -56,7 +56,7 @@ export default function Mapbox({ homes, initial_lat, initial_lon, detail }) {
           latitude: centerCoordinates.lat,
           zoom: detail ? 14 : 11
         }}
-        style={{ width: detail ? '70vw' : '100vw', height: '300px' }}
+        style={{ width: detail ? '60vw' : '100vw', height: '300px' }}
         mapStyle="mapbox://styles/willgundy/cl3951tjg000014o8h75x3u7n"
         mapboxAccessToken={'pk.eyJ1Ijoid2lsbGd1bmR5IiwiYSI6ImNsMzNtd3RwZDAyaDAzYm0xa2F5bWRxd2UifQ.K6k7FavnWDdnUB_CVEIzzA'}
       >

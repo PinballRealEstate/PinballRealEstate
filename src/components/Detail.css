@@ -16,7 +16,7 @@ body{
   }
 
   .card-details {
-    width: 70vw;
+    width: 60vw;
   }
 
 .sub-heading {
@@ -136,4 +136,23 @@ body{
 
 .deets-column {
   margin: 25px;
+}
+
+.image-carousel {
+  max-width: 500px;
+}
+
+.market-trends {
+  display: flex;
+  flex-direction: column;
+  background-color: #cfe0c3;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.space-around {
+  justify-content: space-around;
 }
