@@ -12,7 +12,6 @@ export default function Profile() {
     id:0, 
     avatar:'',
   });
-  const [token, setToken] = useState();
   const [visibleFilter, setVisibleFilter] = useState(false);
   const [visibleNameForm, setVisibleNameForm] = useState(false);
   const [filters, setFilters] = useState({
@@ -58,9 +57,6 @@ export default function Profile() {
     const profileData = await getProfileByID(userData.id);
     const filterData = await getFilters();
     setProfile(profileData); 
-    console.log('userData', userData);
-    console.log('userData.access_token', userData.access_token);
-    setToken(userData.access_token);
     setFilters({
       zip_code: filterData.zip_code,
       low_price: filterData.low_price,
