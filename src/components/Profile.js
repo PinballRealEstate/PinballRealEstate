@@ -105,9 +105,9 @@ export default function Profile() {
       setVisibleNameForm(false);
     }
   }
-  async function handleUpload(e){
-    e.preventDefault();
-    await uploadAvatar(`https://rvwuetvxaktsvpmhimdk.supabase.co/storage/v1/object/sign/avatar/${profile.avatar}`);
+  async function handleUpload(){
+    // e.preventDefault();
+    await uploadAvatar(`https://rvwuetvxaktsvpmhimdk.supabase.co/storage/v1/object/public/avatar/C:/fakepath/${profile.avatar}`);
     setVisibleNameForm(false);
   }
 
@@ -122,13 +122,13 @@ export default function Profile() {
         <button className='profile-button' onClick={handleEditNameVisible}>Edit</button>
         <form className='name-form' onSubmit={handleProfileChange}>
           { visibleNameForm &&              
-              <> 
+              <div className='username-avatar-change'> 
                 Upload Photo<br/>
                 <input type='file' onChange={e => setProfile({ ... profile, avatar: e.target.value })}></input><br/>
                 Edit Username <br/>
                 <input value={profile.username} onChange={e => setProfile({ ...profile, username: e.target.value })}></input><br/>
                 <button onClick={handleProfileChange}>Submit</button><br/>
-              </>
+              </div>
           }          
         </form>
         <div className='filters-div'>
@@ -141,31 +141,26 @@ export default function Profile() {
           </div>
           <br/>
           <div className='filter-form-container'>
-            <form onSubmit={handleFilterChange}>       
-              { visibleFilter && 
-            <div className='filter-form'> 
-              <label>
+            { visibleFilter && 
+              <form onSubmit={handleFilterChange}>
+                <div className='filter-form'> 
+                  <label>
                 Zip Code 
-                <br/>
-                <input className='zip-code-input' value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
-              </label>
-              <label>
-                <br/>
+                    <input className='zip-code-input' value={filters.zip_code} onChange={e => setFilters({ ...filters, zip_code: e.target.value })}></input>
+                  </label>
+                  <label>
                 Minimum Price 
-                <br/>
-                <input className='min-price-input'value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
-              </label>
-              <label>
-                <br/>
+                    <input className='min-price-input'value={filters.low_price} onChange={e => setFilters({ ...filters, low_price: e.target.value })}></input>
+                  </label>
+                  <label>
                 High Price 
-                <br/>
-                <input className='max-price-input'value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
-                <br/>
-              </label>
-              <button onClick={handleFilterChange}>Update</button>
-            </div>            
-              }
-            </form>
+                    <input className='max-price-input'value={filters.high_price} onChange={e => setFilters({ ...filters, high_price: e.target.value })}></input>
+                  </label>
+                  <button onClick={handleFilterChange}>Update</button>
+                </div>
+              </form>            
+            }
+            
           </div>
         </div>
       </div>
