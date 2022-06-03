@@ -8,6 +8,7 @@ import Mapbox from './Mapbox';
 import Spinner from './Spinner';
 import DetailCard from './DetailCard';
 import DetailBarChart from './DetailBarChart';
+import SchoolCard from './SchoolCard';
 
 
 export default function Detail() {
@@ -62,11 +63,9 @@ export default function Detail() {
               </div>
               <div className="deets-column">
                 <h2>GreatSchools Ratings:</h2>
-                {details.schools.map(school => <div className="school-item-wrapper" key={school.name}>
-                  {school.ratings.great_schools_rating ?
-                    <p className="school-grade"><b className="school-value">{school.ratings.great_schools_rating}</b>/10</p>
-                    : <p className="school-grade"><b className="school-value">N/A</b></p>}
-                  <div className="school-item" ><p><b>{school.name}</b></p><p>Grades:<b>{school.grades.range.low}-{school.grades.range.high}</b>   Distance:<b>{school.distance_in_miles}</b></p></div></div>)}
+                {details.schools.map((school, i) => <div className="school-item-wrapper" key={i}>
+                  <SchoolCard school={school}/>
+                </div>)}
               </div>
               <div className="deets-column" >
                 <h2>Listing History:</h2>
