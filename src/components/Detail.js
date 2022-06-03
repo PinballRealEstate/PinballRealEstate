@@ -76,7 +76,7 @@ export default function Detail() {
             </div>
             <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon} detail={true}/>
             <div className="market-trends">
-              <h2>Market Trends for {details.neighborhoods[1].name}</h2>
+              <h2>Market Trends</h2>
               <div className='flex-row space-around'>
                 <DetailCard text={'Average Days on Market'} value={`${details.trend.median.age_days} days`}/>
                 <DetailCard text={'Price per Sq Ft'} value={`$${details.trend.median.listing_price_sqft.toLocaleString('en-US')}`}/>
