@@ -23,6 +23,7 @@ export default function SignIn({ setUser }) {
 
   return (
     <div className='signInPage'>
+      <h1 className='mainwelcome'>PinBall Real Estate</h1>
       <div className='signIn'>
         <h1>Sign In</h1>
         <form onSubmit={handleSignIn}>

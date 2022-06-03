@@ -16,6 +16,7 @@
     background-size: cover;
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -71,3 +72,11 @@
   margin: 10px;
   font-size: medium;
 }
+
+.mainwelcome{
+  color: var(--color2);
+  position: absolute;
+  top: 0px;
+  right: 20px;
+  font-size: 2.6rem;
+  }
