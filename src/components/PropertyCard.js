@@ -90,8 +90,8 @@ export default function PropertyCard({ address,
           </div>
           <div className='flex-column'>
             <IconButton aria-label="list price">
-              <AttachMoney />
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder' }}>{`$${listprice ? listprice.toLocaleString('en-US') : 'No List Price'}`}</Typography>
+              <AttachMoney sx={{ color: '#40798c' }}/>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder', color: '#40798c', fontSize: '17px' }}>{`$${listprice ? listprice.toLocaleString('en-US') : 'No List Price'}`}</Typography>
             </IconButton>
             <IconButton aria-label="square feet">
               <SquareFoot/>
