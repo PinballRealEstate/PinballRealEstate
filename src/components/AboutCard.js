@@ -23,8 +23,8 @@ export default function AboutCard({ name, image_url, bio, architecture, pinball,
           <Typography sx={{ margin: '3px' }}>{`${pinball}`}</Typography>
         </IconButton>
         <div className='flex-row'>
-          <a href={github_link}><img className='icon' src='../assets/github-logo.png' /></a>
-          <a href={linkedin_link}><img className='icon' src='../assets/linked-in-icon.png' /></a>
+          <a href={github_link}><img className='icon1' src='../assets/github-logo.png' /></a>
+          <a href={linkedin_link}><img className='icon2' src='../assets/linked-in-icon.png' /></a>
         </div>
       </div>
     </div>
