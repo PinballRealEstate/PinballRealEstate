@@ -10,8 +10,8 @@ export default function About() {
           name={'Beau Elliott'} 
           image_url={'../assets/Beau-headshot copy.png'} 
           bio={'Beau currently resides in Seattle, WA and loves eating ramen, teaching pole dance, and rock climbing.'} 
-          architecture={''} 
-          pinball={''} 
+          architecture={'Art Deco'} 
+          pinball={'The Addams Family'} 
           github_link={'https://github.com/belliott15'} 
           linkedin_link={'https://www.linkedin.com/in/beau-elliott15/'}/>
         <AboutCard 
