@@ -9,7 +9,7 @@ export default function About() {
         <AboutCard 
           name={'Beau Elliott'} 
           image_url={'../assets/Beau-headshot copy.png'} 
-          bio={'Beau currently resides in Seattle, WA and loves eating ramen, teaching pole dance, and rock climbing.'} 
+          bio={'Beau: Full Stack Software developer, part time circus freak. Cloudy livin\' in Seattle, WA'} 
           architecture={'Art Deco'} 
           pinball={'The Addams Family'} 
           github_link={'https://github.com/belliott15'} 
