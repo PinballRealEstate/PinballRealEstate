@@ -76,10 +76,11 @@ export default function Detail() {
             <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon} detail={true}/>
             <div className="market-trends">
               <h2>Market Trends</h2>
+              {/* added conditionals to all detail cards to ensure page loaded */}
               <div className='flex-row space-around'>
-                <DetailCard text={'Average Days on Market'} value={`${details.trend.median.age_days} days`}/>
-                <DetailCard text={'Price per Sq Ft'} value={`$${details.trend.median.listing_price_sqft.toLocaleString('en-US')}`}/>
-                <DetailCard text={'Average Sale Price'} value={`$${details.trend.median.closing_price.toLocaleString('en-US')}`}/>
+                <DetailCard text={'Average Days on Market'} value={details.trend.median.age_days ? `${details.trend.median.age_days} days` : 'Insufficient Data'}/>
+                <DetailCard text={'Price per Sq Ft'} value={details.trend.median.listing_price_sqft ? `$${details.trend.median.listing_price_sqft.toLocaleString('en-US')}` : 'Insufficient Data'}/>
+                <DetailCard text={'Average Sale Price'} value={details.trend.median.closing_price ? `$${details.trend.median.closing_price.toLocaleString('en-US')}` : 'Insufficient Data'}/>
               </div>
               <DetailBarChart chartData={details.trend.median.by_prop_type}/>
             </div>
