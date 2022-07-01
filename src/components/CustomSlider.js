@@ -23,6 +23,7 @@ const marks = [
 
 const minDistance = 200000;
 
+// nice job adapting this MUI component for your own use!
 export default function CustomSlider({ setSignUpData, signUpData, low_price, high_price, setPriceRange, priceRange }) {
     
   const [value2, setValue2] = React.useState([0, 400000]);

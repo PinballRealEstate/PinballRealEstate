@@ -1,3 +1,5 @@
+// looks like this was sample data to get the app off the ground without having to deal with the API?
+// great idea! should probably remove the file though now that the API is wired up
 export const results = [
   {
     'primary_photo': {

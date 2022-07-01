@@ -40,6 +40,7 @@ export default function DetailBarChart({ chartData }) {
     datasets: [
       {
         label: 'Sale Price',
+        // nice munging!
         data: Object.values(chartData).map(data => data.closing_price),
         backgroundColor: '#40798c',
       },
