@@ -50,6 +50,7 @@ export default function Detail() {
             />}
             <p className="deets">{details.prop_common.description}</p>
             <div className="property-deets">
+              {/* this is getting a big cluttered. Maybe a <DetailColumn {...details} /> component would clean it up ?*/}
               <div className="deets-column">
                 <h2>Details:</h2>
                 <p>Bedrooms: <b>{details.prop_common.bed}</b></p>
@@ -70,7 +71,14 @@ export default function Detail() {
               <div className="deets-column" >
                 <h2>Listing History:</h2>
                 <div className="row-class2"><p><b>Date</b></p><p><b>Price</b></p><p><b>Event</b></p></div>
-                { details.property_history.map(history => <div className="row-class" key={history.source}><p><b>{history.date}</b></p><p>$ {history.price.toLocaleString('en-US')}</p><p>{history.event_name}</p></div>)}
+                { 
+                details.property_history.map(history => 
+                  // HTML one-liners can be really challenging to maintain
+                  <div className="row-class" key={history.source}>
+                    <p><b>{history.date}</b></p>
+                    <p>$ {history.price.toLocaleString('en-US')}</p>
+                    <p>{history.event_name}</p>
+                  </div>)}
               </div>
             </div>
             <Mapbox homes={[]} initial_lat={details.address.location.lat} initial_lon={details.address.location.lon} detail={true}/>

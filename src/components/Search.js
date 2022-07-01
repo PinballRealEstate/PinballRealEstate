@@ -144,6 +144,7 @@ export default function Search() {
       </div>
       {/* added turnary in case homes state is empty */}
       {homes.length > 0 ? 
+      // i would prefer the "sorry" div be written first. Once JSX gets so far from the ternery's initial condition, it's hard to read, especially if we end up in a nested ternerty. Alternatively, break the next div into its own component
         <div>
           {isLoading ? <Spinner /> :
             <div>

@@ -24,6 +24,7 @@ export default function Profile() {
   //State for the homes that are mapped over and applied to cards.
   const [savedHomes, setSavedHomes] = useState([]);
   //Used for the carousel
+  // this hard coded data should probably live in a separate file. This component is getting a little too big
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },

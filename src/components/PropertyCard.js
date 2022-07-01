@@ -52,10 +52,25 @@ export default function PropertyCard({ address,
     return Boolean(saved);
   }
 
+  const BG_COLOR = '#40798c';
+  const ICON_SYLES = { 
+    color: '#1f363d',
+    // zIndex tricks are just asking for trouble in the long run. in the future, see if you can find another way to accomplish this.
+    zIndex: '9999',
+    position: 'absolute',
+    top: '100px',
+    left: '240px',
+   }
+
+  // again, great work adapting MUI to your purposes.
   return (
-    <Card sx={{ width: 280, borderRadius: '20px', backgroundColor: '#40798c', margin: '20px', height: 350 }}>
+    // so, you have a lot of style polluting the app here. I think it would have made sense to dig into MUI's theme API to figure out how to adjust all of these in one place
+    <Card sx={{ width: 280, borderRadius: '20px', 
+    // if you're committed to not using the MUI theme API (which makes sense--it's a lot!) then I'd recommend storing repeated strings/numbers in consts, like so
+    backgroundColor: BG_COLOR, 
+    margin: '20px', height: 350 }}>
       <Link to={`/detail/${id}`}>
-        <CardHeader sx={{ backgroundColor: '#40798c', color: 'white', padding: '0px', margin: '10px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'elipsis' }}
+        <CardHeader sx={{ backgroundColor: BG_COLOR, color: 'white', padding: '0px', margin: '10px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'elipsis' }}
           title={address ? address : 'No Address Found'}
           subheader={secondary_address ? secondary_address : 'No Address Found'}
         />
@@ -68,11 +83,11 @@ export default function PropertyCard({ address,
         /> 
       </Link>
       { !isSaved(id) ?
-        <IconButton aria-label="add to favorites" onClick={saveHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
+        <IconButton aria-label="add to favorites" onClick={saveHome} sx={ICON_SYLES}>
           <FavoriteTwoToneIcon sx={{ color: '#cfe0c3', fontSize: '30px' }} className='favorite-home' />
         </IconButton>
         :
-        <IconButton aria-label="remove from favorites" onClick={removeSavedHome} sx={{ color: '#1f363d', zIndex: '9999', position: 'absolute', top: '100px', left: '240px' }}>
+        <IconButton aria-label="remove from favorites" onClick={removeSavedHome} sx={ICON_SYLES}>
           <FavoriteIcon sx={{ color: '#D72638', fontSize: '30px' }} className='remove-home' />
         </IconButton>
       }
@@ -90,8 +105,8 @@ export default function PropertyCard({ address,
           </div>
           <div className='flex-column'>
             <IconButton aria-label="list price">
-              <AttachMoney sx={{ color: '#40798c' }}/>
-              <Typography sx={{ margin: '3px', fontWeight: 'bolder', color: '#40798c', fontSize: '17px' }}>{`$${listprice ? listprice.toLocaleString('en-US') : 'No List Price'}`}</Typography>
+              <AttachMoney sx={{ color: BG_COLOR }}/>
+              <Typography sx={{ margin: '3px', fontWeight: 'bolder', color: BG_COLOR, fontSize: '17px' }}>{`$${listprice ? listprice.toLocaleString('en-US') : 'No List Price'}`}</Typography>
             </IconButton>
             <IconButton aria-label="square feet">
               <SquareFoot/>
